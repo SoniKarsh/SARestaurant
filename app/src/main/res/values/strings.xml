@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">SARestaurant</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Sign In-->
+    <string name="email_or_username">Email or Username</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="facebook">Facebook</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here.</string>
+    <string name="app_logo">App Logo</string>
+    <string name="sarestaurant">SARestaurant</string>
+    <string name="facebook_app_id">499167327201560</string>
+    <string name="fb_login_protocol_scheme">fb499167327201560</string>
+    <string name="facebook_sign_in">Facebook Sign In</string>
+    <string name="password">Password</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="weather">Weather</string>
+    <string name="logout">Logout</string>
+
+    <!--Sign Up-->
+    <string name="user_name">User Name</string>
+    <string name="email_id">Email Id</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!--Restaurant Fragment-->
+    <string name="restlogo">RestLogo</string>
+    <string name="google_maps_key">AIzaSyC6Smj8wi2qTcaacRBzOVRBNpZUTpEIgvg</string>
+
+    <!--Map-->
+    <string name="map">Map</string>
+    <string name="show_map">Show Map</string>
+    <string name="change_map_type">Change Map Type</string>
+
+</resources>
