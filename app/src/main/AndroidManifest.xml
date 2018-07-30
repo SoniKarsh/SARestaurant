@@ -45,6 +45,17 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <receiver android:name=".appview.alarm.MyReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".appview.alarm.MyAlarm"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>
