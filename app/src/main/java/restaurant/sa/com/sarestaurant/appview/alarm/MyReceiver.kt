@@ -3,12 +3,6 @@ package restaurant.sa.com.sarestaurant.appview.alarm
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.*
-import android.database.Cursor
-import android.net.Uri
-import android.os.Build
-import android.os.SystemClock
-import android.telephony.SmsManager
-import android.telephony.SmsMessage
 import android.widget.Toast
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
