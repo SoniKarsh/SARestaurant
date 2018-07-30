@@ -77,7 +77,9 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     override fun onConnected(p0: Bundle?) {
         Log.d(TAG, "onConnected: ");
-        addLocationAlert(currentLocation.latitude, currentLocation.longitude);
+        for(i in listOfLocations){
+            addLocationAlert(i.latitude, i.longitude);
+        }
 
     }
 
@@ -204,7 +206,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     private fun multipleMarkers(){
         var icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
         var options = MarkerOptions()
-        Toast.makeText(activity, "$listOfLocations", Toast.LENGTH_LONG).show()
         if (!listOfLocations.isEmpty()){
             for(i in listOfLocations){
                         options.position(i)
@@ -290,7 +291,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
                     if(it.isSuccessful){
                         Log.d(TAG, "getDeviceLocation: found Location")
                         currentLocation = it.result
-                        Toast.makeText(activity, "getDeviceLocation $currentLocation", Toast.LENGTH_LONG).show()
                         moveCamera(LatLng(currentLocation.latitude, currentLocation.longitude),
                                 DEFAULT_ZOOM, "My Location")
                     }else{

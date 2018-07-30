@@ -30,16 +30,13 @@ class LocationAlertIntentService: IntentService("LocationAlertIS") {
     override fun onHandleIntent(intent: Intent?) {
         val geofencingEvent = GeofencingEvent.fromIntent(intent)
 
-        if (geofencingEvent.hasError()) {
-            Log.e(TAG, "" + getErrorString(geofencingEvent.getErrorCode()));
-            return;
-        }
-
         Log.i(TAG, geofencingEvent.toString())
 
         val geofenceTransition = geofencingEvent.geofenceTransition
 
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
+        Log.d(TAG, "onHandleIntent: $geofenceTransition");
+
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL || geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ) {
 
             val triggeringGeofences = geofencingEvent.triggeringGeofences
 
@@ -48,7 +45,7 @@ class LocationAlertIntentService: IntentService("LocationAlertIS") {
 
             val transitionType = getTransitionString(geofenceTransition)
 
-
+            Log.d(TAG, "onHandleIntent: $transitionType");
             notifyLocationAlert(transitionType, transitionDetails)
         }
 
@@ -139,11 +136,13 @@ class LocationAlertIntentService: IntentService("LocationAlertIS") {
                 + "://" + this.packageName + "/raw/plucky")
         notification = NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Yay!! fav restaurant is near")
+                .setContentTitle("Near By Favorite Restaurant")
                 .setOngoing(false)
-                .setContentText("wanna visit it?")
+                .setContentText("visit it")
                 .setSound(alarmSound)
                 .setContentIntent(pendingIntent).build()
+
+        notificationManager.notify(System.currentTimeMillis().toInt(), notification)
 
 
     }
