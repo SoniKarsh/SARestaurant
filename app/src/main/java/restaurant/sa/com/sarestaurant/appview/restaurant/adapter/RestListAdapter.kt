@@ -70,7 +70,7 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         }
         Picasso.get().load(holder.restaurantImgUrl)
                 .into(holder.restaurantImage)
-        https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${resources.getString(R.string.google_maps_key)}
+//        https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${resources.getString(R.string.google_maps_key)}
         Log.d(TAG, "onBindViewHolder: ${holder.adapterPosition}")
 
         for (i in favItems){
@@ -155,24 +155,24 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
 
     fun retrofitCall(location: Location){
         val builder = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+//                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
 
         val retrofit: Retrofit = builder.build()
 
         val client: GooglePlacesClient = retrofit.create(GooglePlacesClient::class.java)
 
-        val call = client.sendRequestForPlaces("${location.latitude},${location.longitude}", radius.toString(), result_type, sensor.toString(), resources.getString(R.string.google_maps_key))
-        call.enqueue(object : Callback<ResponseModelClass> {
-            override fun onFailure(call: Call<ResponseModelClass>?, t: Throwable?) {
-                Log.e(TAG, "onFailure: $t");
-            }
-
-            override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
-                Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
-
-            }
-        })
+//        val call = client.sendRequestForPlaces("${location.latitude},${location.longitude}", radius.toString(), result_type, sensor.toString(), resources.getString(R.string.google_maps_key))
+//        call.enqueue(object : Callback<ResponseModelClass> {
+//            override fun onFailure(call: Call<ResponseModelClass>?, t: Throwable?) {
+//                Log.e(TAG, "onFailure: $t");
+//            }
+//
+//            override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
+//                Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
+//
+//            }
+//        })
     }
 
     private fun removeItem(position: Int) {

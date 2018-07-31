@@ -32,12 +32,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import android.provider.MediaStore.Images.Media.getBitmap
-import android.graphics.Bitmap
-import android.support.test.orchestrator.junit.BundleJUnitUtils.getResult
-import android.support.annotation.NonNull
-
-
 
 class RestaurantFragment: Fragment(), RestaurantView {
 
@@ -137,7 +131,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
-                getPhotos(responseModelClass.body().results[0].placeId)
+                getPhotos(responseModelClass.body()!!.results[0].placeId)
                 val layout = LinearLayoutManager(activity)
                 listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
                 Log.d("OnREsponse", "${listOfPlacesLocation}")
