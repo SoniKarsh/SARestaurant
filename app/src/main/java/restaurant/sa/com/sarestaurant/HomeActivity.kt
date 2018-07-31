@@ -2,7 +2,6 @@ package restaurant.sa.com.sarestaurant
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -20,13 +19,39 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragment
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
+import android.location.Location
 import android.support.v7.app.AlertDialog
-import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.facebook.login.LoginManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.nav_header_home.*
+import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
+import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
+import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
+import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
+import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
 
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LocationCommunication {
+class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication, HomeCallback {
+    override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
+
+    }
+
+    override fun sendWeatherData(weatherData: WeatherData) {
+        nav_tv.text = weatherData.temp
+        Picasso.get().load(weatherData.imgUrl)
+                .into(nav_img)
+    }
+
+    override fun getData() {
+//        nav_tv.text = weatherData.temp
+//        Picasso.get().load(weatherData.imgUrl)
+//                .into(imageView)
+    }
 
     val FRAGMENT_TAG = "SignInFragment"
     val RESTAURANT_FRAGMENT_TAG = "RestaurantFragment"
@@ -34,9 +59,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val WEATHER_FRAGMENT_TAG = "WeatherFragment"
     var mapsFragment = MapsFragment()
     lateinit var mapsPresenterImp: MapsPresenterImp
-
+    var detailPresenter: DetailPresenter? = null
     private val TAG = "HomeActivity"
     var listOfLocations: ArrayList<LatLng>? = null
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
+    var restaurantFragment: RestaurantFragment? = null
+    var restaurantDetailFragment: RestaurantDetailFragment? = null
+    var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
 
     override fun sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
         Log.d(TAG, ": ${listOfLocations}");
@@ -51,11 +80,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
-
         mapsPresenterImp = MapsPresenterImp()
-
+        detailPresenter = this
         Log.d(TAG, ": $TAG+Mi");
-
         val fragmentManager = supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
@@ -71,6 +98,25 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        var weatherFragment = WeatherFragment()
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        var getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
+        getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
+            override fun getDeviceLastLocation(location: Location) {
+                Log.d(TAG, "getDeviceLastLocation: $location Mil");
+                weatherFragment.retrofitCall(location, this@HomeActivity)
+            }
+
+            override fun receiveLocationUpdatesFun() {
+
+            }
+
+            override fun onError(error: String) {
+                Toast.makeText(this@HomeActivity, error, Toast.LENGTH_LONG).show()
+            }
+
+        })
+
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val headerView = navigationView.getHeaderView(0)
         var nav_userName = headerView.findViewById<TextView>(R.id.navUserName)
@@ -78,14 +124,24 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_userName.text = SARestaurantApp.sharedPreference!!.getString("username", "")
         nav_emailId.text = SARestaurantApp.sharedPreference!!.getString("emailid", "")
 
+
         nav_view.setNavigationItemSelectedListener(this)
     }
 
 
     override fun onBackPressed() {
+        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
+        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
+        }
+        else if (restaurantFragment != null && restaurantFragment!!.isVisible ){
+
+        }else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
+            Log.d(TAG, "onBackPressed: Clicked");
+            supportFragmentManager.popBackStack()
+        }
+        else {
             AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Closing Activity")

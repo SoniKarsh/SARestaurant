@@ -89,38 +89,38 @@ public final class R {
         public static final int line1 = 0x7f08008e;
         public static final int line3 = 0x7f08008f;
         public static final int messenger_send_button = 0x7f080098;
-        public static final int normal = 0x7f0800a8;
-        public static final int notification_background = 0x7f0800a9;
-        public static final int notification_main_column = 0x7f0800aa;
-        public static final int notification_main_column_container = 0x7f0800ab;
-        public static final int right_icon = 0x7f0800c4;
-        public static final int right_side = 0x7f0800c5;
-        public static final int tag_transition_group = 0x7f0800f3;
-        public static final int text = 0x7f0800f6;
-        public static final int text2 = 0x7f0800f7;
-        public static final int time = 0x7f0800fd;
-        public static final int title = 0x7f0800fe;
+        public static final int normal = 0x7f0800aa;
+        public static final int notification_background = 0x7f0800ab;
+        public static final int notification_main_column = 0x7f0800ac;
+        public static final int notification_main_column_container = 0x7f0800ad;
+        public static final int right_icon = 0x7f0800ca;
+        public static final int right_side = 0x7f0800cb;
+        public static final int tag_transition_group = 0x7f0800f9;
+        public static final int text = 0x7f0800fc;
+        public static final int text2 = 0x7f0800fd;
+        public static final int time = 0x7f080106;
+        public static final int title = 0x7f080107;
     }
     public static final class integer {
         public static final int status_bar_notification_info_maxnum = 0x7f09000a;
     }
     public static final class layout {
-        public static final int messenger_button_send_blue_large = 0x7f0a003b;
-        public static final int messenger_button_send_blue_round = 0x7f0a003c;
-        public static final int messenger_button_send_blue_small = 0x7f0a003d;
-        public static final int messenger_button_send_white_large = 0x7f0a003e;
-        public static final int messenger_button_send_white_round = 0x7f0a003f;
-        public static final int messenger_button_send_white_small = 0x7f0a0040;
-        public static final int notification_action = 0x7f0a0042;
-        public static final int notification_action_tombstone = 0x7f0a0043;
-        public static final int notification_template_custom_big = 0x7f0a004a;
-        public static final int notification_template_icon_group = 0x7f0a004b;
-        public static final int notification_template_part_chronometer = 0x7f0a004f;
-        public static final int notification_template_part_time = 0x7f0a0050;
+        public static final int messenger_button_send_blue_large = 0x7f0a003c;
+        public static final int messenger_button_send_blue_round = 0x7f0a003d;
+        public static final int messenger_button_send_blue_small = 0x7f0a003e;
+        public static final int messenger_button_send_white_large = 0x7f0a003f;
+        public static final int messenger_button_send_white_round = 0x7f0a0040;
+        public static final int messenger_button_send_white_small = 0x7f0a0041;
+        public static final int notification_action = 0x7f0a0043;
+        public static final int notification_action_tombstone = 0x7f0a0044;
+        public static final int notification_template_custom_big = 0x7f0a004b;
+        public static final int notification_template_icon_group = 0x7f0a004c;
+        public static final int notification_template_part_chronometer = 0x7f0a0050;
+        public static final int notification_template_part_time = 0x7f0a0051;
     }
     public static final class string {
-        public static final int messenger_send_button_text = 0x7f0d005b;
-        public static final int status_bar_notification_info_overflow = 0x7f0d006e;
+        public static final int messenger_send_button_text = 0x7f0d005c;
+        public static final int status_bar_notification_info_overflow = 0x7f0d0073;
     }
     public static final class style {
         public static final int MessengerButton = 0x7f0e00ad;

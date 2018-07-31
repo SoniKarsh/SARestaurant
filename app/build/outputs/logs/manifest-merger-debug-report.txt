@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
 MERGED from [com.android.support:design:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/AndroidManifest.xml:17:1-22:12
 MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:21:1-31:12
@@ -45,20 +45,20 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karshsoni/.gradle
 MERGED from [android.arch.core:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/abf90aae579db11da85479014fa06022/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/99d2fb37586a193fd10c9b2f3763d3ca/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b2c5753c8c259a991dd9b7265f99a786/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
+INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
 	package
 		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:3:5-45
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-50:12
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:1-61:12
 		INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:2:11-69
@@ -83,7 +83,7 @@ MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.
 	android:name
 		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:8:22-76
 application
-ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:10:5-48:19
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:10:5-59:19
 MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:28:5-29:19
@@ -202,6 +202,24 @@ ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidMani
 		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:47:13-56
 	android:name
 		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:45:13-41
+receiver#restaurant.sa.com.sarestaurant.appview.alarm.MyReceiver
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:49:9-53:20
+	android:name
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:49:19-59
+intent-filter#action:name:android.provider.Telephony.SMS_RECEIVED
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:50:13-52:29
+action#android.provider.Telephony.SMS_RECEIVED
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:51:17-82
+	android:name
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:51:25-79
+receiver#restaurant.sa.com.sarestaurant.appview.alarm.MyAlarm
+ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:54:9-57:39
+	android:enabled
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:56:13-35
+	android:exported
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:57:13-36
+	android:name
+		ADDED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml:55:13-50
 uses-sdk
 INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/AndroidManifest.xml

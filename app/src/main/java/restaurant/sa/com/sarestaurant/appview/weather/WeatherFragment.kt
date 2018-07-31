@@ -23,13 +23,16 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_weather.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
+import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
+import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
 import restaurant.sa.com.sarestaurant.appview.weather.presenter.WeatherPresenterImp
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 
 
-class WeatherFragment: Fragment() {
+class WeatherFragment : Fragment() {
 
     val TAG = "WeatherFragment"
     val BASE_URL = "https://query.yahooapis.com"
@@ -40,11 +43,14 @@ class WeatherFragment: Fragment() {
     var permissionList = arrayListOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION)
     var weatherPresenterImp: WeatherPresenterImp? = null
+    var homeCallback: HomeCallback? = null
+    var isRunning: Boolean = false
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         contextRestFrag = context!!
         homeActivity = context as HomeActivity
+        homeCallback = homeActivity
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,7 +59,7 @@ class WeatherFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        isRunning = true
         var permissionUtils = PermissionUtils(homeActivity)
         granted = permissionUtils.checkPermissions(permissionList)
         weatherPresenterImp = WeatherPresenterImp()
@@ -70,7 +76,7 @@ class WeatherFragment: Fragment() {
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
                 Log.d(TAG, "getDeviceLastLocation: $location")
-                retrofitCall(location)
+                retrofitCall(location, homeActivity)
             }
 
             override fun receiveLocationUpdatesFun() {
@@ -86,7 +92,9 @@ class WeatherFragment: Fragment() {
 
     }
 
-    fun retrofitCall(location: Location){
+    fun retrofitCall(location: Location, activity: HomeActivity){
+
+        var weatherData = WeatherData()
 
         var builder = Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -109,11 +117,23 @@ class WeatherFragment: Fragment() {
                 mHandler.post(Runnable {
                     var locationOfWeather = responseModelClass.body()!!.query.results.channel.location
                     var windWeather = responseModelClass.body()!!.query.results.channel.wind
-                    weatherFrag.setText("${locationOfWeather.city},  ${locationOfWeather.region},  ${locationOfWeather.country}") // must be inside run()
+                    if(isRunning){
+                        weatherFrag.setText("${locationOfWeather.city},  ${locationOfWeather.region},  ${locationOfWeather.country}") // must be inside run()
                     windSpeed.setText("Wind Speed: ${windWeather.speed}, Wind Chill: ${windWeather.chill}, Wind Direction: ${windWeather.direction}")
                     temp.setText("Temp: ${responseModelClass.body()!!.query.results.channel.item.condition.temp}")
-                    Picasso.get().load(responseModelClass.body()!!.query.results.channel.image.url)
+                        var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
+                    Picasso.get().load(imgUrl)
                             .into(imageView)
+                    }
+                    var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
+                    weatherData.imgUrl = imgUrl
+                    weatherData.temp = responseModelClass.body()!!.query.results.channel.item.condition.temp
+                    homeCallback = activity
+                    homeCallback!!.sendWeatherData(weatherData)
+                    SARestaurantApp.sharedPreference!!.edit()
+                            .putString("temp", responseModelClass.body()!!.query.results.channel.item.condition.temp)
+                            .putString("imgurl", imgUrl)
+                            .apply()
                 })
 
             }

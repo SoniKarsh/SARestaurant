@@ -41,4 +41,12 @@
     <string name="show_map">Show Map</string>
     <string name="change_map_type">Change Map Type</string>
 
+    <!--Detailed Fragment-->
+    <string name="restaurant_name">Restaurant Name :</string>
+    <string name="restaurant_address">Restaurant Address :</string>
+    <string name="is_available_to_serve_you">Is available to serve you? :</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="not_available">No Data Available</string>
+
 </resources>

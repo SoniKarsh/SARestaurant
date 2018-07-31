@@ -65,6 +65,17 @@
             android:name="restaurant.sa.com.sarestaurant.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name="restaurant.sa.com.sarestaurant.appview.alarm.MyReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="restaurant.sa.com.sarestaurant.appview.alarm.MyAlarm"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity android:name="com.facebook.CustomTabMainActivity" />
         <activity android:name="com.facebook.CustomTabActivity" />
 

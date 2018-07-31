@@ -204,6 +204,10 @@
         "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/generated/res/pngs/debug/drawable-mdpi/ic_menu_restaurant_black_24dp.png"
     },
     {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_fragment_restaurant_detail.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout/fragment_restaurant_detail.xml"
+    },
+    {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
@@ -2406,6 +2410,10 @@
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_design_navigation_menu_item.xml.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_slide.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout/slide.xml"
     },
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_messenger_bubble_small_blue.png.flat",

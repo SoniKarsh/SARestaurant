@@ -21,6 +21,9 @@ public class Result {
     private String placeId;
     @SerializedName("plus_code")
     private PlusCode plusCode;
+    @SerializedName("opening_hours")
+    @Expose
+    private OpeningHours openingHours;
     @Expose
     private Double rating;
     @Expose
@@ -31,6 +34,14 @@ public class Result {
     private List<String> types;
     @Expose
     private String vicinity;
+    public OpeningHours getOpeningHours() {
+        return openingHours;
+    }
+
+    public void setOpeningHours(OpeningHours openingHours) {
+        this.openingHours = openingHours;
+    }
+
 
     public Geometry getGeometry() {
         return geometry;

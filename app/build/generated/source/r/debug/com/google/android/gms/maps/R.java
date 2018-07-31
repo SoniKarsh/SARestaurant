@@ -34,10 +34,10 @@ public final class R {
     }
     public static final class id {
         public static final int hybrid = 0x7f08007d;
-        public static final int none = 0x7f0800a7;
-        public static final int normal = 0x7f0800a8;
-        public static final int satellite = 0x7f0800c6;
-        public static final int terrain = 0x7f0800f5;
+        public static final int none = 0x7f0800a9;
+        public static final int normal = 0x7f0800aa;
+        public static final int satellite = 0x7f0800cc;
+        public static final int terrain = 0x7f0800fb;
     }
     public static final class styleable {
         public static final int[] MapAttrs = { 0x7f030029, 0x7f030050, 0x7f030051, 0x7f030052, 0x7f030053, 0x7f030054, 0x7f030055, 0x7f030056, 0x7f0300e1, 0x7f0300e2, 0x7f0300e3, 0x7f0300e4, 0x7f03012e, 0x7f030131, 0x7f0301b6, 0x7f0301b7, 0x7f0301b8, 0x7f0301b9, 0x7f0301ba, 0x7f0301bb, 0x7f0301bc, 0x7f0301be, 0x7f0301cb };
