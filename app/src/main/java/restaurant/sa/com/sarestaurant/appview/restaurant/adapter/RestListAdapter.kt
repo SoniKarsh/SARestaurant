@@ -21,10 +21,12 @@ import kotlinx.android.synthetic.main.fragment_restaurant.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.PhotosModel.ResponsePhotoModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesClient
+import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesPhotoClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +44,7 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var detailPresenter: DetailPresenter? = null
     lateinit var restaurantDetailModel: RestaurantDetailModel
+    val BASE_URL = "https://maps.googleapis.com"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
@@ -70,6 +73,7 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         }
         Picasso.get().load(holder.restaurantImgUrl)
                 .into(holder.restaurantImage)
+        holder.placeId = items.results!![holder.adapterPosition].placeId
 //        https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${resources.getString(R.string.google_maps_key)}
         Log.d(TAG, "onBindViewHolder: ${holder.adapterPosition}")
 
@@ -153,26 +157,26 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
 
     }
 
-    fun retrofitCall(location: Location){
+    fun retrofitCall(placeId: String){
         val builder = Retrofit.Builder()
-//                .baseUrl(BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
 
         val retrofit: Retrofit = builder.build()
 
-        val client: GooglePlacesClient = retrofit.create(GooglePlacesClient::class.java)
+        val client: GooglePlacesPhotoClient = retrofit.create(GooglePlacesPhotoClient::class.java)
 
-//        val call = client.sendRequestForPlaces("${location.latitude},${location.longitude}", radius.toString(), result_type, sensor.toString(), resources.getString(R.string.google_maps_key))
-//        call.enqueue(object : Callback<ResponseModelClass> {
-//            override fun onFailure(call: Call<ResponseModelClass>?, t: Throwable?) {
-//                Log.e(TAG, "onFailure: $t");
-//            }
-//
-//            override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
-//                Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
-//
-//            }
-//        })
+        val call = client.sendRequestForPlacesPhotos(placeId, homeActivity!!.resources.getString(R.string.google_maps_key))
+        call.enqueue(object : Callback<ResponsePhotoModelClass> {
+            override fun onFailure(call: Call<ResponsePhotoModelClass>?, t: Throwable?) {
+                Log.e(TAG, "onFailure: $t");
+            }
+
+            override fun onResponse(call: Call<ResponsePhotoModelClass>?, responseModelClass: Response<ResponsePhotoModelClass>?) {
+                Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
+
+            }
+        })
     }
 
     private fun removeItem(position: Int) {
@@ -200,6 +204,7 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         var favoriteButton = view.toggleButton2
         var restaurantImage = view.restImageView
         var sharePost = view.restShareImgView
+        var placeId: String = ""
     }
 
 }
