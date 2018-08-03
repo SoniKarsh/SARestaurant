@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="armeabi-v7a,armeabi"
-    api-level="24"
-    build-mode="FULL"
-    density="xxhdpi"
+    api-level="23"
+    build-mode="COLD"
+    density="hdpi"
     format="10"
     plugin-version="3.1.3"
-    timestamp="1532964312722"
+    timestamp="1533287560470"
     token="7494021676822296598"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
@@ -18,55 +18,31 @@
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="27" />
+        duration="0" />
     <task
         name="verifier"
-        duration="12" />
+        duration="0" />
 
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
-        type="SPLIT" />
-    <artifact
-        location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-        type="SPLIT" />
     <artifact
         location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1532964312722"
+        timestamp="1533287149290"
         verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
+            type="SPLIT" />
         <artifact
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
             type="SPLIT" />
+        <artifact
+            location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
+            type="SPLIT_MAIN" />
         <artifact
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
             type="SPLIT" />
@@ -86,17 +62,16 @@
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
             type="SPLIT" />
         <artifact
-            location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
         <artifact
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1533287560470"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
             type="SPLIT_MAIN" />

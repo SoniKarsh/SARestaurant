@@ -224,6 +224,10 @@
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/res/drawable-mdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
     {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_status_bar.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout/status_bar.xml"
+    },
+    {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
     },
@@ -286,6 +290,10 @@
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout-hdpi_fragment_restaurant_detail.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout-hdpi/fragment_restaurant_detail.xml"
     },
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_warning_black_24dp.png.flat",
@@ -1172,6 +1180,10 @@
         "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_favorite_border_black_24dp.png"
     },
     {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout-land_fragment_sign_up.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout-land/fragment_sign_up.xml"
+    },
+    {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view.xml.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/layout/abc_activity_chooser_view.xml"
     },
@@ -1322,6 +1334,10 @@
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout-land_fragment_sign_in.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout-land/fragment_sign_in.xml"
     },
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_messenger_button_send_round_shadow.png.flat",
@@ -2204,6 +2220,10 @@
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
     {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout-xxhdpi_fragment_restaurant_detail.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout-xxhdpi/fragment_restaurant_detail.xml"
+    },
+    {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/drawable-xxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -2462,6 +2482,10 @@
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_notification_template_media_custom.xml.flat",
         "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/dd8ff48af84e3dc89f8ea0d7d2bce1fe/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout-xhdpi_fragment_restaurant_detail.xml.flat",
+        "source": "/home/karshsoni/Documents/MyApp/SARestaurant/app/src/main/res/layout-xhdpi/fragment_restaurant_detail.xml"
     },
     {
         "merged": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/res/merged/debug/layout_notification_template_icon_group.xml.flat",

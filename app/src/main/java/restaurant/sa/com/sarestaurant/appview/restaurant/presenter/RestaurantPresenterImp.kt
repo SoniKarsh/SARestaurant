@@ -14,7 +14,7 @@ class RestaurantPresenterImp: RestaurantPresenter {
     override fun getListOfLocations(responseFromParse: ResponseModelClass): ArrayList<LatLng> {
 
         for(i in responseFromParse.results){
-            listOfLocations.add(LatLng(i.geometry.location.lat, i.geometry.location.lng))
+            listOfLocations.add(LatLng(i.geometry!!.location!!.lat!!, i!!.geometry!!.location!!.lng!!))
         }
 
         return listOfLocations

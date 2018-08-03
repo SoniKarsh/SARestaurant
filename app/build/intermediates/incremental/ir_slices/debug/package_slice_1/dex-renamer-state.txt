@@ -1,4 +1,4 @@
-#Mon Jul 30 20:10:08 IST 2018
-base.0=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/18
+#Fri Aug 03 13:43:38 IST 2018
+base.0=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/53
 path.0=classes.dex
 renamed.0=classes.dex

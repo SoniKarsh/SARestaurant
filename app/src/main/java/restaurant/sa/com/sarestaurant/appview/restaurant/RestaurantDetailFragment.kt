@@ -2,6 +2,7 @@ package restaurant.sa.com.sarestaurant.appview.restaurant
 
 import android.content.Context
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +12,11 @@ import kotlinx.android.synthetic.main.fragment_restaurant_detail.*
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
-import restaurant.sa.com.sarestaurant.MainActivity
 import android.support.v4.view.ViewPager
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.ImageSlideAdapter
+import android.support.constraint.ConstraintSet
+
+
 
 
 class RestaurantDetailFragment: Fragment(), DetailPresenter {
@@ -22,9 +25,10 @@ class RestaurantDetailFragment: Fragment(), DetailPresenter {
     var restaurantDetailModel: RestaurantDetailModel? = null
     private val TAG = "RestDetailFragment";
     private var mPager: ViewPager? = null
-    private var currentPage = 0
-    private val XMEN = arrayOf<Int>(R.drawable.ic_google_plus, R.drawable.ic_facebook, R.drawable.ic_favorite_black_24dp)
-    private var XMENArray = ArrayList<Int>()
+    var imageArrayList: ArrayList<String> = ArrayList()
+    var imgUrl: String? = null
+    lateinit var thisContext: Context
+    val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
 
     override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
         this.restaurantDetailModel = restaurantDetailModel
@@ -33,6 +37,7 @@ class RestaurantDetailFragment: Fragment(), DetailPresenter {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        thisContext = context!!
         detailPresenter = this
     }
 
@@ -42,16 +47,26 @@ class RestaurantDetailFragment: Fragment(), DetailPresenter {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        for (i in 0 until XMEN.size)
-            XMENArray.add(XMEN[i])
+        if(restaurantDetailModel!!.imageUrlList!![0] != ""){
+            for(i in restaurantDetailModel!!.imageUrlList!!){
+                imgUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$i&sensor=false&key=${thisContext.resources.getString(R.string.google_maps_key)}"
+                imageArrayList.add(imgUrl!!)
+            }
+        }else{
+            imageArrayList.add(noImage)
+        }
 
         mPager = activity!!.findViewById(R.id.viewPager) as ViewPager
-        mPager!!.setAdapter(ImageSlideAdapter(context!!, XMENArray))
+        mPager!!.setAdapter(ImageSlideAdapter(context!!, imageArrayList))
 
         restDetailName.text = restaurantDetailModel!!.rest_name
         restDetailAddress.text = restaurantDetailModel!!.rest_address
         ratingBar.rating = restaurantDetailModel!!.rating.toFloat()
+        if(ratingBar.rating == 0.0.toFloat()){
+            ratingBar.visibility = View.GONE
+            noRatingTV.visibility = View.VISIBLE
+            noRatingTV.text = getString(R.string.no_rate_available)
+        }
         if(restaurantDetailModel!!.rest_isClosed == "true"){
             openingHours.text = getString(R.string.yes)
         }else if(restaurantDetailModel!!.rest_isClosed == "false"){

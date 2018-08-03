@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_weather.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
+import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
@@ -76,7 +77,7 @@ class WeatherFragment : Fragment() {
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
                 Log.d(TAG, "getDeviceLastLocation: $location")
-                retrofitCall(location, homeActivity)
+                retrofitCall(location, homeActivity, false)
             }
 
             override fun receiveLocationUpdatesFun() {
@@ -92,7 +93,7 @@ class WeatherFragment : Fragment() {
 
     }
 
-    fun retrofitCall(location: Location, activity: HomeActivity){
+    fun retrofitCall(location: Location, context: Context, isActivityCall: Boolean){
 
         var weatherData = WeatherData()
 
@@ -117,19 +118,24 @@ class WeatherFragment : Fragment() {
                 mHandler.post(Runnable {
                     var locationOfWeather = responseModelClass.body()!!.query.results.channel.location
                     var windWeather = responseModelClass.body()!!.query.results.channel.wind
-                    if(isRunning){
-                        weatherFrag.setText("${locationOfWeather.city},  ${locationOfWeather.region},  ${locationOfWeather.country}") // must be inside run()
-                    windSpeed.setText("Wind Speed: ${windWeather.speed}, Wind Chill: ${windWeather.chill}, Wind Direction: ${windWeather.direction}")
-                    temp.setText("Temp: ${responseModelClass.body()!!.query.results.channel.item.condition.temp}")
-                        var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
-                    Picasso.get().load(imgUrl)
-                            .into(imageView)
-                    }
                     var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
                     weatherData.imgUrl = imgUrl
                     weatherData.temp = responseModelClass.body()!!.query.results.channel.item.condition.temp
-                    homeCallback = activity
-                    homeCallback!!.sendWeatherData(weatherData)
+                    if(isRunning){
+                        weatherFrag.setText("${locationOfWeather.city},  ${locationOfWeather.region},  ${locationOfWeather.country}") // must be inside run()
+                        windSpeed.setText("Wind Speed: ${windWeather.speed}, Wind Chill: ${windWeather.chill}, Wind Direction: ${windWeather.direction}")
+                        temp.setText("Temp: ${responseModelClass.body()!!.query.results.channel.item.condition.temp}")
+                        var imgUrlRun = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
+                        Picasso.get().load(imgUrlRun)
+                            .into(imageView)
+                    }else if(isActivityCall){
+                        var activity: HomeActivity = context as HomeActivity
+                        homeCallback = activity
+                        homeCallback!!.sendWeatherData(weatherData)
+                    }else{
+                        homeCallback = context as ApiCallJobService
+                        homeCallback!!.sendWeatherData(weatherData)
+                    }
                     SARestaurantApp.sharedPreference!!.edit()
                             .putString("temp", responseModelClass.body()!!.query.results.channel.item.condition.temp)
                             .putString("imgurl", imgUrl)

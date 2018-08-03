@@ -34,7 +34,9 @@
 
     <!--Restaurant Fragment-->
     <string name="restlogo">RestLogo</string>
-    <string name="google_maps_key">AIzaSyC6Smj8wi2qTcaacRBzOVRBNpZUTpEIgvg</string>
+    <!--<string name="google_maps_key">AIzaSyC6Smj8wi2qTcaacRBzOVRBNpZUTpEIgvg</string>-->
+    <string name="google_maps_key">AIzaSyCEHTix-cuZqUpSZ9olJKQzyi7u87ZtJZU</string>
+
 
     <!--Map-->
     <string name="map">Map</string>
@@ -48,5 +50,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="not_available">No Data Available</string>
+    <string name="no_rate_available">No Ratings Available</string>
+
+    <string name="previous">Play</string>
 
 </resources>

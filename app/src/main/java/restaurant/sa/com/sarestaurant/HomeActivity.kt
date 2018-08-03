@@ -89,9 +89,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            scheduleJob()
-        }
         setSupportActionBar(toolbar)
         mapsPresenterImp = MapsPresenterImp()
         detailPresenter = this
@@ -117,7 +114,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
                 Log.d(TAG, "getDeviceLastLocation: $location Mil");
-                weatherFragment.retrofitCall(location, this@HomeActivity)
+                weatherFragment.retrofitCall(location, this@HomeActivity, true)
             }
 
             override fun receiveLocationUpdatesFun() {
@@ -143,15 +140,12 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
 
     override fun onBackPressed() {
-        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
-//        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
+//        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
+        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
-        else if (restaurantFragment != null && restaurantFragment!!.isVisible ){
-            restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
-            supportFragmentManager.popBackStack()
-        }else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
+        else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
             Log.d(TAG, "onBackPressed: Clicked");
             supportFragmentManager.popBackStack()
         }
@@ -224,32 +218,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun scheduleJob() {
-        val componentName = ComponentName(this, ApiCallJobService::class.java)
-        val info = JobInfo.Builder(123, componentName)
-                .setRequiresCharging(true)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-                .setPersisted(true)
-                .setPeriodic((15 * 60 * 1000).toLong())
-                .build()
-
-        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        val resultCode = scheduler.schedule(info)
-        if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduled")
-        } else {
-            Log.d(TAG, "Job scheduling failed")
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun cancelJob() {
-        val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        scheduler.cancel(123)
-        Log.d(TAG, "Job cancelled")
     }
 
 }

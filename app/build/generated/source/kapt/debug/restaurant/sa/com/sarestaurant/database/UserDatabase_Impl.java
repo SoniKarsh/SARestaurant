@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import restaurant.sa.com.sarestaurant.dao.FavoriteRestaurantDao;
 import restaurant.sa.com.sarestaurant.dao.FavoriteRestaurantDao_Impl;
+import restaurant.sa.com.sarestaurant.dao.ResultDao;
+import restaurant.sa.com.sarestaurant.dao.ResultDao_Impl;
 import restaurant.sa.com.sarestaurant.dao.UserDao;
 import restaurant.sa.com.sarestaurant.dao.UserDao_Impl;
 
@@ -30,22 +32,26 @@ public class UserDatabase_Impl extends UserDatabase {
 
   private volatile FavoriteRestaurantDao _favoriteRestaurantDao;
 
+  private volatile ResultDao _resultDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(4) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `User` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `emailId` TEXT NOT NULL, `mobileNo` TEXT NOT NULL, `userName` TEXT NOT NULL, `password` TEXT NOT NULL)");
         _db.execSQL("CREATE UNIQUE INDEX `index_User_userName_emailId` ON `User` (`userName`, `emailId`)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `FavoriteRestaurant` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `adapter_position` INTEGER NOT NULL, `restaurant_name` TEXT NOT NULL, `restaurant_address` TEXT NOT NULL, `restaurant_img_path` TEXT NOT NULL, `is_favorite` INTEGER, `latitude` REAL, `longitude` REAL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `Result` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `icon` TEXT, `name` TEXT NOT NULL, `id` TEXT, `photos` TEXT, `placeId` TEXT, `rating` REAL, `reference` TEXT, `scope` TEXT, `types` TEXT, `vicinity` TEXT, `lat` REAL, `lng` REAL, `latitude` REAL, `longitude` REAL, `latitude1` REAL, `longitude2` REAL, `compoundCode` TEXT, `globalCode` TEXT, `openNow` INTEGER)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9baec6d0b0ca416049ba36bdbbfaedcb\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e6b6723699ae5ae975b8ee61db111ee2\")");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `User`");
         _db.execSQL("DROP TABLE IF EXISTS `FavoriteRestaurant`");
+        _db.execSQL("DROP TABLE IF EXISTS `Result`");
       }
 
       @Override
@@ -104,8 +110,38 @@ public class UserDatabase_Impl extends UserDatabase {
                   + " Expected:\n" + _infoFavoriteRestaurant + "\n"
                   + " Found:\n" + _existingFavoriteRestaurant);
         }
+        final HashMap<String, TableInfo.Column> _columnsResult = new HashMap<String, TableInfo.Column>(20);
+        _columnsResult.put("_id", new TableInfo.Column("_id", "INTEGER", true, 1));
+        _columnsResult.put("icon", new TableInfo.Column("icon", "TEXT", false, 0));
+        _columnsResult.put("name", new TableInfo.Column("name", "TEXT", true, 0));
+        _columnsResult.put("id", new TableInfo.Column("id", "TEXT", false, 0));
+        _columnsResult.put("photos", new TableInfo.Column("photos", "TEXT", false, 0));
+        _columnsResult.put("placeId", new TableInfo.Column("placeId", "TEXT", false, 0));
+        _columnsResult.put("rating", new TableInfo.Column("rating", "REAL", false, 0));
+        _columnsResult.put("reference", new TableInfo.Column("reference", "TEXT", false, 0));
+        _columnsResult.put("scope", new TableInfo.Column("scope", "TEXT", false, 0));
+        _columnsResult.put("types", new TableInfo.Column("types", "TEXT", false, 0));
+        _columnsResult.put("vicinity", new TableInfo.Column("vicinity", "TEXT", false, 0));
+        _columnsResult.put("lat", new TableInfo.Column("lat", "REAL", false, 0));
+        _columnsResult.put("lng", new TableInfo.Column("lng", "REAL", false, 0));
+        _columnsResult.put("latitude", new TableInfo.Column("latitude", "REAL", false, 0));
+        _columnsResult.put("longitude", new TableInfo.Column("longitude", "REAL", false, 0));
+        _columnsResult.put("latitude1", new TableInfo.Column("latitude1", "REAL", false, 0));
+        _columnsResult.put("longitude2", new TableInfo.Column("longitude2", "REAL", false, 0));
+        _columnsResult.put("compoundCode", new TableInfo.Column("compoundCode", "TEXT", false, 0));
+        _columnsResult.put("globalCode", new TableInfo.Column("globalCode", "TEXT", false, 0));
+        _columnsResult.put("openNow", new TableInfo.Column("openNow", "INTEGER", false, 0));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysResult = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesResult = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoResult = new TableInfo("Result", _columnsResult, _foreignKeysResult, _indicesResult);
+        final TableInfo _existingResult = TableInfo.read(_db, "Result");
+        if (! _infoResult.equals(_existingResult)) {
+          throw new IllegalStateException("Migration didn't properly handle Result(restaurant.sa.com.sarestaurant.appview.restaurant.model.Result).\n"
+                  + " Expected:\n" + _infoResult + "\n"
+                  + " Found:\n" + _existingResult);
+        }
       }
-    }, "9baec6d0b0ca416049ba36bdbbfaedcb", "92487d52e797c31414301824da1020aa");
+    }, "e6b6723699ae5ae975b8ee61db111ee2", "8b4ee35e1ce7f5ded6ff213187df618d");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -116,7 +152,7 @@ public class UserDatabase_Impl extends UserDatabase {
 
   @Override
   protected InvalidationTracker createInvalidationTracker() {
-    return new InvalidationTracker(this, "User","FavoriteRestaurant");
+    return new InvalidationTracker(this, "User","FavoriteRestaurant","Result");
   }
 
   @Override
@@ -127,6 +163,7 @@ public class UserDatabase_Impl extends UserDatabase {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `User`");
       _db.execSQL("DELETE FROM `FavoriteRestaurant`");
+      _db.execSQL("DELETE FROM `Result`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -161,6 +198,20 @@ public class UserDatabase_Impl extends UserDatabase {
           _favoriteRestaurantDao = new FavoriteRestaurantDao_Impl(this);
         }
         return _favoriteRestaurantDao;
+      }
+    }
+  }
+
+  @Override
+  public ResultDao resultDao() {
+    if (_resultDao != null) {
+      return _resultDao;
+    } else {
+      synchronized(this) {
+        if(_resultDao == null) {
+          _resultDao = new ResultDao_Impl(this);
+        }
+        return _resultDao;
       }
     }
   }

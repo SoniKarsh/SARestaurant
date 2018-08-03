@@ -3,6 +3,7 @@ package restaurant.sa.com.sarestaurant.appview.restaurant.adapter
 import android.app.Dialog
 import android.support.v7.widget.RecyclerView
 import android.content.Context
+//import restaurant.sa.com.sarestaurant.model.models.Result
 import android.location.Location
 import android.os.Build
 import android.util.Log
@@ -23,6 +24,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragmen
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.PhotosModel.ResponsePhotoModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.Result
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesClient
@@ -34,7 +36,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RestListAdapter(var items: ResponseModelClass, var favItems: List<FavoriteRestaurantModel>, var context: Context) : RecyclerView.Adapter<RestListAdapter.CustomViewHolder>(){
+class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteRestaurantModel>, var context: Context) : RecyclerView.Adapter<RestListAdapter.CustomViewHolder>(){
 
     val TAG = "RestaurantListAdapter"
     lateinit var favoriteRestaurantModel: FavoriteRestaurantModel
@@ -45,13 +47,14 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
     var detailPresenter: DetailPresenter? = null
     lateinit var restaurantDetailModel: RestaurantDetailModel
     val BASE_URL = "https://maps.googleapis.com"
+    val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return items.results!!.size
+        return items.size
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
@@ -63,23 +66,23 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.restaurantImage.clipToOutline = true
         }
-        holder.restaurantAddress.text = items.results!![holder.adapterPosition].vicinity
-        holder.restaurantName.text = items.results!![holder.adapterPosition].name
-        if (items.results!![holder.adapterPosition].photos != null){
-            val photoReference = items.results!![holder.adapterPosition].photos!![0].photoReference
+        holder.restaurantAddress.text = items[holder.adapterPosition].vicinity
+        holder.restaurantName.text = items[holder.adapterPosition].name
+        if (items[holder.adapterPosition].photos != null){
+            val photoReference = items[holder.adapterPosition].photos!![0].photoReference
             holder.restaurantImgUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&sensor=false&key=${context.resources.getString(R.string.google_maps_key)}"
         }else{
-            holder.restaurantImgUrl = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
+            holder.restaurantImgUrl = noImage
         }
         Picasso.get().load(holder.restaurantImgUrl)
                 .into(holder.restaurantImage)
-        holder.placeId = items.results!![holder.adapterPosition].placeId
+        holder.placeId = items[holder.adapterPosition].placeId!!
 //        https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${resources.getString(R.string.google_maps_key)}
         Log.d(TAG, "onBindViewHolder: ${holder.adapterPosition}")
 
         for (i in favItems){
-            if(items.results!![holder.adapterPosition].name == i.restaurantName
-                    && items.results!![holder.adapterPosition].vicinity == i.restaurantAddress){
+            if(items[holder.adapterPosition].name == i.restaurantName
+                    && items[holder.adapterPosition].vicinity == i.restaurantAddress){
                 if(i.isFavorite!=null){
                     if(i.isFavorite!!) {
                         holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
@@ -93,29 +96,35 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
 
         holder.holderView.setOnClickListener {
 
-            restaurantDetailModel.rest_name = items.results!![holder.adapterPosition].name
-            restaurantDetailModel.rest_address = items.results!![holder.adapterPosition].vicinity
+            restaurantDetailModel.rest_name = items[holder.adapterPosition].name
+            restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
             restaurantDetailModel.imgUrl = holder.restaurantImgUrl
-            restaurantDetailModel.rating = items.results!![holder.adapterPosition].rating
-            if(items.results!![holder.adapterPosition].openingHours != null){
-                restaurantDetailModel.rest_isClosed = items.results!![holder.adapterPosition].openingHours.openNow.toString()
+            if(items [holder.adapterPosition].rating != null){
+                restaurantDetailModel.rating = items[holder.adapterPosition].rating!!
+            }else{
+                restaurantDetailModel.rating = 0.0
+            }
+//            holder.placeId = items.results!![holder.adapterPosition].placeId
+            if(items[holder.adapterPosition].openingHours != null){
+                restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
             }else{
                 restaurantDetailModel.rest_isClosed = "No Data Available"
             }
             Log.d(TAG, "onBindViewHolder: Clicked");
-            detailPresenter?.getRestaurantData(restaurantDetailModel)
-            homeActivity = context as HomeActivity
-            homeActivity!!.supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
-                    .addToBackStack(null)
-                    .commit()
+            retrofitCall(holder.placeId)
+//            detailPresenter?.getRestaurantData(restaurantDetailModel)
+//            homeActivity = context as HomeActivity
+//            homeActivity!!.supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
+//                    .addToBackStack(null)
+//                    .commit()
         }
 
         holder.sharePost.setOnClickListener {
 
-            shareModel.address = items.results!![holder.adapterPosition].vicinity
-            shareModel.name = items.results!![holder.adapterPosition].name
+            shareModel.address = items[holder.adapterPosition].vicinity!!
+            shareModel.name = items[holder.adapterPosition].name
             shareModel.imgUrl = holder.restaurantImgUrl
 
             val dialogBuilder = AlertDialog.Builder(context)
@@ -135,12 +144,12 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         holder.favoriteButton.setOnClickListener {
             var isFavorite = holder.favoriteButton.isChecked
             favoriteRestaurantModel.adapterPosition = holder.adapterPosition
-            favoriteRestaurantModel.restaurantName = items.results!![holder.adapterPosition].name
-            favoriteRestaurantModel.restaurantAddress = items.results!![holder.adapterPosition].vicinity
+            favoriteRestaurantModel.restaurantName = items[holder.adapterPosition].name
+            favoriteRestaurantModel.restaurantAddress = items[holder.adapterPosition].vicinity!!
             favoriteRestaurantModel.restaurantImagePath = holder.restaurantImgUrl
 
-            favoriteRestaurantModel.latitude = items.results!![holder.adapterPosition].geometry.location.lat
-            favoriteRestaurantModel.longitude = items.results!![holder.adapterPosition].geometry.location.lng
+            favoriteRestaurantModel.latitude = items[holder.adapterPosition].geometry!!.location!!.lat
+            favoriteRestaurantModel.longitude = items[holder.adapterPosition].geometry!!.location!!.lng
             favoriteRestaurantModel.isFavorite = isFavorite
 
             if(isFavorite){
@@ -161,11 +170,10 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
         val builder = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-
         val retrofit: Retrofit = builder.build()
 
         val client: GooglePlacesPhotoClient = retrofit.create(GooglePlacesPhotoClient::class.java)
-
+        homeActivity = context as HomeActivity
         val call = client.sendRequestForPlacesPhotos(placeId, homeActivity!!.resources.getString(R.string.google_maps_key))
         call.enqueue(object : Callback<ResponsePhotoModelClass> {
             override fun onFailure(call: Call<ResponsePhotoModelClass>?, t: Throwable?) {
@@ -173,8 +181,21 @@ class RestListAdapter(var items: ResponseModelClass, var favItems: List<Favorite
             }
 
             override fun onResponse(call: Call<ResponsePhotoModelClass>?, responseModelClass: Response<ResponsePhotoModelClass>?) {
-                Log.d(TAG, "onResponse: ${responseModelClass!!.body()}")
+                Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!}")
 
+                if(responseModelClass.body()!!.result.photos != null){
+                    for(i in responseModelClass.body()!!.result.photos){
+                        restaurantDetailModel.imageUrlList!!.add(i.photoReference)
+                    }
+                }else{
+                    restaurantDetailModel.imageUrlList!!.add("")
+                }
+                detailPresenter?.getRestaurantData(restaurantDetailModel)
+                homeActivity!!.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
+                        .addToBackStack(null)
+                        .commit()
             }
         })
     }
