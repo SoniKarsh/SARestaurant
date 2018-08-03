@@ -1,7 +1,19 @@
 #Internal package file, do not edit.
-#Fri Aug 03 15:09:21 IST 2018
+#Fri Aug 03 18:16:55 IST 2018
+1.base=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/116
+2.path=classes.dex
 0.baseType=DIRECTORY
-0.base=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/68
+3.baseType=DIRECTORY
+2.base=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/115
+3.set=DEX
+2.set=DEX
+1.baseType=DIRECTORY
+3.path=classes.dex
+count=4
+1.set=DEX
 0.path=classes.dex
+3.base=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/117
 0.set=DEX
-count=1
+0.base=/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/114
+2.baseType=DIRECTORY
+1.path=classes.dex

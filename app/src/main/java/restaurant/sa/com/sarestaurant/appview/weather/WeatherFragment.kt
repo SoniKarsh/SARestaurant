@@ -52,6 +52,7 @@ class WeatherFragment : Fragment() {
         super.onAttach(context)
         contextRestFrag = context!!
         homeActivity = context as HomeActivity
+        context.supportActionBar?.title = TAG
         homeCallback = homeActivity
     }
 

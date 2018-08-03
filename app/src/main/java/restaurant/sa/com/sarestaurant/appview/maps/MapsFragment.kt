@@ -86,6 +86,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         homeActivity = context as HomeActivity
+        context.supportActionBar?.title = TAG
         locationCommunication = homeActivity
     }
 
