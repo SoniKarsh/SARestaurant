@@ -1,11 +1,15 @@
 package restaurant.sa.com.sarestaurant.appview.restaurant
 
 import android.content.Context
+import android.content.DialogInterface
+import android.content.pm.PackageManager
 //import restaurant.sa.com.sarestaurant.model.models.Result
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -40,7 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RestaurantFragment: Fragment(), RestaurantView {
 
     lateinit var homeActivity: HomeActivity
-    var permissionList = arrayListOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
+    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION)
     var granted = false
     private val TAG = "RestaurantFragment"
@@ -70,6 +74,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var stop = 0
     var isLoading = false
     var totalListSize: Int = 0
+    var permissionUtils: PermissionUtils? = null
 
     override fun stopProgress() {
         progressBar.visibility = View.GONE
@@ -90,16 +95,22 @@ class RestaurantFragment: Fragment(), RestaurantView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_restaurant, container, false)
     }
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var permissionUtils = PermissionUtils(homeActivity)
-        granted = permissionUtils.checkPermissions(permissionList)
+        permissionUtils = PermissionUtils(homeActivity)
+//        granted =
+        permissionUtils!!.checkPermissions(permissionList)
         restaurantPresenterImp = RestaurantPresenterImp()
         resultList = ArrayList()
         if(!granted){
             Log.d(TAG, ": Not Granted:(");
-            permissionUtils.askForPermissions()
+//            permissionUtils.askForPermissions(permissionList)
             granted = true
 //            permissionUtils.askForPermissions()
         }
@@ -117,7 +128,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
             }
 
             override fun onError(error: String) {
-                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
+//                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
             }
 
         })

@@ -64,6 +64,11 @@ class SignInFragment : Fragment(), SignInView {
             }
         }
 
+        button2.setOnClickListener {
+            val intent = Intent(activity, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         btnFacebookSignIn.setOnClickListener {
             val userModel = UserModel()
 

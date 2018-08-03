@@ -40,10 +40,13 @@ import android.app.job.JobScheduler
 import android.app.job.JobInfo
 import android.content.ComponentName
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.support.v4.app.ActivityCompat
 import android.view.View
 import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
+import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 
 
 class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication, HomeCallback {
@@ -76,6 +79,11 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     var restaurantFragment: RestaurantFragment? = null
     var restaurantDetailFragment: RestaurantDetailFragment? = null
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
+    var permissionUtils: PermissionUtils? = null
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
     override fun sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
         Log.d(TAG, ": ${listOfLocations}");
@@ -90,6 +98,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+        permissionUtils = PermissionUtils(this)
         mapsPresenterImp = MapsPresenterImp()
         detailPresenter = this
         Log.d(TAG, ": $TAG+Mi");

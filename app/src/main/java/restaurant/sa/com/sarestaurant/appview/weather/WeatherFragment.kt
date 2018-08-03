@@ -41,11 +41,12 @@ class WeatherFragment : Fragment() {
     lateinit var homeActivity: HomeActivity
     lateinit var contextRestFrag: Context
     var granted = false
-    var permissionList = arrayListOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
+    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
             android.Manifest.permission.ACCESS_COARSE_LOCATION)
     var weatherPresenterImp: WeatherPresenterImp? = null
     var homeCallback: HomeCallback? = null
     var isRunning: Boolean = false
+    var permissionUtils: PermissionUtils? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -58,16 +59,21 @@ class WeatherFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         isRunning = true
-        var permissionUtils = PermissionUtils(homeActivity)
-        granted = permissionUtils.checkPermissions(permissionList)
+        permissionUtils = PermissionUtils(homeActivity)
+//        granted = permissionUtils!!.checkPermissions(permissionList)
+        permissionUtils!!.checkPermissions(permissionList)
         weatherPresenterImp = WeatherPresenterImp()
 
         if(!granted){
             Log.d(TAG, ": Not Granted:(");
-            permissionUtils.askForPermissions()
+            permissionUtils!!.askForPermissions(permissionList as Array<String>)
             granted = true
 //            permissionUtils.askForPermissions()
         }

@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.appview.signup.SignUpFragment
@@ -23,6 +24,7 @@ class GenericTextWatcher(var view: View, var signUpFragment: SignUpFragment): Te
     var matchFound : Boolean = false
     lateinit var text: String
     val TAG = "GenericTextWatcher"
+    lateinit var tempText : String
 
     override fun afterTextChanged(s: Editable?) {
         text = s.toString()
@@ -56,6 +58,8 @@ class GenericTextWatcher(var view: View, var signUpFragment: SignUpFragment): Te
                 if(!matchFound || text.isEmpty() || (text.length < 8)){
                     signUpView.setError(view)
                 }else{
+                    tempText = text
+                    Log.d(TAG, "afterTextChanged: $tempText");
                     signUpView.removeError(view)
                 }
             }

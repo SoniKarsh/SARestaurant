@@ -53,5 +53,6 @@
     <string name="no_rate_available">No Ratings Available</string>
 
     <string name="previous">Play</string>
+    <string name="weather_image">Weather Image</string>
 
 </resources>

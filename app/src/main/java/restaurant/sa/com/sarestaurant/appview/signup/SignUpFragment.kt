@@ -48,6 +48,8 @@ class SignUpFragment: Fragment(), SignUpView {
             if(txtPassword.text.toString() != txtConfirmPassword.text.toString()){
                 Log.d(TAG, "onActivityCreated: ${txtPassword}${txtConfirmPassword}");
                 confirmPasswordWrapper.error = "Confirm Password and Password Doesn't Match."
+            }else{
+                confirmPasswordWrapper.isErrorEnabled = false
             }
 
             if(displayValidationMessage(userNameWrapper) && displayValidationMessage(emailIdWrapperUp)
@@ -66,6 +68,7 @@ class SignUpFragment: Fragment(), SignUpView {
                 startActivity(intent)
             }
             else{
+                Log.d(TAG, "onActivityCreated: ${txtPassword.text} ${txtConfirmPassword.text}");
                 Toast.makeText(activity, "Please Follow The Guidelines", Toast.LENGTH_LONG).show()
             }
         }

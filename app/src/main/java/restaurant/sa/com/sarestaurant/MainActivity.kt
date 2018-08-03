@@ -1,13 +1,10 @@
 package restaurant.sa.com.sarestaurant
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import restaurant.sa.com.sarestaurant.appview.signin.SignInFragment
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
