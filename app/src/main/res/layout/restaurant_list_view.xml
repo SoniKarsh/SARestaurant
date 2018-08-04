@@ -28,7 +28,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:contentDescription="@string/restlogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

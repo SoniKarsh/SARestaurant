@@ -28,6 +28,7 @@ import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.LinearLayoutManageScroll
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.RestListAdapter
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.Result
@@ -61,7 +62,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var currentItems: Int = 0
     var scrolledOutItems: Int = 0
     var totalItems: Int = 0
-    val layout = LinearLayoutManager(activity)
+    lateinit var layout: LinearLayoutManager
     lateinit var listOfPlacesLocation: ArrayList<LatLng>
     var isRetrofitCall = false
     lateinit var listOfModel :ArrayList<Result>
@@ -75,6 +76,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var isLoading = false
     var totalListSize: Int = 0
     var permissionUtils: PermissionUtils? = null
+    var linearLayoutManageScroll: LinearLayoutManageScroll? = null
 
     override fun stopProgress() {
         progressBar.visibility = View.GONE
@@ -133,13 +135,17 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
         })
 
+        layout = LinearLayoutManager(activity)
+        linearLayoutManageScroll = LinearLayoutManageScroll(activity!!)
         simpleSwipeRefreshLayout.setOnRefreshListener {
             Handler().postDelayed({
                 simpleSwipeRefreshLayout.setRefreshing(false);
+                linearLayoutManageScroll!!.setScrollEnabled(false)
                 // Generate a random integer number
                 if(adapter!=null){
                     adapter!!.items.clear()
                 }
+                layout
                 retrofitCall(currentLocation!!)
                 // set the number value in TextView
                 Log.d(TAG, "onActivityCreated: $currentLocation")
@@ -159,7 +165,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
 //                isLoading = true
                 if(isScrolling && (currentItems + scrolledOutItems == totalItems) && !isLoading) //$$isLoading
                 {
-                    isScrolling = false;
+                    isScrolling = false
                     isRetrofitCall = false
                     fetchData()
                 }
@@ -257,6 +263,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!.results}")
                 listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
                 Log.d("OnREsponse", "${listOfPlacesLocation}")
+                linearLayoutManageScroll!!.setScrollEnabled(true)
                 restaurantView!!.stopProgress()
                 locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
                 SARestaurantApp.database!!.resultDao().deleteAll()
