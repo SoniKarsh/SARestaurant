@@ -35,17 +35,6 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailM
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
-import android.R.string.cancel
-import android.app.job.JobScheduler
-import android.app.job.JobInfo
-import android.content.ComponentName
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v4.app.ActivityCompat
-import android.view.View
-import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 
 
