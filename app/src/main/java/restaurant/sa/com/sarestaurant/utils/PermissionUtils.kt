@@ -37,6 +37,8 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
                     }
                     if(nonGreanted.isNotEmpty()){
                         askForPermissions(nonGreanted.toTypedArray())
+                    }else{
+
                     }
                 }else{
                     for (i in 0 until permissions.size){
