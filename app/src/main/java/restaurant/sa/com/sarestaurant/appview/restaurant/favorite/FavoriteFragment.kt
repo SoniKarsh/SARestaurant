@@ -42,11 +42,17 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        SARestaurantApp.isFavVisible = true
         homeActivity = context as HomeActivity
         context.supportActionBar?.title = TAG
         homeActivity.supportActionBar?.show()
         locationCommunication = homeActivity
         restaurantView = this
+    }
+
+    override fun onDetach() {
+        SARestaurantApp.isFavVisible = false
+        super.onDetach()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,7 +68,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
         fetchData()
         simpleSwipeRefreshLayout.setOnRefreshListener {
             Handler().postDelayed({
-                simpleSwipeRefreshLayout.setRefreshing(false);
+                simpleSwipeRefreshLayout.setRefreshing(false)
                 // Generate a random integer number
                 fetchData()
                 // set the number value in TextView
@@ -78,7 +84,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
         restaurantPresenterImp.getListOfFavLocations(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.onCallback{
             override fun onResponse(listOfLocations: ArrayList<LatLng>) {
                 listOfPlacesLocation = listOfLocations
-                Log.d(TAG, "onResponse: Stop Progress");
+                Log.d(TAG, "onResponse: Stop Progress")
                 restaurantView!!.stopProgress()
             }
 

@@ -21,6 +21,7 @@ import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
 import android.os.PersistableBundle
+import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
 import android.widget.TextView
 import android.widget.Toast
@@ -33,6 +34,7 @@ import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
@@ -41,6 +43,7 @@ import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
 class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication, HomeCallback {
+
     override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
 
     }
@@ -61,6 +64,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     val RESTAURANT_FRAGMENT_TAG = "RestaurantFragment"
     val FAVORITE_RESTAURANT_FRAGMENT_TAG = "FavoriteFragment"
     val WEATHER_FRAGMENT_TAG = "WeatherFragment"
+    val MAP_FRAGMENT_TAG = "MapsFragment"
     var mapsFragment = MapsFragment()
     var weatherFragment = WeatherFragment()
     lateinit var mapsPresenterImp: MapsPresenterImp
@@ -69,10 +73,12 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     var listOfLocations: ArrayList<LatLng>? = null
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     var restaurantFragment: RestaurantFragment? = null
+    var favoriteFragment: FavoriteFragment? = null
     var restaurantDetailFragment: RestaurantDetailFragment? = null
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var permissionUtils: PermissionUtils? = null
     var homeActivity: HomeActivity? = null
+    var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
 //    var permissionGranted: PermissionUtils? = null
     var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -81,13 +87,21 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
+    override fun sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
         Log.d(TAG, ": ${listOfLocations}");
         this.listOfLocations = listOfLocations
     }
 
     override fun getLocationFromRestaurant(): ArrayList<LatLng> {
         return listOfLocations!!
+    }
+
+    override fun sendNameImgFromRestaurant(listOfTitleImgModel: ArrayList<TitleImgModel>) {
+        this.listOfTitleImgModel = listOfTitleImgModel
+    }
+
+    override fun getNameImgFromRestaurant(): ArrayList<TitleImgModel> {
+        return listOfTitleImgModel
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -180,15 +194,48 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     }
 
     override fun onBackPressed() {
+        LogUtils.setTag(TAG)
+        LogUtils.d("${SARestaurantApp.isRestVisible}," +
+                "${SARestaurantApp.isRestDetailVisible}," +
+                "${SARestaurantApp.isFavVisible}," +
+                "${SARestaurantApp.isWeatherVisible}," +
+                "${SARestaurantApp.isMapVisible}")
 //        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
-        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
+//        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
+        }else if (SARestaurantApp.isFavVisible && !SARestaurantApp.isMapVisible){
+            LogUtils.setTag(TAG)
+            LogUtils.d("isFavVisible")
+            favoriteFragment = supportFragmentManager.findFragmentByTag(FAVORITE_RESTAURANT_FRAGMENT_TAG) as FavoriteFragment
+            supportFragmentManager.popBackStack("Favorite", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar!!.title = "RestaurantFragment"
+            nav_view.setCheckedItem(R.id.nav_home)
+        }else if(SARestaurantApp.isWeatherVisible){
+            weatherFragment = supportFragmentManager.findFragmentByTag(WEATHER_FRAGMENT_TAG) as WeatherFragment
+            supportFragmentManager.popBackStack("Weather", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar!!.title = "RestaurantFragment"
+            nav_view.setCheckedItem(R.id.nav_home)
+        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isMapVisible && !SARestaurantApp.isFavVisible){
+            mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
+            supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar!!.title = "RestaurantFragment"
+            nav_view.setCheckedItem(R.id.nav_home)
+        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isFavVisible && SARestaurantApp.isMapVisible){
+            mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
+            supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar!!.title = "FavoriteFragment"
+            nav_view.setCheckedItem(R.id.nav_favorite)
+        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isRestDetailVisible){
+            restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
+            supportFragmentManager.popBackStack("RestDetail", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar!!.title = "RestaurantFragment"
+            nav_view.setCheckedItem(R.id.nav_home)
         }
-        else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
-            Log.d(TAG, "onBackPressed: Clicked");
-            supportFragmentManager.popBackStack()
-        }
+//        else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
+//            Log.d(TAG, "onBackPressed: Clicked");
+//            supportFragmentManager.popBackStack()
+//        }
         else {
             AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -214,7 +261,8 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             R.id.action_map -> {
                 if(mapsPresenterImp.isServicesOK(this)){
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentHolder, mapsFragment)
+                            .replace(R.id.fragmentHolder, mapsFragment, MAP_FRAGMENT_TAG)
+                            .addToBackStack("Maps")
                             .commit();
                 }
                 return true
@@ -231,18 +279,21 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 val transaction = fragmentManager.beginTransaction()
                 transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
                 transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
+                transaction.addToBackStack(null)
                 transaction.commit()
             }
             R.id.nav_favorite -> {
                 val fragmentManager = supportFragmentManager
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, FavoriteFragment(), FAVORITE_RESTAURANT_FRAGMENT_TAG)
+                transaction.addToBackStack("Favorite")
                 transaction.commit()
             }
             R.id.nav_weather -> {
                 val fragmentManager = supportFragmentManager
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, WeatherFragment(), WEATHER_FRAGMENT_TAG)
+                transaction.addToBackStack("Weather")
                 transaction.commit()
             }
             R.id.nav_logout -> {

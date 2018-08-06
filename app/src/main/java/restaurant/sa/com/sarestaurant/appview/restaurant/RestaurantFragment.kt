@@ -27,6 +27,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.LinearLayoutMan
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.RestListAdapter
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.Result
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPresenterImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesClient
 import restaurant.sa.com.sarestaurant.appview.restaurant.view.RestaurantView
@@ -58,6 +59,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var totalItems: Int = 0
     lateinit var layout: LinearLayoutManageScroll
     lateinit var listOfPlacesLocation: ArrayList<LatLng>
+    lateinit var listOfTitleImgModel: ArrayList<TitleImgModel>
     var isRetrofitCall = false
     lateinit var listOfModel :ArrayList<Result>
     var adapter: RestListAdapter? = null
@@ -71,6 +73,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var totalListSize: Int = 0
     var permissionUtils: PermissionUtils? = null
     var linearLayoutManageScroll: LinearLayoutManageScroll? = null
+    var restContext: Context? = null
 
     override fun stopProgress() {
         progressBar.visibility = View.GONE
@@ -83,9 +86,16 @@ class RestaurantFragment: Fragment(), RestaurantView {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         homeActivity = context as HomeActivity
+        SARestaurantApp.isRestVisible = true
+        restContext = context
         context.supportActionBar?.title = TAG
         locationCommunication = homeActivity
         restaurantView = this
+    }
+
+    override fun onDetach() {
+        SARestaurantApp.isRestVisible = false
+        super.onDetach()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -128,6 +138,9 @@ class RestaurantFragment: Fragment(), RestaurantView {
 //        linearLayoutManageScroll = LinearLayoutManageScroll(activity!!)
         simpleSwipeRefreshLayout.setOnRefreshListener {
             layout.setScrollEnabled(false)
+            if(adapter!=null){
+                adapter!!.isClickable = false
+            }
             Handler().postDelayed({
                 simpleSwipeRefreshLayout.setRefreshing(false);
                 // Generate a random integer number
@@ -138,6 +151,9 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 // set the number value in TextView
                 Log.d(TAG, "onActivityCreated: $currentLocation")
                 layout.setScrollEnabled(true)
+                if(adapter!=null){
+                    adapter!!.isClickable = true
+                }
             }, 3000)
         }
 
@@ -170,45 +186,6 @@ class RestaurantFragment: Fragment(), RestaurantView {
     }
 
     private fun fetchData() {
-//        listOfModel = resultListFetch
-//        Log.d(TAG, "fetchData: ${listOfModel.size}");
-//        if(isRetrofitCall){
-////            responseModelFromFetch.results.add(Result())
-//            for (i in 0..5){
-//                Log.d(TAG, "fetchData: $i");
-//                adapter.items.add(resultListFetch[i])
-//            }
-//            adapter.notifyDataSetChanged()
-//        }else if(stop<resultListFetch.size-1){
-//                progressBarRest.visibility = View.VISIBLE
-//                Handler().postDelayed(Runnable {
-//                    for (i in start..stop){
-//                        adapter.items.add(listOfModel[i])
-//                        Log.d(TAG, "fetchData: $i $start $stop");
-//                    }
-////                for (i in responseModelClass.results){
-////                    adapter.items.results.add(i)
-////                }
-//                    adapter.notifyDataSetChanged()
-//                    progressBarRest.visibility = View.GONE
-//                    start+=5
-//                    stop+=5
-//                }, 3000)
-//                x++
-//        }else if((listOfModel.size%5)<5 && x==1){
-//            x++
-//            progressBarRest.visibility = View.VISIBLE
-////            Log.d(TAG, "fetchData: In Here ${stop-5} ${listOfModel%5}");
-//            Handler().postDelayed(Runnable {
-//                for (i in (stop-5)..(listOfModel.size%5 + stop)){
-//                    adapter.items.add(listOfModel[i])
-//                    Log.d(TAG, "fetchData: ${listOfModel[i]}");
-//                }
-//                adapter.notifyDataSetChanged()
-//                progressBarRest.visibility = View.GONE
-//            }, 3000)
-//
-//        }
         isLoading = true
         listOfModel = SARestaurantApp.database!!.resultDao().loadAllUsersByPage(5, stop) as ArrayList<Result>
         Log.d(TAG, "fetchData: ${listOfModel}");
@@ -249,10 +226,12 @@ class RestaurantFragment: Fragment(), RestaurantView {
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!.results}")
                 listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
+                listOfTitleImgModel = restaurantPresenterImp.getListOfTitleImg(responseModelClass.body()!!)
                 Log.d("OnREsponse", "${listOfPlacesLocation}")
 //                linearLayoutManageScroll!!.setScrollEnabled(true)
                 restaurantView!!.stopProgress()
                 locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
+                locationCommunication!!.sendNameImgFromRestaurant(listOfTitleImgModel)
                 SARestaurantApp.database!!.resultDao().deleteAll()
                 Log.d(TAG, "onResponse: x: $x stop: $stop")
                 x = 0

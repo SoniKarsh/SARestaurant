@@ -44,13 +44,11 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
             holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
 //            addItem(favoriteRestaurantModel)
         }
-
         holder.favoriteButton.setOnClickListener {
-
             var adapterPos = items[holder.adapterPosition].adapterPosition
             items = removeItem(adapterPos)
             notifyItemRemoved(holder.adapterPosition)
-
+            notifyItemRangeChanged(holder.adapterPosition, items.size)
         }
 
 //        holder.restaurantAddress.text = items[]
@@ -100,6 +98,10 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
     }
 
     private fun removeItem(position: Int): ArrayList<FavoriteRestaurantModel> {

@@ -1,4 +1,0 @@
-#Sun Aug 05 21:48:04 IST 2018
-base.0=/home/karsh/Documents/SARestaurant/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/40
-path.0=classes.dex
-renamed.0=classes.dex

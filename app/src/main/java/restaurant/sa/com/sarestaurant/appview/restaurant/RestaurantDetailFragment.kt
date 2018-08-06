@@ -15,8 +15,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresent
 import android.support.v4.view.ViewPager
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.ImageSlideAdapter
 import android.support.constraint.ConstraintSet
-
-
+import restaurant.sa.com.sarestaurant.SARestaurantApp
 
 
 class RestaurantDetailFragment: Fragment(), DetailPresenter {
@@ -37,8 +36,15 @@ class RestaurantDetailFragment: Fragment(), DetailPresenter {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        SARestaurantApp.isRestDetailVisible = true
+//        context.supportActionBar?.title = TAG
         thisContext = context!!
         detailPresenter = this
+    }
+
+    override fun onDetach() {
+        SARestaurantApp.isRestDetailVisible = false
+        super.onDetach()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

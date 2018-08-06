@@ -46,6 +46,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var detailPresenter: DetailPresenter? = null
     lateinit var restaurantDetailModel: RestaurantDetailModel
+    var isClickable: Boolean = true
     val BASE_URL = "https://maps.googleapis.com"
     val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
 
@@ -96,22 +97,24 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
 
         holder.holderView.setOnClickListener {
 
-            restaurantDetailModel.rest_name = items[holder.adapterPosition].name
-            restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
-            restaurantDetailModel.imgUrl = holder.restaurantImgUrl
-            if(items [holder.adapterPosition].rating != null){
-                restaurantDetailModel.rating = items[holder.adapterPosition].rating!!
-            }else{
-                restaurantDetailModel.rating = 0.0
-            }
+            if(isClickable){
+                restaurantDetailModel.rest_name = items[holder.adapterPosition].name
+                restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
+                restaurantDetailModel.imgUrl = holder.restaurantImgUrl
+                if(items [holder.adapterPosition].rating != null){
+                    restaurantDetailModel.rating = items[holder.adapterPosition].rating!!
+                }else{
+                    restaurantDetailModel.rating = 0.0
+                }
 //            holder.placeId = items.results!![holder.adapterPosition].placeId
-            if(items[holder.adapterPosition].openingHours != null){
-                restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
-            }else{
-                restaurantDetailModel.rest_isClosed = "No Data Available"
+                if(items[holder.adapterPosition].openingHours != null){
+                    restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
+                }else{
+                    restaurantDetailModel.rest_isClosed = "No Data Available"
+                }
+                Log.d(TAG, "onBindViewHolder: Clicked");
+                retrofitCall(holder.placeId)
             }
-            Log.d(TAG, "onBindViewHolder: Clicked");
-            retrofitCall(holder.placeId)
 //            detailPresenter?.getRestaurantData(restaurantDetailModel)
 //            homeActivity = context as HomeActivity
 //            homeActivity!!.supportFragmentManager
@@ -194,7 +197,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
                 homeActivity!!.supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
-                        .addToBackStack(null)
+                        .addToBackStack("RestDetail")
                         .commit()
             }
         })

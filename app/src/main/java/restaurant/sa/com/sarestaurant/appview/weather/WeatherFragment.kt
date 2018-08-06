@@ -49,10 +49,16 @@ class WeatherFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        SARestaurantApp.isWeatherVisible = true
         contextRestFrag = context!!
         homeActivity = context as HomeActivity
         context.supportActionBar?.title = TAG
         homeCallback = homeActivity
+    }
+
+    override fun onDetach() {
+        SARestaurantApp.isWeatherVisible = false
+        super.onDetach()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,7 +79,7 @@ class WeatherFragment : Fragment() {
 
         if(!granted){
             Log.d(TAG, ": Not Granted:(");
-            permissionUtils!!.askForPermissions(permissionList as Array<String>)
+//            permissionUtils!!.askForPermissions(permissionList as Array<String>)
             granted = true
 //            permissionUtils.askForPermissions()
         }

@@ -3,10 +3,8 @@ package restaurant.sa.com.sarestaurant.appview.signup
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,7 @@ import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.signin.SignInFragment
-import restaurant.sa.com.sarestaurant.appview.signup.GenericTextWatcher.GenericTextWatcher
+import restaurant.sa.com.sarestaurant.appview.signup.generictextwatcher.GenericTextWatcher
 import restaurant.sa.com.sarestaurant.appview.signup.view.SignUpView
 import restaurant.sa.com.sarestaurant.model.UserModel
 

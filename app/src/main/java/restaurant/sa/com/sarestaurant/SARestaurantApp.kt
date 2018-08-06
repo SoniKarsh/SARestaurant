@@ -21,6 +21,11 @@ class SARestaurantApp: Application() {
         var countAdapter = 0
         val TAG = "SARestaurantApp"
         lateinit var componentName: ComponentName
+        var isMapVisible = false
+        var isFavVisible = false
+        var isRestVisible = false
+        var isRestDetailVisible = false
+        var isWeatherVisible = false
     }
 
     override fun onCreate() {

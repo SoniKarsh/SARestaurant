@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/karsh/Documents/SARestaurant/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
+            "outputFile": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/res/values-id/values-id.xml",
+                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/res/values-id/values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

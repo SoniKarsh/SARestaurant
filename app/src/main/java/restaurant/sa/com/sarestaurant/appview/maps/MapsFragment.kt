@@ -26,21 +26,22 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.custom_info_window.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
 import restaurant.sa.com.sarestaurant.HomeActivity
+import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
+import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.MarkerCallback
+import restaurant.sa.com.sarestaurant.utils.LogUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-
-
-
-    override fun onConnectionSuspended(p0: Int) {
-        Log.d(TAG, "onConnectionSuspended: ");
-    }
+class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleMap.InfoWindowAdapter, GoogleApiClient.OnConnectionFailedListener {
 
     lateinit var fragView: View
     var getLoc: GetLoc?= null
@@ -54,6 +55,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     lateinit var currentLocation: Location
     var LOCATION_PERMISSION_REQUEST_CODE = 9999
     var listOfLocations: ArrayList<LatLng> = ArrayList()
+    var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
     lateinit var locationCommunication: LocationCommunication
     var geofencingClient: GeofencingClient? = null
     lateinit var homeActivity: HomeActivity
@@ -63,12 +65,34 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     private val GEOFENCE_RADIUS = 100000
     //in milli seconds
     private val GEOFENCE_EXPIRATION = 6000
+    var inflater: LayoutInflater? = null
+
 
     interface GetLoc{
         fun onGetLoc(listener: onReceiveLoc)
         interface onReceiveLoc{
             fun successForLoc()
         }
+    }
+
+    override fun getInfoWindow(p0: Marker?): View {
+
+        inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+        val v: View = inflater!!.inflate(R.layout.custom_info_window, null)
+        v.tvInfo.text = p0!!.title
+        Log.d(TAG, "getInfoWindow: ${p0.snippet}");
+        Picasso.get().load(p0.snippet)
+                .into(v.ivInfo, MarkerCallback(p0))
+        return v
+    }
+
+    override fun getInfoContents(p0: Marker?): View? {
+        return null
+    }
+
+
+    override fun onConnectionSuspended(p0: Int) {
+        Log.d(TAG, "onConnectionSuspended: ")
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -85,9 +109,16 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        SARestaurantApp.isMapVisible = true
         homeActivity = context as HomeActivity
-        context.supportActionBar?.title = TAG
+//        context.supportActionBar?.title = TAG
+        context.supportActionBar?.hide()
         locationCommunication = homeActivity
+    }
+
+    override fun onDetach() {
+        SARestaurantApp.isMapVisible = false
+        super.onDetach()
     }
 
 
@@ -113,6 +144,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
         }
         geofencingClient = LocationServices.getGeofencingClient(homeActivity);
+
         Log.d(TAG, "initMap: ")
 //        getLocationPermission()
     }
@@ -122,6 +154,9 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         Log.d(TAG, "onActivityCreated: ");
 
         listOfLocations = locationCommunication.getLocationFromRestaurant()
+        listOfTitleImgModel = locationCommunication.getNameImgFromRestaurant()
+        LogUtils.setTag(TAG)
+        LogUtils.d(listOfTitleImgModel.size.toString()+""+listOfLocations.size.toString())
 
         getDeviceLocation()
         fun rand(start: Int, end: Int) = Random().nextInt(end + 1 - start) + start
@@ -140,10 +175,12 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap?) {
         Log.d(TAG, "onMapReady: Map is Ready")
         googleMap = p0!!
-
+        googleMap.isMyLocationEnabled = true
+        googleMap.setInfoWindowAdapter(this)
         googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
 
             override fun onMapClick(p0: LatLng?) {
@@ -183,6 +220,8 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
                 .build()
     }
 
+
+
     @SuppressLint("MissingPermission")
     fun addLocationAlert(lat: Double, lng: Double ){
         if (mLocationPermissionsGranted) {
@@ -208,9 +247,11 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         var icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
         var options = MarkerOptions()
         if (!listOfLocations.isEmpty()){
-            for(i in listOfLocations){
-                        options.position(i)
+            for(i in 0 until listOfLocations.size){
+                        options.position(listOfLocations[i])
                             .icon(icon)
+                            .title(listOfTitleImgModel[i].name)
+                                .snippet(listOfTitleImgModel[i].imgUrl)
                 googleMap.addMarker(options)
             }
 

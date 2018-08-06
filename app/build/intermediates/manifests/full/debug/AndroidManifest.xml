@@ -28,7 +28,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="restaurant.sa.com.sarestaurant.SplashActivity" >
+        <activity
+            android:name="restaurant.sa.com.sarestaurant.SplashActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +67,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="restaurant.sa.com.sarestaurant.HomeActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name="restaurant.sa.com.sarestaurant.appview.alarm.MyReceiver" >
@@ -89,16 +94,6 @@
             android:name="com.squareup.picasso.PicassoProvider"
             android:authorities="restaurant.sa.com.sarestaurant.com.squareup.picasso"
             android:exported="false" />
-
-        <activity
-            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
         <provider
             android:name="com.facebook.marketing.internal.MarketingInitProvider"
             android:authorities="restaurant.sa.com.sarestaurant.MarketingInitProvider"
@@ -124,6 +119,15 @@
                 <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
