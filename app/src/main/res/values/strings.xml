@@ -35,8 +35,8 @@
     <!--Restaurant Fragment-->
     <string name="restlogo">RestLogo</string>
     <!--<string name="google_maps_key">AIzaSyC6Smj8wi2qTcaacRBzOVRBNpZUTpEIgvg</string>-->
-    <string name="google_maps_key">AIzaSyC_rQ7nR2KJiDKt2cNl2e6eREwh80dGDTI</string>
-    <!--<string name="google_maps_key">AIzaSyCEHTix-cuZqUpSZ9olJKQzyi7u87ZtJZU</string>-->
+    <!--<string name="google_maps_key">AIzaSyC_rQ7nR2KJiDKt2cNl2e6eREwh80dGDTI</string>-->
+    <string name="google_maps_key">AIzaSyCEHTix-cuZqUpSZ9olJKQzyi7u87ZtJZU</string>
 
 
     <!--Map-->

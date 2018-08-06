@@ -9,8 +9,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.util.Log
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.database.UserDatabase
 

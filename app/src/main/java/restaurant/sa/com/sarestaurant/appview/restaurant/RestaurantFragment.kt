@@ -1,15 +1,11 @@
 package restaurant.sa.com.sarestaurant.appview.restaurant
 
 import android.content.Context
-import android.content.DialogInterface
-import android.content.pm.PackageManager
 //import restaurant.sa.com.sarestaurant.model.models.Result
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -17,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
@@ -45,8 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RestaurantFragment: Fragment(), RestaurantView {
 
     lateinit var homeActivity: HomeActivity
-    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
     var granted = false
     private val TAG = "RestaurantFragment"
     var currentLocation: Location? = null
@@ -62,7 +56,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var currentItems: Int = 0
     var scrolledOutItems: Int = 0
     var totalItems: Int = 0
-    lateinit var layout: LinearLayoutManager
+    lateinit var layout: LinearLayoutManageScroll
     lateinit var listOfPlacesLocation: ArrayList<LatLng>
     var isRetrofitCall = false
     lateinit var listOfModel :ArrayList<Result>
@@ -97,11 +91,6 @@ class RestaurantFragment: Fragment(), RestaurantView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_restaurant, container, false)
     }
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//    }
-
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -135,20 +124,20 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
         })
 
-        layout = LinearLayoutManager(activity)
-        linearLayoutManageScroll = LinearLayoutManageScroll(activity!!)
+        layout = LinearLayoutManageScroll(activity!!)
+//        linearLayoutManageScroll = LinearLayoutManageScroll(activity!!)
         simpleSwipeRefreshLayout.setOnRefreshListener {
+            layout.setScrollEnabled(false)
             Handler().postDelayed({
                 simpleSwipeRefreshLayout.setRefreshing(false);
-                linearLayoutManageScroll!!.setScrollEnabled(false)
                 // Generate a random integer number
                 if(adapter!=null){
                     adapter!!.items.clear()
                 }
-                layout
                 retrofitCall(currentLocation!!)
                 // set the number value in TextView
                 Log.d(TAG, "onActivityCreated: $currentLocation")
+                layout.setScrollEnabled(true)
             }, 3000)
         }
 
@@ -161,8 +150,6 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 currentItems = layout.childCount
                 totalItems = layout.itemCount
                 scrolledOutItems = layout.findFirstVisibleItemPosition()
-//                total = totalItems/5
-//                isLoading = true
                 if(isScrolling && (currentItems + scrolledOutItems == totalItems) && !isLoading) //$$isLoading
                 {
                     isScrolling = false
@@ -263,14 +250,15 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!.results}")
                 listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
                 Log.d("OnREsponse", "${listOfPlacesLocation}")
-                linearLayoutManageScroll!!.setScrollEnabled(true)
+//                linearLayoutManageScroll!!.setScrollEnabled(true)
                 restaurantView!!.stopProgress()
                 locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
                 SARestaurantApp.database!!.resultDao().deleteAll()
                 Log.d(TAG, "onResponse: x: $x stop: $stop")
                 x = 0
                 stop = 0
-                recyclerView.layoutManager = null
+                layout = LinearLayoutManageScroll(activity!!)
+//                recyclerView.layoutManager = null
                 for (i in responseModelClass.body()!!.results!!) {
                     SARestaurantApp.database!!.resultDao().insertData(i)
                     Log.d(TAG, "onResponseAfter Refresh: $i")

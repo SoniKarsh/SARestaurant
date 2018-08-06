@@ -20,6 +20,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragme
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
+import android.os.PersistableBundle
 import android.support.v7.app.AlertDialog
 import android.widget.TextView
 import android.widget.Toast
@@ -35,8 +36,9 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailM
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
+import restaurant.sa.com.sarestaurant.utils.LogUtils
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
-
+import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
 class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication, HomeCallback {
     override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
@@ -60,6 +62,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     val FAVORITE_RESTAURANT_FRAGMENT_TAG = "FavoriteFragment"
     val WEATHER_FRAGMENT_TAG = "WeatherFragment"
     var mapsFragment = MapsFragment()
+    var weatherFragment = WeatherFragment()
     lateinit var mapsPresenterImp: MapsPresenterImp
     var detailPresenter: DetailPresenter? = null
     private val TAG = "HomeActivity"
@@ -69,12 +72,16 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     var restaurantDetailFragment: RestaurantDetailFragment? = null
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var permissionUtils: PermissionUtils? = null
+    var homeActivity: HomeActivity? = null
+//    var permissionGranted: PermissionUtils? = null
+    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionUtils!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
+    override fun                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
         Log.d(TAG, ": ${listOfLocations}");
         this.listOfLocations = listOfLocations
     }
@@ -87,14 +94,44 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+        homeActivity = this
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         permissionUtils = PermissionUtils(this)
+        permissionUtils!!.setPermissionGranted(object : PermissionUtils.PermissionGranted {
+            override fun onPermissionGranted() {
+                getGPSLocation()
+                val fragmentManager = homeActivity!!.supportFragmentManager
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
+                transaction.commit()
+            }
+
+            override fun onPermissionDenied() {
+                // Create New Fragment
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthShort(this@HomeActivity, "Permission Denied")
+            }
+        })
+        permissionUtils!!.checkPermissions(permissionList)
+//        var getLocationF = GetLocationImp(true, mFusedLocationProviderClient, this)
+//        getLocationF.sendLocation(object: GetLocation.OnReceiveLocation{
+//            override fun getDeviceLastLocation(location: Location) {
+//                Log.d(TAG, "getDeviceLastLocation: $location Mil");
+////                currentLocation = location
+////                retrofitCall(location)
+//            }
+//
+//            override fun receiveLocationUpdatesFun() {
+//
+//            }
+//
+//            override fun onError(error: String) {
+//                Toast.makeText(this@HomeActivity, error, Toast.LENGTH_LONG).show()
+//            }
+//
+//        })
         mapsPresenterImp = MapsPresenterImp()
         detailPresenter = this
-        Log.d(TAG, ": $TAG+Mi");
-        val fragmentManager = supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
-        transaction.commit()
 
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -105,9 +142,21 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
-        var weatherFragment = WeatherFragment()
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0)
+        var nav_userName = headerView.findViewById<TextView>(R.id.navUserName)
+        var nav_emailId = headerView.findViewById<TextView>(R.id.navEmailId)
+        nav_userName.text = SARestaurantApp.sharedPreference!!.getString("username", "")
+        nav_emailId.text = SARestaurantApp.sharedPreference!!.getString("emailid", "")
+
+
+        nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    fun getGPSLocation(){
         var getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
@@ -124,18 +173,11 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             }
 
         })
-
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
-        val headerView = navigationView.getHeaderView(0)
-        var nav_userName = headerView.findViewById<TextView>(R.id.navUserName)
-        var nav_emailId = headerView.findViewById<TextView>(R.id.navEmailId)
-        nav_userName.text = SARestaurantApp.sharedPreference!!.getString("username", "")
-        nav_emailId.text = SARestaurantApp.sharedPreference!!.getString("emailid", "")
-
-
-        nav_view.setNavigationItemSelectedListener(this)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
 
     override fun onBackPressed() {
 //        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
@@ -157,8 +199,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                     .show()
         }
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

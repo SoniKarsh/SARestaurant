@@ -1,76 +1,61 @@
 package restaurant.sa.com.sarestaurant.utils
 
-import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import restaurant.sa.com.sarestaurant.HomeActivity
-import java.util.jar.Manifest
 
 class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPermissionsResultCallback {
 
-//    private var permissionGranted: PermissionGranted? = null
+    private var permissionGranted: PermissionGranted? = null
     var permissionCount = 0
     lateinit var homeActivity: HomeActivity
     val TAG = "PermissionUtils"
     val LOCATION_PERMISSION_REQUEST_CODE = 9001
     var nonGrantedPermissions: Array<String>? = null
-    companion object {
-        val PERMISSION_COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION
-        val PERMISSION_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION
-    }
-
-
+    var PERMISSION_GRANTED = "Permission GRANTED"
+    var PERMISSION_DENIED = "Permission DENIED"
+    var permissions: Array<String>? = null
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         var nonGreanted = ArrayList<String>()
         when(requestCode){
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if(grantResults.isNotEmpty()){
-                    for(i in 0 until grantResults.size){
+                    for (i in 0 until grantResults.size){
                         if (ContextCompat.checkSelfPermission(context, permissions[i]) == PackageManager.PERMISSION_GRANTED){
                             // Show SnackBar
+                            if(permissionGranted != null){
+                                permissionGranted!!.onPermissionGranted()
+                            }
                         }else{
                             nonGreanted.add(permissions[i])
                         }
                     }
-                    if(nonGreanted.isEmpty()){
-
-                    }else{
-                        for(i in nonGreanted){
-                            ActivityCompat.shouldShowRequestPermissionRationale(context as HomeActivity, i)
-                            AlertDialog.Builder(context)
-                                    .setIcon(android.R.drawable.ic_dialog_info)
-                                    .setTitle("Permission")
-                                    .setMessage("Please give location permission to continue access the feature. Otherwise some feature might not work.")
-                                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->  askForPermissions(i)})
-                                    .setNegativeButton("No", null)
-                                    .show()
-                        }
+                    if(nonGreanted.isNotEmpty()){
+                        askForPermissions(nonGreanted.toTypedArray())
                     }
                 }else{
-                    for(i in permissions){
-                        ActivityCompat.shouldShowRequestPermissionRationale(context as HomeActivity, i)
-                        AlertDialog.Builder(context)
-                                .setIcon(android.R.drawable.ic_dialog_info)
-                                .setTitle("Permission")
-                                .setMessage("Please give location permission to continue access the feature. Otherwise some feature might not work.")
-                                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->  askForPermissions(i)})
-                                .setNegativeButton("No", null)
-                                .show()
+                    for (i in 0 until permissions.size){
+                        this.permissions!![i] = permissions[i]
                     }
+                    LogUtils.setTag(TAG)
+                    LogUtils.d(this.permissions.toString())
+                    ToastUtils.lengthShort(context, this.permissions.toString())
+                    askForPermissions(this.permissions!!)
                 }
+            }
+            else -> {
+                LogUtils.setTag(TAG)
+                LogUtils.d("Request Code Doesnt match")
             }
         }
     }
 
     fun checkPermissions(permissionList: Array<String>) {
-//        Log.d(TAG, "getLocationPermission: getting location permissions")
 
         homeActivity = context as HomeActivity
 
@@ -79,32 +64,51 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
                 permissionCount++
             }else{
                 nonGrantedPermissions = arrayOf(permissionList[i])
-                Log.d(TAG, "$nonGrantedPermissions: MISSION")
             }
         }
 
         if(permissionCount < permissionList.size){
-            ActivityCompat.requestPermissions(homeActivity, nonGrantedPermissions!!, LOCATION_PERMISSION_REQUEST_CODE)
+            askForPermissions(nonGrantedPermissions!!)
+        }else{
+            if(permissionGranted != null){
+                Log.d(TAG, "True: ");
+                permissionGranted!!.onPermissionGranted()
+            }
+            ToastUtils.lengthShort(context, PERMISSION_GRANTED)
         }
-
-        Log.d(TAG, "onCreate: $permissionCount ${permissionList.size}")
-//        return permissionCount == permissionList.size
     }
 
     fun askForPermissions(permissionList: Array<String>){
-        Log.d(TAG, "askForPermissions: ");
-        ActivityCompat.requestPermissions(homeActivity, permissionList, LOCATION_PERMISSION_REQUEST_CODE)
-//        ActivityCompat.requestPermissions(mainActivity, )
+        LogUtils.setTag(TAG)
+        LogUtils.d("askForPermission")
+        for(i in 0 until permissionList.size){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permissionList[i])){
+                AlertDialog.Builder(homeActivity)
+                        .setTitle("Permission needed")
+                        .setMessage("This permission is needed because of fetching nearby restaurant list" +
+                                " and fetching weather data.")
+                        .setPositiveButton("ok") { dialog, which ->
+                            ActivityCompat.requestPermissions(homeActivity,
+                                    permissionList, LOCATION_PERMISSION_REQUEST_CODE)
+                        }
+                        .setNegativeButton("cancel") { dialog, which -> dialog.dismiss() }
+                        .create().show()
+            }else{
+                permissions = arrayOf(permissionList[i])
+                ActivityCompat.requestPermissions(homeActivity, permissions!!, LOCATION_PERMISSION_REQUEST_CODE)
+            }
+        }
     }
-    fun askForPermissions(permissionList: String){
-        Log.d(TAG, "askForPermissions: ");
-        var permissions = arrayOf(permissionList)
-        ActivityCompat.requestPermissions(homeActivity, permissions, LOCATION_PERMISSION_REQUEST_CODE)
-//        ActivityCompat.requestPermissions(mainActivity, )
+
+    fun setPermissionGranted(permissionGranted: PermissionGranted) {
+        this.permissionGranted = permissionGranted
     }
-//
-//    interface PermissionGranted {
-//        fun onPermissionGranted(requestCode: Int)
-//    }
+    /**
+     * This is callback interface.
+     */
+    interface PermissionGranted{
+        fun onPermissionGranted()
+        fun onPermissionDenied()
+    }
 
 }

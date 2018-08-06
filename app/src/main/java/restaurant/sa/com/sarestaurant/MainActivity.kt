@@ -30,6 +30,5 @@ class MainActivity : AppCompatActivity() {
             transaction.replace(R.id.fragmentId, SignInFragment(), FRAGMENT_TAG)
             transaction.commit()
         }
-
     }
 }

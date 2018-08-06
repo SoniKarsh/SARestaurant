@@ -41,8 +41,7 @@ class WeatherFragment : Fragment() {
     lateinit var homeActivity: HomeActivity
     lateinit var contextRestFrag: Context
     var granted = false
-    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
     var weatherPresenterImp: WeatherPresenterImp? = null
     var homeCallback: HomeCallback? = null
     var isRunning: Boolean = false
