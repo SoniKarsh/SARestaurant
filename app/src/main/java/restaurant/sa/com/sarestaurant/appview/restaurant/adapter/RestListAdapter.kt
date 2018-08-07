@@ -19,6 +19,7 @@ import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_restaurant.*
+import kotlinx.android.synthetic.main.fragment_restaurant_detail.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
@@ -35,6 +36,13 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ *
+ * @author Karsh Soni
+ *
+ * 7th August, 2018
+ *
+ */
 
 class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteRestaurantModel>, var context: Context) : RecyclerView.Adapter<RestListAdapter.CustomViewHolder>(){
 
@@ -49,7 +57,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     var isClickable: Boolean = true
     val BASE_URL = "https://maps.googleapis.com"
     val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
-
+    val dialog = Dialog(this.context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
     }
@@ -95,8 +103,30 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             }
         }
 
-        holder.holderView.setOnClickListener {
+//        holder.holderView.setOnClickListener {
+//
+//            if(isClickable){
+//                restaurantDetailModel.rest_name = items[holder.adapterPosition].name
+//                restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
+//                restaurantDetailModel.imgUrl = holder.restaurantImgUrl
+//                if(items [holder.adapterPosition].rating != null){
+//                    restaurantDetailModel.rating = items[holder.adapterPosition].rating!!
+//                }else{
+//                    restaurantDetailModel.rating = 0.0
+//                }
+////            holder.placeId = items.results!![holder.adapterPosition].placeId
+//                if(items[holder.adapterPosition].openingHours != null){
+//                    restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
+//                }else{
+//                    restaurantDetailModel.rest_isClosed = "No Data Available"
+//                }
+//                Log.d(TAG, "onBindViewHolder: Clicked");
+//                retrofitCall(holder.placeId)
+//            }
+//        }
 
+        dialog.setContentView(R.layout.fragment_restaurant_detail)
+        holder.holderView.setOnClickListener {
             if(isClickable){
                 restaurantDetailModel.rest_name = items[holder.adapterPosition].name
                 restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
@@ -115,14 +145,9 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
                 Log.d(TAG, "onBindViewHolder: Clicked");
                 retrofitCall(holder.placeId)
             }
-//            detailPresenter?.getRestaurantData(restaurantDetailModel)
-//            homeActivity = context as HomeActivity
-//            homeActivity!!.supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
-//                    .addToBackStack(null)
-//                    .commit()
+
         }
+
 
         holder.sharePost.setOnClickListener {
 
@@ -139,8 +164,8 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             rcvDialog.layoutManager = LinearLayoutManager(context)
             dialogBuilder.setView(rcvDialog)
 
-            val dialog: Dialog = dialogBuilder.create()
-            dialog.show()
+            val shareDialog: Dialog = dialogBuilder.create()
+            shareDialog.show()
 
         }
 
@@ -164,9 +189,6 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             }
 
         }
-
-
-
     }
 
     fun retrofitCall(placeId: String){
@@ -186,19 +208,36 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             override fun onResponse(call: Call<ResponsePhotoModelClass>?, responseModelClass: Response<ResponsePhotoModelClass>?) {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!}")
 
-                if(responseModelClass.body()!!.result.photos != null){
-                    for(i in responseModelClass.body()!!.result.photos){
-                        restaurantDetailModel.imageUrlList!!.add(i.photoReference)
+                if(responseModelClass.body()!!.result!!.photos != null){
+                    for(i in responseModelClass.body()!!.result!!.photos!!){
+                        restaurantDetailModel.imageUrlList!!.add(i.photoReference!!)
                     }
                 }else{
                     restaurantDetailModel.imageUrlList!!.add("")
                 }
                 detailPresenter?.getRestaurantData(restaurantDetailModel)
-                homeActivity!!.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
-                        .addToBackStack("RestDetail")
-                        .commit()
+
+                dialog.restDetailAddress.text = restaurantDetailModel.rest_address
+                dialog.ratingBar.rating = restaurantDetailModel.rating.toFloat()
+                if(dialog.ratingBar.rating == 0.0.toFloat()){
+                    dialog.ratingBar.visibility = View.GONE
+                    dialog.noRatingTV.visibility = View.VISIBLE
+                    dialog.noRatingTV.text = context.getString(R.string.no_rate_available)
+                }
+                if(restaurantDetailModel.rest_isClosed == "true"){
+                    dialog.openingHours.text = context.getString(R.string.yes)
+                }else if(restaurantDetailModel.rest_isClosed == "false"){
+                    dialog.openingHours.text = context.getString(R.string.no)
+                }else{
+                    dialog.openingHours.text = context.getString(R.string.not_available)
+                }
+                dialog.restDetailName.text = restaurantDetailModel.rest_name
+                dialog.show()
+//                homeActivity!!.supportFragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
+//                        .addToBackStack("RestDetail")
+//                        .commit()
             }
         })
     }

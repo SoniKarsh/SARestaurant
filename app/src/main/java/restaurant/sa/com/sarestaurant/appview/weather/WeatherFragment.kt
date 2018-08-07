@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.support.v4.app.Fragment
+import android.support.v7.view.menu.ActionMenuItemView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ActionMenuView
+import android.widget.ImageView
 import android.widget.Toast
 import restaurant.sa.com.sarestaurant.appview.weather.model.ResponseModelClass
 import retrofit2.Call
@@ -20,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_weather.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
@@ -53,6 +57,7 @@ class WeatherFragment : Fragment() {
         contextRestFrag = context!!
         homeActivity = context as HomeActivity
         context.supportActionBar?.title = TAG
+        context.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.VISIBLE
         homeCallback = homeActivity
     }
 
@@ -128,16 +133,16 @@ class WeatherFragment : Fragment() {
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
                 Log.d(TAG, "onResponse: ${responseModelClass!!.body().toString()}")
                 mHandler.post(Runnable {
-                    var locationOfWeather = responseModelClass.body()!!.query.results.channel.location
-                    var windWeather = responseModelClass.body()!!.query.results.channel.wind
-                    var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
+                    var locationOfWeather = responseModelClass.body()!!.query!!.results!!.channel!!.location
+                    var windWeather = responseModelClass.body()!!.query!!.results!!.channel!!.wind
+                    var imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
                     weatherData.imgUrl = imgUrl
-                    weatherData.temp = responseModelClass.body()!!.query.results.channel.item.condition.temp
+                    weatherData.temp = responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp!!
                     if(isRunning){
-                        weatherFrag.setText("${locationOfWeather.city},  ${locationOfWeather.region},  ${locationOfWeather.country}") // must be inside run()
-                        windSpeed.setText("Wind Speed: ${windWeather.speed}, Wind Chill: ${windWeather.chill}, Wind Direction: ${windWeather.direction}")
-                        temp.setText("Temp: ${responseModelClass.body()!!.query.results.channel.item.condition.temp}")
-                        var imgUrlRun = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query.results.channel.item.condition.code}.gif"
+                        weatherFrag.setText("${locationOfWeather!!.city},  ${locationOfWeather!!.region},  ${locationOfWeather!!.country}") // must be inside run()
+                        windSpeed.setText("Wind Speed: ${windWeather!!.speed}, Wind Chill: ${windWeather!!.chill}, Wind Direction: ${windWeather.direction}")
+                        temp.setText("Temp: ${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp}")
+                        var imgUrlRun = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
                         Picasso.get().load(imgUrlRun)
                             .into(imageView)
                     }else if(isActivityCall){
@@ -149,7 +154,7 @@ class WeatherFragment : Fragment() {
                         homeCallback!!.sendWeatherData(weatherData)
                     }
                     SARestaurantApp.sharedPreference!!.edit()
-                            .putString("temp", responseModelClass.body()!!.query.results.channel.item.condition.temp)
+                            .putString("temp", responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp)
                             .putString("imgurl", imgUrl)
                             .apply()
                 })

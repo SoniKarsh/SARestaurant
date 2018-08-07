@@ -74,6 +74,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     var permissionUtils: PermissionUtils? = null
     var linearLayoutManageScroll: LinearLayoutManageScroll? = null
     var restContext: Context? = null
+    var handler: Handler? = null
 
     override fun stopProgress() {
         progressBar.visibility = View.GONE
@@ -88,6 +89,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
         homeActivity = context as HomeActivity
         SARestaurantApp.isRestVisible = true
         restContext = context
+        context.supportActionBar?.show()
         context.supportActionBar?.title = TAG
         locationCommunication = homeActivity
         restaurantView = this
@@ -141,8 +143,11 @@ class RestaurantFragment: Fragment(), RestaurantView {
             if(adapter!=null){
                 adapter!!.isClickable = false
             }
-            Handler().postDelayed({
-                simpleSwipeRefreshLayout.setRefreshing(false);
+            handler = Handler()
+            handler!!.postDelayed({
+                if(simpleSwipeRefreshLayout!=null){
+                    simpleSwipeRefreshLayout.setRefreshing(false);
+                }
                 // Generate a random integer number
                 if(adapter!=null){
                     adapter!!.items.clear()
@@ -185,19 +190,48 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: ");
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if(progressBar.visibility == View.VISIBLE){
+            progressBar.visibility = View.GONE
+        }else if(progressBarRest.visibility == View.VISIBLE){
+            progressBarRest.visibility = View.GONE
+        }else if(simpleSwipeRefreshLayout.visibility == View.VISIBLE){
+            simpleSwipeRefreshLayout.visibility = View.GONE
+        }else if(handler!=null){
+            handler!!.removeCallbacksAndMessages(null)
+        }
+
+        Log.d(TAG, "onStop: ");
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "onDestroyView: ");
+    }
+
     private fun fetchData() {
         isLoading = true
         listOfModel = SARestaurantApp.database!!.resultDao().loadAllUsersByPage(5, stop) as ArrayList<Result>
         Log.d(TAG, "fetchData: ${listOfModel}");
         if(x<totalListSize){
-            progressBarRest.visibility = View.VISIBLE
+            if(progressBarRest!= null){
+                progressBarRest.visibility = View.VISIBLE // Changed
+            }
             Handler().postDelayed(Runnable {
                 adapter!!.items.addAll(listOfModel)
                 x+=5
                 Log.d(TAG, "fetchData: $x");
                 adapter!!.notifyDataSetChanged()
 //                startC += 5
-                progressBarRest.visibility = View.GONE
+                if(progressBarRest!= null && progressBarRest.visibility == View.VISIBLE){
+                    progressBarRest.visibility = View.GONE // Changed
+                }
                 isLoading = false
             }, 3000)
             stop += 5
@@ -229,7 +263,9 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 listOfTitleImgModel = restaurantPresenterImp.getListOfTitleImg(responseModelClass.body()!!)
                 Log.d("OnREsponse", "${listOfPlacesLocation}")
 //                linearLayoutManageScroll!!.setScrollEnabled(true)
-                restaurantView!!.stopProgress()
+                if(progressBar != null && progressBar.visibility == View.VISIBLE){
+                    restaurantView!!.stopProgress()
+                }
                 locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
                 locationCommunication!!.sendNameImgFromRestaurant(listOfTitleImgModel)
                 SARestaurantApp.database!!.resultDao().deleteAll()
@@ -244,8 +280,10 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 }
 //                Log.d(TAG, "onResponseFrmFet: ${responseModelFromFetch.results[0].name}")
                 adapter = RestListAdapter(resultList, SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
-                recyclerView.layoutManager = layout
-                recyclerView.adapter = adapter
+                if(recyclerView != null){
+                    recyclerView.layoutManager = layout
+                    recyclerView.adapter = adapter
+                }
 //                fetchData(responseModelClass.body()!!.results as ArrayList<Result>)
                 listOfModel = SARestaurantApp.database!!.resultDao().getAll() as ArrayList<Result>
                 totalListSize = listOfModel.size

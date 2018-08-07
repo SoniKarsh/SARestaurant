@@ -23,12 +23,15 @@ import android.location.Location
 import android.os.PersistableBundle
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
+import android.support.v7.view.menu.ActionMenuItemView
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.*
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
@@ -113,7 +116,11 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         permissionUtils = PermissionUtils(this)
         permissionUtils!!.setPermissionGranted(object : PermissionUtils.PermissionGranted {
             override fun onPermissionGranted() {
+                homeBtn.visibility = View.GONE
+                homeTV.visibility = View.GONE
                 getGPSLocation()
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthShort(this@HomeActivity, "GRANTED")
                 val fragmentManager = homeActivity!!.supportFragmentManager
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
@@ -122,28 +129,12 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
             override fun onPermissionDenied() {
                 // Create New Fragment
+                fragmentHolder.visibility = View.GONE
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthShort(this@HomeActivity, "Permission Denied")
             }
         })
         permissionUtils!!.checkPermissions(permissionList)
-//        var getLocationF = GetLocationImp(true, mFusedLocationProviderClient, this)
-//        getLocationF.sendLocation(object: GetLocation.OnReceiveLocation{
-//            override fun getDeviceLastLocation(location: Location) {
-//                Log.d(TAG, "getDeviceLastLocation: $location Mil");
-////                currentLocation = location
-////                retrofitCall(location)
-//            }
-//
-//            override fun receiveLocationUpdatesFun() {
-//
-//            }
-//
-//            override fun onError(error: String) {
-//                Toast.makeText(this@HomeActivity, error, Toast.LENGTH_LONG).show()
-//            }
-//
-//        })
         mapsPresenterImp = MapsPresenterImp()
         detailPresenter = this
 
@@ -168,6 +159,10 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        return super.onContextItemSelected(item)
     }
 
     fun getGPSLocation(){
@@ -215,20 +210,24 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             weatherFragment = supportFragmentManager.findFragmentByTag(WEATHER_FRAGMENT_TAG) as WeatherFragment
             supportFragmentManager.popBackStack("Weather", POP_BACK_STACK_INCLUSIVE)
             supportActionBar!!.title = "RestaurantFragment"
+            this.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.VISIBLE
             nav_view.setCheckedItem(R.id.nav_home)
         }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isMapVisible && !SARestaurantApp.isFavVisible){
             mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
+            supportActionBar?.show()
             supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
             supportActionBar!!.title = "RestaurantFragment"
             nav_view.setCheckedItem(R.id.nav_home)
         }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isFavVisible && SARestaurantApp.isMapVisible){
             mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
             supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar?.show()
             supportActionBar!!.title = "FavoriteFragment"
             nav_view.setCheckedItem(R.id.nav_favorite)
         }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isRestDetailVisible){
             restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
             supportFragmentManager.popBackStack("RestDetail", POP_BACK_STACK_INCLUSIVE)
+            supportActionBar?.show()
             supportActionBar!!.title = "RestaurantFragment"
             nav_view.setCheckedItem(R.id.nav_home)
         }
@@ -275,12 +274,13 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                val fragmentManager = supportFragmentManager
-                val transaction = fragmentManager.beginTransaction()
-                transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-                transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
-                transaction.addToBackStack(null)
-                transaction.commit()
+                permissionUtils!!.checkPermissions(permissionList)
+//                val fragmentManager = supportFragmentManager
+//                val transaction = fragmentManager.beginTransaction()
+//                transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+//                transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
+//                transaction.addToBackStack(null)
+//                transaction.commit()
             }
             R.id.nav_favorite -> {
                 val fragmentManager = supportFragmentManager
@@ -297,11 +297,17 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 transaction.commit()
             }
             R.id.nav_logout -> {
-                LoginManager.getInstance().logOut()
-                SARestaurantApp.sharedPreference!!.edit().clear().apply()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
+                AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to Logout?")
+                        .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> LoginManager.getInstance().logOut()
+                            SARestaurantApp.sharedPreference!!.edit().clear().apply()
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)})
+                        .setNegativeButton("No", null)
+                        .show()
             }
         }
 

@@ -23,13 +23,18 @@ import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
+import restaurant.sa.com.sarestaurant.MainActivity
+import android.app.NotificationChannel
+
+
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class ApiCallJobService: JobService(), HomeCallback {
 
     private val TAG = "ApiCallJobService"
     private var jobCancelled = false
-    lateinit var builder: Notification.Builder
+    lateinit var builder: NotificationCompat.Builder
+    lateinit var builderLess: Notification.Builder
     private val channelId= "restaurant.sa.com.sarestaurant.appview.alarm"
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private var weatherFragment: WeatherFragment? = null
@@ -90,25 +95,57 @@ class ApiCallJobService: JobService(), HomeCallback {
 
     fun shownotification(){
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notificationLayout  = RemoteViews(this.packageName, R.layout.status_bar)
-//        notificationLayout.setImageViewResource(R.id.tempImg, )
-//        val notificationLayoutExpanded = RemoteViews(this.packageName, R.layout.status_bar_expanded)
-
         var notificationIntent = Intent(this, HomeActivity::class.java)
-//        notificationIntent.putExtra("Current Position", mediaPlayer!!.currentPosition)
         var pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
+        notificationLayout  = RemoteViews(this.packageName, R.layout.status_bar)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            var mChannel = mNotificationManager!!.getNotificationChannel(channelId)
+            if (mChannel == null) {
+                mChannel = NotificationChannel(channelId, "title", importance)
+                mChannel.enableVibration(true)
+                mChannel.setVibrationPattern(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+                mNotificationManager!!.createNotificationChannel(mChannel)
+            }
+            builder = NotificationCompat.Builder(this, channelId)
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("this")  // required
+                    .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
+                    .setContentText(this.getString(R.string.app_name))  // required
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setTicker("this")
+                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+        } else {
+            Log.d(TAG, "shownotification: Sent");
+            builder = NotificationCompat.Builder(this)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("This")                           // required
+                    .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
+                    .setContentText(this.getString(R.string.app_name))  // required
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setTicker("This")
+                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+                    .setPriority(Notification.PRIORITY_HIGH)
+        }
 
-        notification = NotificationCompat.Builder(this, channelId)
-                .setContentTitle("Example Service")
-                .setContentText("Working")
-                .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setCustomContentView(notificationLayout)
-                .setContentIntent(pendingIntent)
-                .build()
+//        notification = NotificationCompat.Builder(this, channelId)
+//                .setContentTitle("Example Service")
+//                .setContentText("Working")
+//                .setOngoing(true)
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .setCustomContentView(notificationLayout)
+//                .setContentIntent(pendingIntent)
+//                .build()
 
-
+        notification = builder.build()
         startForeground(1, notification)
     }
 

@@ -8,6 +8,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!--MainActivity-->
+    <string name="text">Please give needed permission to use feature of our application.</string>
+    <string name="request_permission">Request Permission</string>
+
     <!--Sign In-->
     <string name="email_or_username">Email or Username</string>
     <string name="sign_in">SIGN IN</string>

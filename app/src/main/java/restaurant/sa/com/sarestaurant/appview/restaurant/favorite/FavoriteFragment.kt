@@ -61,7 +61,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        progressBar.visibility = View.GONE
+//        progressBar.progress =
 
         restaurantPresenterImp = RestaurantPresenterImp()
         Log.d(TAG, "onActivityCreated: ${SARestaurantApp.database!!.favoriteRestaurantDao().getAll().toString()}");
