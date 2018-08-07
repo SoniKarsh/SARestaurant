@@ -3,6 +3,8 @@ package restaurant.sa.com.sarestaurant.appview.restaurant.adapter
 import android.app.Dialog
 import android.support.v7.widget.RecyclerView
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 //import restaurant.sa.com.sarestaurant.model.models.Result
 import android.location.Location
 import android.os.Build
@@ -140,6 +142,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             dialogBuilder.setView(rcvDialog)
 
             val dialog: Dialog = dialogBuilder.create()
+//            dialog.getWindow().setBackgroundDrawable(ColorDrawable(Color.BLUE))
             dialog.show()
 
         }

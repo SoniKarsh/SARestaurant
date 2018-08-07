@@ -3,14 +3,17 @@ package restaurant.sa.com.sarestaurant.appview.signup
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
@@ -26,6 +29,11 @@ class SignUpFragment: Fragment(), SignUpView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,7 +75,7 @@ class SignUpFragment: Fragment(), SignUpView {
             }
             else{
                 Log.d(TAG, "onActivityCreated: ${txtPassword.text} ${txtConfirmPassword.text}");
-                Toast.makeText(activity, "Please Follow The Guidelines", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Make sure you have entered all the details correctly.", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -76,9 +84,21 @@ class SignUpFragment: Fragment(), SignUpView {
     override fun displayValidationMessage(view: TextInputLayout?): Boolean {
         if (!view!!.isErrorEnabled && view.editText!!.text.isNotEmpty()){
             return true
+        }else{
+            if(view.findViewById<TextInputEditText>(R.id.txtUserName) != null){
+                setError(view.findViewById(R.id.txtUserName))
+            }else if(view.findViewById<TextInputEditText>(R.id.txtEmailId) != null){
+                setError(view.findViewById(R.id.txtEmailId))
+            }else if(view.findViewById<TextInputEditText>(R.id.txtMobileNo) != null){
+                setError(view.findViewById(R.id.txtMobileNo))
+            }else if(view.findViewById<TextInputEditText>(R.id.txtPassword) != null){
+                setError(view.findViewById(R.id.txtPassword))
+            }
+            return false
         }
-        return false
     }
+
+
 
     override fun setError(view: View) {
         when(view.id){

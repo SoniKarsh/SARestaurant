@@ -144,12 +144,10 @@ class SignInFragment : Fragment(), SignInView {
     }
 
     override fun setError() {
-        emailWrapper.error = "Username or Password is not valid!!!"
         passwordWrapper.error = "Username or Password is not valid!!!"
     }
 
     override fun removeError() {
-        emailWrapper.isErrorEnabled = false
         passwordWrapper.isErrorEnabled = false
     }
 

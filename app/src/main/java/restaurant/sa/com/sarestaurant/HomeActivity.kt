@@ -23,12 +23,14 @@ import android.location.Location
 import android.os.PersistableBundle
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.*
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
@@ -113,6 +115,8 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         permissionUtils = PermissionUtils(this)
         permissionUtils!!.setPermissionGranted(object : PermissionUtils.PermissionGranted {
             override fun onPermissionGranted() {
+                LogUtils.setTag(TAG)
+                LogUtils.d("In Granted")
                 getGPSLocation()
                 val fragmentManager = homeActivity!!.supportFragmentManager
                 val transaction = fragmentManager.beginTransaction()

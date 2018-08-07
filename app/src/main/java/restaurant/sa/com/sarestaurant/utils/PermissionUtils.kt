@@ -19,6 +19,7 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
     var PERMISSION_GRANTED = "Permission GRANTED"
     var PERMISSION_DENIED = "Permission DENIED"
     var permissions: Array<String>? = null
+    var count = 0
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         var nonGreanted = ArrayList<String>()
@@ -36,18 +37,29 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
                         }
                     }
                     if(nonGreanted.isNotEmpty()){
-                        askForPermissions(nonGreanted.toTypedArray())
+                        if(count>=1){
+                            if(permissionGranted != null){
+                                permissionGranted!!.onPermissionDenied()
+                            }
+                        }else{
+                            askForPermissions(nonGreanted.toTypedArray())
+                        }
                     }else{
-
                     }
                 }else{
-                    for (i in 0 until permissions.size){
-                        this.permissions!![i] = permissions[i]
+                    if(count>=1){
+                        if(permissionGranted != null){
+                            permissionGranted!!.onPermissionDenied()
+                        }
+                    }else{
+                        for (i in 0 until permissions.size){
+                            this.permissions!![i] = permissions[i]
+                        }
+                        LogUtils.setTag(TAG)
+                        LogUtils.d(this.permissions.toString())
+                        ToastUtils.lengthShort(context, this.permissions.toString())
+                        askForPermissions(this.permissions!!)
                     }
-                    LogUtils.setTag(TAG)
-                    LogUtils.d(this.permissions.toString())
-                    ToastUtils.lengthShort(context, this.permissions.toString())
-                    askForPermissions(this.permissions!!)
                 }
             }
             else -> {
@@ -73,7 +85,6 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
             askForPermissions(nonGrantedPermissions!!)
         }else{
             if(permissionGranted != null){
-                Log.d(TAG, "True: ");
                 permissionGranted!!.onPermissionGranted()
             }
             ToastUtils.lengthShort(context, PERMISSION_GRANTED)
@@ -81,10 +92,12 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
     }
 
     fun askForPermissions(permissionList: Array<String>){
+
         LogUtils.setTag(TAG)
         LogUtils.d("askForPermission")
         for(i in 0 until permissionList.size){
             if(ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permissionList[i])){
+                count++
                 AlertDialog.Builder(homeActivity)
                         .setTitle("Permission needed")
                         .setMessage("This permission is needed because of fetching nearby restaurant list" +
