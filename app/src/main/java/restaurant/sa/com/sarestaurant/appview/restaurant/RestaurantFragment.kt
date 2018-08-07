@@ -206,7 +206,6 @@ class RestaurantFragment: Fragment(), RestaurantView {
         }else if(handler!=null){
             handler!!.removeCallbacksAndMessages(null)
         }
-
         Log.d(TAG, "onStop: ");
     }
 
