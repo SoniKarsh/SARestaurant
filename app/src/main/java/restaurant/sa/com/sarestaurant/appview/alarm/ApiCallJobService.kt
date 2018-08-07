@@ -1,6 +1,7 @@
 package restaurant.sa.com.sarestaurant.appview.alarm
 
 import android.app.Notification
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.job.JobParameters
@@ -17,6 +18,7 @@ import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import restaurant.sa.com.sarestaurant.HomeActivity
+import restaurant.sa.com.sarestaurant.MainActivity
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
@@ -29,13 +31,14 @@ class ApiCallJobService: JobService(), HomeCallback {
 
     private val TAG = "ApiCallJobService"
     private var jobCancelled = false
-    lateinit var builder: Notification.Builder
+    lateinit var builder: NotificationCompat.Builder
+    lateinit var builderLess: Notification.Builder
     private val channelId= "restaurant.sa.com.sarestaurant.appview.alarm"
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private var weatherFragment: WeatherFragment? = null
     var weatherData: WeatherData? = null
     var notificationLayout: RemoteViews? = null
-    private var mNotificationManager: NotificationManager? = null
+    private var notificationManager: NotificationManager? = null
     var notification: Notification? = null
     override fun onStartJob(params: JobParameters): Boolean {
         Log.d(TAG, "Job started")
@@ -89,9 +92,9 @@ class ApiCallJobService: JobService(), HomeCallback {
     }
 
     fun shownotification(){
-        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        notificationLayout  = RemoteViews(this.packageName, R.layout.status_bar)
+        notificationLayout = RemoteViews(this.packageName, R.layout.status_bar)
 //        notificationLayout.setImageViewResource(R.id.tempImg, )
 //        val notificationLayoutExpanded = RemoteViews(this.packageName, R.layout.status_bar_expanded)
 
@@ -99,22 +102,64 @@ class ApiCallJobService: JobService(), HomeCallback {
 //        notificationIntent.putExtra("Current Position", mediaPlayer!!.currentPosition)
         var pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
 
-        notification = NotificationCompat.Builder(this, channelId)
-                .setContentTitle("Example Service")
-                .setContentText("Working")
-                .setOngoing(true)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setCustomContentView(notificationLayout)
-                .setContentIntent(pendingIntent)
-                .build()
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            var channel = notificationManager!!.getNotificationChannel(channelId)
+            if (channel == null) {
+                channel = NotificationChannel(channelId, "title", importance)
+                channel.enableVibration(true)
+                channel.setVibrationPattern(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+                notificationManager!!.createNotificationChannel(channel)
+            }
+            builder = NotificationCompat.Builder(this, channelId)
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("this")  // required
+                    .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
+                    .setContentText(this.getString(R.string.app_name))  // required
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setTicker("this")
+                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+            notification = builder.build()
+            startForeground(1, notification)
+        } else {
+            builder = NotificationCompat.Builder(this, channelId)
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("This")                           // required
+                    .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
+                    .setContentText(this.getString(R.string.app_name))  // required
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setOngoing(true)
+                    .setContentIntent(pendingIntent)
+                    .setTicker("This")
+                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+                    .setPriority(Notification.PRIORITY_HIGH)
+            notification = builder.build()
+            startForeground(1, notification)
+        }
 
-
-        startForeground(1, notification)
+//        notification = NotificationCompat.Builder(this, channelId)
+//                .setContentTitle("Example Service")
+//                .setContentText("Working")
+//                .setOngoing(true)
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .setCustomContentView(notificationLayout)
+//                .setContentIntent(pendingIntent)
+//                .build()
+//
+//        notification = builder.build()
+//        startForeground(1, notification)
     }
 
     fun updateNotification(){
         notificationLayout!!.setTextViewText(R.id.tempTV, weatherData!!.temp)
-        mNotificationManager!!.notify(1, notification)
+        notificationManager!!.notify(1, notification)
 
     }
 

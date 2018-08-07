@@ -1,400 +1,400 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-MERGED from [com.android.support:design:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5cbc20871ba9a1592a9444ea57d16e00/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/d23926a600db446e74e502c7d2133ff9/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/fa3a7cea4164ab4846d629fa54371f38/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/9c61c67bd6b750e4f18c9c792d8ad188/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:21:1-37:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/9f417c0ccd42aad2c5af7e6cc176196d/AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:cardview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/fc78ac4be605233e583e8dcee0d736dd/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/65cb3c50a637193e78ae4f3b56e741bf/AndroidManifest.xml:17:1-22:12
-MERGED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:2:1-14:12
-MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/8b2698a403163e18faf48ef8969966f5/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:17:1-32:12
-MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/ffc2db1a9344fffc438ac62e9290a88f/AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/90fba562d622b0d61a27ce84e1f94aac/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/086c98fa0d851349f6be53498c944e7b/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/fe809d2f6a2eb3b96c4f50dc5c6a86f0/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/28daa3c40ef96d90b6fcbe8371fa2381/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/f4639cf7eb6f113480ce2b2f88573086/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:21:1-35:12
-MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:21:1-53:12
-MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/e7930034d152c6d58b8c721bb60f7efc/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.persistence:db:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/c3b8e8545efa9e02bf1388bda97dbd33/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:exifinterface:27.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/fc778f155a2f842720a438151b220177/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/45e0264f157d626ae329194083892d95/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/61bfbd91ae21ced50aa0460f69fb470a/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/769756313e94aee2b091943eb65244e0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2a5536f367c7ebafe2ad79b18d36aacb/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1fb538bb42b897dab6108dd3e052d2ad/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ac963bb6d1fa878c43b29dcfab5a34b7/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ab879d664875c9614550176f48b5448c/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customtabs:27.0.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/ddbf41f022f97746f7764fefb7d53fa4/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ef3bd089e5c009aed9751985fbdd69a0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/fbac9611b2c7c9b9414da6f6315d46c5/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/3ca90863c64a1ca08fcedc9e239e4fad/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/66501cb40033f7845517fa7baaf2f5dd/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8f7a3e37587821b44b5adb50271ea94e/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/48e09010beefe98eedaa3ece04a73e89/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/66932b863e42a8fdf36d6c1fe6a9cb8e/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eb0f465868be410c1fbb74c169eaa992/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+MERGED from [com.android.support:design:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:21:1-37:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/89eecc7e45f473d48315cd0bfc5dd017/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/430bd693010b6dd74f1be2410f2ef205/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce876a94996cb58c2341a4135e7b4945/AndroidManifest.xml:17:1-22:12
+MERGED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:2:1-14:12
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/cdff26189400980ecfe9d1b393bd59a1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:17:1-32:12
+MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/a3b0a3cee023d1ec31c92cf3b496a296/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/d701d62edb66e0e1033246a344209ce4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/09fa94abc080636b4c0485de8bda8e97/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/8a6317dc7f74ba63b41956c08ad05dc9/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/329a02e5293c3ed67943739e4a485f0a/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/034310b74051eaa4190ce91e7fe6bffc/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:21:1-35:12
+MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:21:1-53:12
+MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/5d550ab0ee38273c00f1be7669adb83b/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.persistence:db:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/3e48bb6cba879d08d026200589c50308/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:exifinterface:27.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/78a7518df2209b16a950ab0660e45ab9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/7da7d405b6ef39721b893503f1e88463/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/23c8ffd4a2847941847f359a9f4518e2/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/eb5f6526bda1bb0e6146bce6d5963a60/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2b6b482df573d83e7f7bf3b600d5c5d6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/c29f70753b08f79878b4038783ff40ba/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ff185724ccb8575615071c7ee3dbbc40/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/397e5002b98b0f5756546a7f7590cb2c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customtabs:27.0.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/88a960d04819e699d19316641924a7e9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1c1aa37f47b63c78a25e3051e9add78f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/dd8ff48af84e3dc89f8ea0d7d2bce1fe/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/1ce7d3afd681fa2e0acb26cda9bc85a8/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/220df4f1ba46b7c5cdb3cb5d5edf2514/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/abf90aae579db11da85479014fa06022/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/e76a01bdb5df829ee0fdd408bb72f259/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/99d2fb37586a193fd10c9b2f3763d3ca/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b2c5753c8c259a991dd9b7265f99a786/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
 	package
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:3:5-45
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:3:5-45
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:1-70:12
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:5:5-80
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:5:5-80
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:5:22-78
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:5:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:6:5-78
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:6:5-78
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:6:22-76
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:6:22-76
 uses-permission#android.permission.INTERNET
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:7:5-66
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:24:5-67
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:7:5-66
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:7:22-64
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:7:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:8:5-78
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:23:5-79
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:8:5-78
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:8:22-76
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:8:22-76
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:9:5-80
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:9:5-80
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:9:22-78
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:9:22-78
 application
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:11:5-68:19
-MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/d23926a600db446e74e502c7d2133ff9/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/d23926a600db446e74e502c7d2133ff9/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/fa3a7cea4164ab4846d629fa54371f38/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/fa3a7cea4164ab4846d629fa54371f38/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/9c61c67bd6b750e4f18c9c792d8ad188/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/9c61c67bd6b750e4f18c9c792d8ad188/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:28:5-35:19
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:28:5-35:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/9f417c0ccd42aad2c5af7e6cc176196d/AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/9f417c0ccd42aad2c5af7e6cc176196d/AndroidManifest.xml:9:5-20
-MERGED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:7:5-12:19
-MERGED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:7:5-12:19
-MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/8b2698a403163e18faf48ef8969966f5/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/8b2698a403163e18faf48ef8969966f5/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:30:5-20
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:30:5-20
-MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/ffc2db1a9344fffc438ac62e9290a88f/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/ffc2db1a9344fffc438ac62e9290a88f/AndroidManifest.xml:22:5-20
-MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/fe809d2f6a2eb3b96c4f50dc5c6a86f0/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/fe809d2f6a2eb3b96c4f50dc5c6a86f0/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/28daa3c40ef96d90b6fcbe8371fa2381/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/28daa3c40ef96d90b6fcbe8371fa2381/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/f4639cf7eb6f113480ce2b2f88573086/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/f4639cf7eb6f113480ce2b2f88573086/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:28:5-33:19
-MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:28:5-33:19
-MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:28:5-51:19
-MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:28:5-51:19
-MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/45e0264f157d626ae329194083892d95/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/45e0264f157d626ae329194083892d95/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/61bfbd91ae21ced50aa0460f69fb470a/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/61bfbd91ae21ced50aa0460f69fb470a/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/769756313e94aee2b091943eb65244e0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/769756313e94aee2b091943eb65244e0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:22:5-26:19
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:11:5-68:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:28:5-35:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/89eecc7e45f473d48315cd0bfc5dd017/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/89eecc7e45f473d48315cd0bfc5dd017/AndroidManifest.xml:9:5-20
+MERGED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:7:5-12:19
+MERGED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:7:5-12:19
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/cdff26189400980ecfe9d1b393bd59a1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/cdff26189400980ecfe9d1b393bd59a1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/a3b0a3cee023d1ec31c92cf3b496a296/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/a3b0a3cee023d1ec31c92cf3b496a296/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/8a6317dc7f74ba63b41956c08ad05dc9/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/8a6317dc7f74ba63b41956c08ad05dc9/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/329a02e5293c3ed67943739e4a485f0a/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/329a02e5293c3ed67943739e4a485f0a/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/034310b74051eaa4190ce91e7fe6bffc/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/034310b74051eaa4190ce91e7fe6bffc/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:28:5-33:19
+MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:28:5-33:19
+MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:28:5-51:19
+MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:28:5-51:19
+MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/7da7d405b6ef39721b893503f1e88463/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/7da7d405b6ef39721b893503f1e88463/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/23c8ffd4a2847941847f359a9f4518e2/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/23c8ffd4a2847941847f359a9f4518e2/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/eb5f6526bda1bb0e6146bce6d5963a60/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/eb5f6526bda1bb0e6146bce6d5963a60/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:22:5-26:19
 	android:supportsRtl
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:15:9-41
 	android:roundIcon
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:16:9-54
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:16:9-54
 	android:icon
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:14:9-43
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:14:9-43
 	android:allowBackup
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:13:9-35
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:13:9-35
 	android:theme
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:18:9-40
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:18:9-40
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:12:9-40
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:12:9-40
 activity#restaurant.sa.com.sarestaurant.SplashActivity
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:19:9-27:20
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:19:9-27:20
 	android:screenOrientation
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:21:13-49
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:21:13-49
 	android:configChanges
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:20:13-48
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:20:13-48
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:19:19-49
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:19:19-49
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:22:13-26:29
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:22:13-26:29
 action#android.intent.action.MAIN
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:23:17-69
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:23:17-69
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:23:25-66
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:23:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:25:17-77
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:25:17-77
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:25:27-74
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:25:27-74
 meta-data#com.facebook.sdk.ApplicationId
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:29:9-30:54
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:29:9-30:54
 	android:value
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:30:13-52
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:30:13-52
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:29:20-65
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:29:20-65
 activity#com.facebook.FacebookActivity
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:32:9-35:48
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:29:9-32:66
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:29:9-32:66
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:32:9-35:48
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:29:9-32:66
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:29:9-32:66
 	android:label
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:35:13-45
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:35:13-45
 	android:configChanges
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:33:13-113
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:33:13-113
 	android:theme
-		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:32:13-63
+		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:32:19-63
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:32:19-63
 provider#com.facebook.FacebookContentProvider
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:37:9-39:38
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:37:9-39:38
 	android:authorities
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:37:19-98
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:37:19-98
 	android:exported
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:39:13-36
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:39:13-36
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:38:13-64
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:38:13-64
 meta-data#com.google.android.geo.API_KEY
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:41:9-107
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:41:9-107
 	android:value
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:41:66-105
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:41:66-105
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:41:20-65
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:41:20-65
 service#restaurant.sa.com.sarestaurant.appview.maps.LocationAlertIntentService
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:43:9-102
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:43:9-102
 	android:allowBackup
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:43:74-100
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:43:74-100
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:43:18-73
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:43:18-73
 activity#restaurant.sa.com.sarestaurant.MainActivity
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:45:9-46:58
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:45:9-46:58
 	android:theme
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:46:13-56
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:46:13-56
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:45:19-47
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:45:19-47
 activity#restaurant.sa.com.sarestaurant.HomeActivity
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:47:9-52:58
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:47:9-52:58
 	android:screenOrientation
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:50:13-49
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:50:13-49
 	android:label
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:51:13-56
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:51:13-56
 	android:configChanges
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:49:13-48
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:49:13-48
 	android:theme
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:52:13-56
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:52:13-56
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:48:13-41
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:48:13-41
 receiver#restaurant.sa.com.sarestaurant.appview.alarm.MyReceiver
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:54:9-58:20
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:54:9-58:20
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:54:19-59
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:54:19-59
 intent-filter#action:name:android.provider.Telephony.SMS_RECEIVED
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:55:13-57:29
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:55:13-57:29
 action#android.provider.Telephony.SMS_RECEIVED
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:56:17-82
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:56:17-82
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:56:25-79
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:56:25-79
 service#restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:60:9-62:72
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:60:9-62:72
 	android:permission
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:62:13-69
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:62:13-69
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:61:13-60
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:61:13-60
 receiver#restaurant.sa.com.sarestaurant.appview.alarm.MyAlarm
-ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:63:9-66:39
+ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:63:9-66:39
 	android:enabled
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:65:13-35
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:65:13-35
 	android:exported
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:66:13-36
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:66:13-36
 	android:name
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml:64:13-50
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml:64:13-50
 uses-sdk
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-MERGED from [com.android.support:design:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5cbc20871ba9a1592a9444ea57d16e00/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5cbc20871ba9a1592a9444ea57d16e00/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/d23926a600db446e74e502c7d2133ff9/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/d23926a600db446e74e502c7d2133ff9/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/fa3a7cea4164ab4846d629fa54371f38/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/fa3a7cea4164ab4846d629fa54371f38/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/9c61c67bd6b750e4f18c9c792d8ad188/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/9c61c67bd6b750e4f18c9c792d8ad188/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:24:5-26:41
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/9f417c0ccd42aad2c5af7e6cc176196d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/9f417c0ccd42aad2c5af7e6cc176196d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:cardview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/fc78ac4be605233e583e8dcee0d736dd/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/fc78ac4be605233e583e8dcee0d736dd/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/65cb3c50a637193e78ae4f3b56e741bf/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/65cb3c50a637193e78ae4f3b56e741bf/AndroidManifest.xml:20:5-44
-MERGED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:5:5-44
-MERGED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/8b2698a403163e18faf48ef8969966f5/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/8b2698a403163e18faf48ef8969966f5/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/ffc2db1a9344fffc438ac62e9290a88f/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/ffc2db1a9344fffc438ac62e9290a88f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/90fba562d622b0d61a27ce84e1f94aac/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/90fba562d622b0d61a27ce84e1f94aac/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/086c98fa0d851349f6be53498c944e7b/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/086c98fa0d851349f6be53498c944e7b/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/fe809d2f6a2eb3b96c4f50dc5c6a86f0/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/fe809d2f6a2eb3b96c4f50dc5c6a86f0/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/28daa3c40ef96d90b6fcbe8371fa2381/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/28daa3c40ef96d90b6fcbe8371fa2381/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/f4639cf7eb6f113480ce2b2f88573086/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/f4639cf7eb6f113480ce2b2f88573086/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:24:5-26:41
-MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/e7930034d152c6d58b8c721bb60f7efc/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/e7930034d152c6d58b8c721bb60f7efc/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.persistence:db:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/c3b8e8545efa9e02bf1388bda97dbd33/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.persistence:db:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/c3b8e8545efa9e02bf1388bda97dbd33/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:exifinterface:27.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/fc778f155a2f842720a438151b220177/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:exifinterface:27.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/fc778f155a2f842720a438151b220177/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/45e0264f157d626ae329194083892d95/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/45e0264f157d626ae329194083892d95/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/61bfbd91ae21ced50aa0460f69fb470a/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/61bfbd91ae21ced50aa0460f69fb470a/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/769756313e94aee2b091943eb65244e0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/769756313e94aee2b091943eb65244e0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2a5536f367c7ebafe2ad79b18d36aacb/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2a5536f367c7ebafe2ad79b18d36aacb/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1fb538bb42b897dab6108dd3e052d2ad/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/1fb538bb42b897dab6108dd3e052d2ad/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ac963bb6d1fa878c43b29dcfab5a34b7/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ac963bb6d1fa878c43b29dcfab5a34b7/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ab879d664875c9614550176f48b5448c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ab879d664875c9614550176f48b5448c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customtabs:27.0.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/ddbf41f022f97746f7764fefb7d53fa4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customtabs:27.0.2] /home/karsh/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/ddbf41f022f97746f7764fefb7d53fa4/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ef3bd089e5c009aed9751985fbdd69a0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ef3bd089e5c009aed9751985fbdd69a0/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/fbac9611b2c7c9b9414da6f6315d46c5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/fbac9611b2c7c9b9414da6f6315d46c5/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/3ca90863c64a1ca08fcedc9e239e4fad/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/3ca90863c64a1ca08fcedc9e239e4fad/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/66501cb40033f7845517fa7baaf2f5dd/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/66501cb40033f7845517fa7baaf2f5dd/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8f7a3e37587821b44b5adb50271ea94e/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8f7a3e37587821b44b5adb50271ea94e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/48e09010beefe98eedaa3ece04a73e89/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/48e09010beefe98eedaa3ece04a73e89/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/66932b863e42a8fdf36d6c1fe6a9cb8e/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/66932b863e42a8fdf36d6c1fe6a9cb8e/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eb0f465868be410c1fbb74c169eaa992/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/eb0f465868be410c1fbb74c169eaa992/AndroidManifest.xml:20:5-44
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-android-sdk:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.34.0.aar/a69da779b74dfd342ecd4a13e6eb70b6/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-share-4.34.0.aar/86e4fff8eff1e7fd838934f0f7f68e17/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-login-4.34.0.aar/1e34bfff1423c8b63062ddad06e61473/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/89eecc7e45f473d48315cd0bfc5dd017/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.2.aar/89eecc7e45f473d48315cd0bfc5dd017/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/430bd693010b6dd74f1be2410f2ef205/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/430bd693010b6dd74f1be2410f2ef205/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce876a94996cb58c2341a4135e7b4945/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence.room:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ce876a94996cb58c2341a4135e7b4945/AndroidManifest.xml:20:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:5:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/cdff26189400980ecfe9d1b393bd59a1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-location-15.0.1.aar/cdff26189400980ecfe9d1b393bd59a1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/a3b0a3cee023d1ec31c92cf3b496a296/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-plus:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-plus-15.0.1.aar/a3b0a3cee023d1ec31c92cf3b496a296/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/d701d62edb66e0e1033246a344209ce4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/d701d62edb66e0e1033246a344209ce4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/09fa94abc080636b4c0485de8bda8e97/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/09fa94abc080636b4c0485de8bda8e97/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/8a6317dc7f74ba63b41956c08ad05dc9/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-places:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-places-4.34.0.aar/8a6317dc7f74ba63b41956c08ad05dc9/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/329a02e5293c3ed67943739e4a485f0a/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-applinks:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.34.0.aar/329a02e5293c3ed67943739e4a485f0a/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/034310b74051eaa4190ce91e7fe6bffc/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-messenger:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-messenger-4.34.0.aar/034310b74051eaa4190ce91e7fe6bffc/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:24:5-26:41
+MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/5d550ab0ee38273c00f1be7669adb83b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db-framework:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-framework-1.1.1.aar/5d550ab0ee38273c00f1be7669adb83b/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/3e48bb6cba879d08d026200589c50308/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/db-1.1.1.aar/3e48bb6cba879d08d026200589c50308/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/78a7518df2209b16a950ab0660e45ab9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/78a7518df2209b16a950ab0660e45ab9/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/7da7d405b6ef39721b893503f1e88463/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-audience:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-audience-15.0.1.aar/7da7d405b6ef39721b893503f1e88463/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/23c8ffd4a2847941847f359a9f4518e2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-15.0.1.aar/23c8ffd4a2847941847f359a9f4518e2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/eb5f6526bda1bb0e6146bce6d5963a60/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/eb5f6526bda1bb0e6146bce6d5963a60/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2b6b482df573d83e7f7bf3b600d5c5d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/2b6b482df573d83e7f7bf3b600d5c5d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/c29f70753b08f79878b4038783ff40ba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/c29f70753b08f79878b4038783ff40ba/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ff185724ccb8575615071c7ee3dbbc40/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ff185724ccb8575615071c7ee3dbbc40/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/397e5002b98b0f5756546a7f7590cb2c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/397e5002b98b0f5756546a7f7590cb2c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:27.0.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/88a960d04819e699d19316641924a7e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:27.0.2] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/customtabs-27.0.2.aar/88a960d04819e699d19316641924a7e9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1c1aa37f47b63c78a25e3051e9add78f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1c1aa37f47b63c78a25e3051e9add78f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/dd8ff48af84e3dc89f8ea0d7d2bce1fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/dd8ff48af84e3dc89f8ea0d7d2bce1fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/1ce7d3afd681fa2e0acb26cda9bc85a8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/1ce7d3afd681fa2e0acb26cda9bc85a8/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/220df4f1ba46b7c5cdb3cb5d5edf2514/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/220df4f1ba46b7c5cdb3cb5d5edf2514/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/abf90aae579db11da85479014fa06022/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/abf90aae579db11da85479014fa06022/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/e76a01bdb5df829ee0fdd408bb72f259/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/e76a01bdb5df829ee0fdd408bb72f259/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/99d2fb37586a193fd10c9b2f3763d3ca/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/99d2fb37586a193fd10c9b2f3763d3ca/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b2c5753c8c259a991dd9b7265f99a786/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/b2c5753c8c259a991dd9b7265f99a786/AndroidManifest.xml:20:5-44
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		ADDED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
-		INJECTED from /home/karsh/Documents/SARestaurant/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		ADDED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
+		INJECTED from /home/karshsoni/SA/SARest/SARestaurant/app/src/main/AndroidManifest.xml
 activity#com.facebook.CustomTabMainActivity
-ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:33:9-71
+ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:33:9-71
 	android:name
-		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:33:19-68
+		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:33:19-68
 activity#com.facebook.CustomTabActivity
-ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:34:9-67
+ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:34:9-67
 	android:name
-		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/db63e4aa67e81b57c26b14ed0539bf56/AndroidManifest.xml:34:19-64
+		ADDED from [com.facebook.android:facebook-common:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-common-4.34.0.aar/909dc855ea3778f5893cdee862fa814b/AndroidManifest.xml:34:19-64
 provider#com.squareup.picasso.PicassoProvider
-ADDED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:8:9-11:40
+ADDED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:8:9-11:40
 	android:authorities
-		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:10:13-72
+		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:10:13-72
 	android:exported
-		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:11:13-37
+		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:11:13-37
 	android:name
-		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karsh/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/bb82948a263f674f2c86f01b3e350b49/AndroidManifest.xml:9:13-64
+		ADDED from [com.squareup.picasso:picasso:2.71828] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/936cd980a0d7b0327fbb4b737e13d7bf/AndroidManifest.xml:9:13-64
 uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:26:5-28:35
+ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:27:9-41
+		ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:27:9-41
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/9678b2c5edca3b6c1a96fbb0127e8f82/AndroidManifest.xml:28:9-32
+		ADDED from [com.google.android.gms:play-services-maps:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-maps-15.0.1.aar/b523cfd9a4dffb4a22aa3b74320c973e/AndroidManifest.xml:28:9-32
 provider#com.facebook.marketing.internal.MarketingInitProvider
-ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:29:9-32:40
+ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:29:9-32:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:31:13-73
+		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:31:13-73
 	android:exported
-		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:32:13-37
+		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/6cc9ba2447241409baed1e9977727be3/AndroidManifest.xml:30:13-81
+		ADDED from [com.facebook.android:facebook-marketing:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-marketing-4.34.0.aar/99c476b5a932855837de41200c8acb66/AndroidManifest.xml:30:13-81
 provider#com.facebook.internal.FacebookInitProvider
-ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:39:9-42:40
+ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:39:9-42:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:41:13-72
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:41:13-72
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:42:13-37
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:42:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:40:13-70
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:40:13-70
 receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
-ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:44:9-50:20
+ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:44:9-50:20
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:46:13-37
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:46:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:45:13-86
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:45:13-86
 intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:47:13-49:29
+ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:47:13-49:29
 action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:48:17-95
+ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:48:17-95
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karsh/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/5303c9f8f2eada6e0d57e3de78c5aca9/AndroidManifest.xml:48:25-92
+		ADDED from [com.facebook.android:facebook-core:4.34.0] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/facebook-core-4.34.0.aar/63163775a7342f65ee2461649185899a/AndroidManifest.xml:48:25-92
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:23:9-26:75
+ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:23:9-26:75
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:25:13-37
+		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:25:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a16897cafa1e8e06d75f6ea5450767be/AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/db3f6177ebc6f8bc5e08beb80f433988/AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karsh/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/51182abcdb983e41b7462bd0be25ff78/AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /home/karshsoni/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ae5ce655ed23904c6f79f59276862723/AndroidManifest.xml:24:13-58

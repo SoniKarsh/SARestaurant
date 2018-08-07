@@ -23,14 +23,12 @@ import android.location.Location
 import android.os.PersistableBundle
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.*
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
@@ -301,11 +299,18 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 transaction.commit()
             }
             R.id.nav_logout -> {
-                LoginManager.getInstance().logOut()
-                SARestaurantApp.sharedPreference!!.edit().clear().apply()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
+                AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to Logout?")
+                        .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> LoginManager.getInstance().logOut()
+                            SARestaurantApp.sharedPreference!!.edit().clear().apply()
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)})
+                        .setNegativeButton("No", null)
+                        .show()
+
             }
         }
 

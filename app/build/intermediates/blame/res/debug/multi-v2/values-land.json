@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/karsh/Documents/SARestaurant/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
+            "outputFile": "/home/karshsoni/SA/SARest/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/5cbc20871ba9a1592a9444ea57d16e00/res/values-land/values-land.xml",
+                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/56ce5e83e89e4748bbc95c04c55b9485/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/res/values-land/values-land.xml",
+                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

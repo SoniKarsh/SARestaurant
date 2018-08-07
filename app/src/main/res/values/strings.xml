@@ -10,6 +10,7 @@
 
     <!--MainActivity-->
     <string name="text">Please give needed permission to use feature of our application.</string>
+    <string name="request_permission">Request Permission</string>
 
     <!--Sign In-->
     <string name="email_or_username">Email or Username</string>
@@ -58,6 +59,5 @@
 
     <string name="previous">Play</string>
     <string name="weather_image">Weather Image</string>
-    <string name="request_permission">Request Permission</string>
 
 </resources>

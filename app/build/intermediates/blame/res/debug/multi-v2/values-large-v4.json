@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/karsh/Documents/SARestaurant/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
+            "outputFile": "/home/karshsoni/SA/SARest/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/res/values-large-v4/values-large-v4.xml",
+                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/values-large-v4/values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
