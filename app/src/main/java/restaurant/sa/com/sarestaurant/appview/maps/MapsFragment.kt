@@ -104,7 +104,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         mMapView?.getMapAsync(this)
         synchronized(this) {
             Log.i("Client", "created")
-            var gclient = GoogleApiClient.Builder(context!!).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build()
+            val gclient = GoogleApiClient.Builder(context!!).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build()
             gclient.connect()
 //            mydb= Room.databaseBuilder(context, Mydatabase::class.java,"Database").allowMainThreadQueries().build()
 
@@ -150,9 +150,9 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
 
             override fun onMapClick(p0: LatLng?) {
-                Log.d(TAG, "onMapClick: Clicked");
+//                Log.d(TAG, "onMapClick: Clicked");
                 curLocation = p0!!
-                addLocationAlert(p0.latitude, p0.longitude);
+//                addLocationAlert(p0.latitude, p0.longitude);
             }
         })
 
