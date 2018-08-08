@@ -9,5 +9,6 @@
         android:adjustViewBounds="true"
         android:layout_gravity="center"
         android:src="@drawable/ic_launcher_background"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="TODO" />
 </FrameLayout>

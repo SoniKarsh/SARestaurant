@@ -1,5 +1,10 @@
 package restaurant.sa.com.sarestaurant
 
+import android.app.FragmentManager
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -20,10 +25,9 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragme
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
-import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
-import android.support.v7.view.menu.ActionMenuItemView
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.facebook.login.LoginManager
@@ -32,35 +36,13 @@ import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.*
-import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
-import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
-import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
-import restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
-import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
-import restaurant.sa.com.sarestaurant.utils.LogUtils
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
-class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication, HomeCallback {
-
-    override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
-
-    }
-
-    override fun sendWeatherData(weatherData: WeatherData) {
-        nav_tv.text = weatherData.temp
-        Picasso.get().load(weatherData.imgUrl)
-                .into(nav_img)
-    }
-
-    override fun getData() {
-//        nav_tv.text = weatherData.temp
-//        Picasso.get().load(weatherData.imgUrl)
-//                .into(imageView)
-    }
+class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication {
 
     val FRAGMENT_TAG = "SignInFragment"
     val RESTAURANT_FRAGMENT_TAG = "RestaurantFragment"
@@ -74,14 +56,9 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     private val TAG = "HomeActivity"
     var listOfLocations: ArrayList<LatLng>? = null
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    var restaurantFragment: RestaurantFragment? = null
-    var favoriteFragment: FavoriteFragment? = null
-    var restaurantDetailFragment: RestaurantDetailFragment? = null
-    var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var permissionUtils: PermissionUtils? = null
     var homeActivity: HomeActivity? = null
     var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
-//    var permissionGranted: PermissionUtils? = null
     var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -106,6 +83,10 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         return listOfTitleImgModel
     }
 
+    override fun getRestaurantData(restaurantDetailModel: RestaurantDetailModel) {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -117,10 +98,15 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             override fun onPermissionGranted() {
                 homeBtn.visibility = View.GONE
                 homeTV.visibility = View.GONE
-                getGPSLocation()
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthShort(this@HomeActivity, "GRANTED")
+                if(fragmentHolder.visibility == View.GONE){
+                    fragmentHolder.visibility = View.VISIBLE
+                }
                 val fragmentManager = homeActivity!!.supportFragmentManager
+                if(supportFragmentManager.backStackEntryCount>0) {
+                    fragmentManager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                }
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
                 transaction.commit()
@@ -137,11 +123,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         mapsPresenterImp = MapsPresenterImp()
         detailPresenter = this
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
-
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -151,11 +132,25 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val headerView = navigationView.getHeaderView(0)
-        var nav_userName = headerView.findViewById<TextView>(R.id.navUserName)
-        var nav_emailId = headerView.findViewById<TextView>(R.id.navEmailId)
-        nav_userName.text = SARestaurantApp.sharedPreference!!.getString("username", "")
-        nav_emailId.text = SARestaurantApp.sharedPreference!!.getString("emailid", "")
+        val navUserName = headerView.findViewById<TextView>(R.id.navUserName)
+        val navEmailId = headerView.findViewById<TextView>(R.id.navEmailId)
+        navUserName.text = SARestaurantApp.instance!!.sharedPreference!!.getString("username", "")
+        navEmailId.text = SARestaurantApp.instance!!.sharedPreference!!.getString("emailid", "")
+//        val arrayListOfWeather: List<WeatherModel>? = SARestaurantApp.database!!.weatherDao().getAll()
+//        if(arrayListOfWeather!![arrayListOfWeather.size-1].temperature != null){
+//            nav_tv.text = arrayListOfWeather[arrayListOfWeather.size-1].temperature
+//            Picasso.get().load(arrayListOfWeather[arrayListOfWeather.size-1].imgUrl)
+//                    .into(nav_img)
+//        }
 
+        val navTv = headerView.findViewById<TextView>(R.id.nav_tv)
+        val navImgUrl = headerView.findViewById<ImageView>(R.id.nav_img)
+        navTv.text = SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "")
+        val imgUrl = SARestaurantApp.instance!!.sharedPreference!!.getString("imgurl", "")
+        if(imgUrl != ""){
+            Picasso.get().load(imgUrl)
+                    .into(navImgUrl)
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
     }
@@ -164,77 +159,28 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         return super.onContextItemSelected(item)
     }
 
-    fun getGPSLocation(){
-        val getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
-        getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
-            override fun getDeviceLastLocation(location: Location) {
-                Log.d(TAG, "getDeviceLastLocation: $location Mil");
-                weatherFragment.retrofitCall(location, this@HomeActivity, true)
-            }
-
-            override fun onError(error: String) {
-                Toast.makeText(this@HomeActivity, error, Toast.LENGTH_LONG).show()
-            }
-
-        })
-    }
-
     override fun onBackPressed() {
-        LogUtils.setTag(TAG)
-        LogUtils.d("${SARestaurantApp.isRestVisible}," +
-                "${SARestaurantApp.isRestDetailVisible}," +
-                "${SARestaurantApp.isFavVisible}," +
-                "${SARestaurantApp.isWeatherVisible}," +
-                "${SARestaurantApp.isMapVisible}")
-//        restaurantFragment = supportFragmentManager.findFragmentByTag(RESTAURANT_FRAGMENT_TAG) as RestaurantFragment
-//        restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        }else if (SARestaurantApp.isFavVisible && !SARestaurantApp.isMapVisible){
-            LogUtils.setTag(TAG)
-            LogUtils.d("isFavVisible")
-            favoriteFragment = supportFragmentManager.findFragmentByTag(FAVORITE_RESTAURANT_FRAGMENT_TAG) as FavoriteFragment
-            supportFragmentManager.popBackStack("Favorite", POP_BACK_STACK_INCLUSIVE)
-            supportActionBar!!.title = "RestaurantFragment"
-            nav_view.setCheckedItem(R.id.nav_home)
-        }else if(SARestaurantApp.isWeatherVisible){
-            weatherFragment = supportFragmentManager.findFragmentByTag(WEATHER_FRAGMENT_TAG) as WeatherFragment
-            supportFragmentManager.popBackStack("Weather", POP_BACK_STACK_INCLUSIVE)
-            supportActionBar!!.title = "RestaurantFragment"
-            this.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.VISIBLE
-            nav_view.setCheckedItem(R.id.nav_home)
-        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isMapVisible && !SARestaurantApp.isFavVisible){
-            mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
-            supportActionBar?.show()
-            supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
-            supportActionBar!!.title = "RestaurantFragment"
-            nav_view.setCheckedItem(R.id.nav_home)
-        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isFavVisible && SARestaurantApp.isMapVisible){
-            mapsFragment = supportFragmentManager.findFragmentByTag(MAP_FRAGMENT_TAG) as MapsFragment
-            supportFragmentManager.popBackStack("Maps", POP_BACK_STACK_INCLUSIVE)
-            supportActionBar?.show()
-            supportActionBar!!.title = "FavoriteFragment"
-            nav_view.setCheckedItem(R.id.nav_favorite)
-        }else if(SARestaurantApp.isRestVisible && SARestaurantApp.isRestDetailVisible){
-            restaurantDetailFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_DETAIL_REST) as RestaurantDetailFragment
-            supportFragmentManager.popBackStack("RestDetail", POP_BACK_STACK_INCLUSIVE)
-            supportActionBar?.show()
-            supportActionBar!!.title = "RestaurantFragment"
-            nav_view.setCheckedItem(R.id.nav_home)
+        if(supportFragmentManager.backStackEntryCount>0){
+            supportFragmentManager.popBackStack()
+        }else{
+            val  visibleFragment = supportFragmentManager.findFragmentById(R.id.fragmentHolder)
+            if(visibleFragment !is RestaurantFragment){
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentHolder, RestaurantFragment(), RestaurantFragment::class.java.simpleName)
+                        .commit()
+            }else {
+                AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Closing Activity")
+                        .setMessage("Are you sure you want to close this activity?")
+                        .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> finish() })
+                        .setNegativeButton("No", null)
+                        .show()
+            }
         }
-//        else if(restaurantDetailFragment != null && restaurantDetailFragment!!.isVisible){
-//            Log.d(TAG, "onBackPressed: Clicked");
-//            supportFragmentManager.popBackStack()
-//        }
-        else {
-            AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle("Closing Activity")
-                    .setMessage("Are you sure you want to close this activity?")
-                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> finish() })
-                    .setNegativeButton("No", null)
-                    .show()
-        }
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -249,11 +195,13 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_map -> {
-                if(mapsPresenterImp.isServicesOK(this)){
+                ToastUtils.lengthShort(this, SARestaurantApp.instance!!.isClickableForMap.toString())
+                if(mapsPresenterImp.isServicesOK(this) && SARestaurantApp.instance!!.isClickableForMap){
                     supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentHolder, mapsFragment, MAP_FRAGMENT_TAG)
-                            .addToBackStack("Maps")
-                            .commit();
+                            .add(R.id.fragmentHolder, mapsFragment, mapsFragment.javaClass.simpleName)
+                            .hide(supportFragmentManager.findFragmentById(R.id.fragmentHolder))
+                            .addToBackStack(mapsFragment.javaClass.simpleName)
+                            .commit()
                 }
                 return true
             }
@@ -274,17 +222,24 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 //                transaction.commit()
             }
             R.id.nav_favorite -> {
+
                 val fragmentManager = supportFragmentManager
+                if(fragmentManager.backStackEntryCount>0) {
+                    fragmentManager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                }
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, FavoriteFragment(), FAVORITE_RESTAURANT_FRAGMENT_TAG)
-                transaction.addToBackStack("Favorite")
+//                transaction.addToBackStack("Favorite")
                 transaction.commit()
             }
             R.id.nav_weather -> {
                 val fragmentManager = supportFragmentManager
+                if(fragmentManager.backStackEntryCount>0) {
+                    fragmentManager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                }
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, WeatherFragment(), WEATHER_FRAGMENT_TAG)
-                transaction.addToBackStack("Weather")
+//                transaction.addToBackStack("Weather")
                 transaction.commit()
             }
             R.id.nav_logout -> {
@@ -293,7 +248,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                         .setTitle("Logout")
                         .setMessage("Are you sure you want to Logout?")
                         .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> LoginManager.getInstance().logOut()
-                            SARestaurantApp.sharedPreference!!.edit().clear().apply()
+                            SARestaurantApp.instance!!.sharedPreference!!.edit().clear().apply()
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)})

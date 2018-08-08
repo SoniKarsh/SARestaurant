@@ -42,7 +42,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        SARestaurantApp.isFavVisible = true
+        SARestaurantApp.instance!!.isFavVisible = true
         homeActivity = context as HomeActivity
         context.supportActionBar?.title = TAG
         homeActivity.supportActionBar?.show()
@@ -51,7 +51,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
     }
 
     override fun onDetach() {
-        SARestaurantApp.isFavVisible = false
+        SARestaurantApp.instance!!.isFavVisible = false
         super.onDetach()
     }
 
@@ -81,8 +81,11 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     fun fetchData(){
         val layout = LinearLayoutManager(activity)
-        restaurantPresenterImp.getListOfFavLocations(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.onCallback{
+        restaurantPresenterImp.getListOfFavLocations(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.OnCallBack{
             override fun onResponse(listOfLocations: ArrayList<LatLng>) {
+                // isClickableForMap
+                SARestaurantApp.instance!!.isClickableForMap == true
+
                 listOfPlacesLocation = listOfLocations
                 Log.d(TAG, "onResponse: Stop Progress")
                 restaurantView!!.stopProgress()

@@ -1,7 +1,5 @@
 package restaurant.sa.com.sarestaurant.appview.maps
 
-
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
@@ -9,9 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +18,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import restaurant.sa.com.sarestaurant.R
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -32,8 +27,6 @@ import com.google.android.gms.tasks.Task
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_info_window.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
-import kotlinx.android.synthetic.main.fragment_restaurant_detail.*
-import kotlinx.android.synthetic.main.fragment_restaurant_detail.view.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
@@ -46,8 +39,6 @@ import kotlin.collections.ArrayList
 class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleMap.InfoWindowAdapter, GoogleApiClient.OnConnectionFailedListener {
 
     lateinit var fragView: View
-    var getLoc: GetLoc?= null
-    private val mapFragment: SupportMapFragment? = null
     val TAG = "MapsFragment"
     lateinit var googleMap: GoogleMap
     var mMapView: MapView? = null
@@ -55,27 +46,15 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     private val DEFAULT_ZOOM = 15f
     lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     lateinit var currentLocation: Location
-    var LOCATION_PERMISSION_REQUEST_CODE = 9999
     var listOfLocations: ArrayList<LatLng> = ArrayList()
     var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
     lateinit var locationCommunication: LocationCommunication
     var geofencingClient: GeofencingClient? = null
     lateinit var homeActivity: HomeActivity
+    var LOCATION_PERMISSION_REQUEST_CODE = 9999
     lateinit var curLocation: LatLng
-    private val LOC_PERM_REQ_CODE = 1
-    //meters
     private val GEOFENCE_RADIUS = 100000
-    //in milli seconds
-    private val GEOFENCE_EXPIRATION = 6000
     var inflater: LayoutInflater? = null
-
-
-    interface GetLoc{
-        fun onGetLoc(listener: onReceiveLoc)
-        interface onReceiveLoc{
-            fun successForLoc()
-        }
-    }
 
     override fun getInfoContents(p0: Marker?): View? {
         return null
@@ -100,26 +79,22 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        SARestaurantApp.isMapVisible = true
+        SARestaurantApp.instance!!.isMapVisible = true
         homeActivity = context as HomeActivity
-//        context.supportActionBar?.title = TAG
         context.supportActionBar?.hide()
         locationCommunication = homeActivity
     }
 
     override fun onDetach() {
-        SARestaurantApp.isMapVisible = false
+        homeActivity.supportActionBar?.show()
+        SARestaurantApp.instance!!.isMapVisible = false
         super.onDetach()
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d(TAG, "onCreateView: 1")
         fragView = inflater.inflate(R.layout.fragment_maps, container, false)
         mMapView = fragView.findViewById(R.id.map)
-        Log.d(TAG, "onCreateView: 2")
         initMap()
-        Log.d(TAG, "onCreateView: 3")
         return fragView
     }
 
@@ -177,13 +152,11 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
             override fun onMapClick(p0: LatLng?) {
                 Log.d(TAG, "onMapClick: Clicked");
                 curLocation = p0!!
-//                getLoc!!.onGetLoc()
                 addLocationAlert(p0.latitude, p0.longitude);
             }
-        });
+        })
 
         multipleMarkers()
-        Toast.makeText(activity, "onMapReady", Toast.LENGTH_LONG).show()
     }
 
     fun getGeofencePendingIntent(): PendingIntent {
@@ -216,28 +189,26 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     @SuppressLint("MissingPermission")
     fun addLocationAlert(lat: Double, lng: Double ){
         if (mLocationPermissionsGranted) {
-                var key = ""+lat+"-"+lng;
-            var geofence: Geofence = getGeofence(lat, lng, key);
+                val key = ""+lat+"-"+lng;
+            val geofence: Geofence = getGeofence(lat, lng, key);
             geofencingClient?.addGeofences(getGeofencingRequest(geofence),
                     getGeofencePendingIntent())!!
                     .addOnCompleteListener {
                         if (it.isSuccessful()) {
-                            Toast.makeText(homeActivity,
-                                    "Location alter has been added",
-                                    Toast.LENGTH_SHORT).show();
+                            LogUtils.setTag(TAG)
+                            LogUtils.d("Location alter has been added")
                         }else{
-                            Toast.makeText(homeActivity,
-                                    "Location alter could not be added",
-                                    Toast.LENGTH_SHORT).show();
+                            LogUtils.setTag(TAG)
+                            LogUtils.d("Location alter could not be added")
                         }
             }
         }
     }
 
     private fun multipleMarkers(){
-        var icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
-        var options = MarkerOptions()
-        if (!listOfLocations.isEmpty()){
+        val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
+        val options = MarkerOptions()
+        if (!listOfLocations.isEmpty() && !listOfTitleImgModel.isEmpty()){
             for(i in 0 until listOfLocations.size){
                         options.position(listOfLocations[i])
                             .icon(icon)
@@ -247,35 +218,69 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
             }
 
         }else{
-            Toast.makeText(this.activity, "Empty!!!", Toast.LENGTH_LONG).show()
             Log.d(TAG, "multipleMarkers: Empty!!!");
         }
 
     }
 
     override fun getInfoWindow(p0: Marker?): View {
-        val i = p0!!.snippet.toInt()
+        val i: Int
+        val v: View
         inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-        val v: View = inflater!!.inflate(R.layout.custom_info_window, null)
-        v.tvInfo.text = p0.title
-        v.tvAddress.text = listOfTitleImgModel[i].address
-        v.ratingBar2.rating = listOfTitleImgModel[i].rating!!.toFloat()
-        if(v.ratingBar2.rating == 0.0.toFloat()){
+        v = inflater!!.inflate(R.layout.custom_info_window, null)
+        if(p0!!.snippet != null){
+            i = p0.snippet.toInt()
+            v.tvInfo.text = p0.title
+            v.tvAddress.text = listOfTitleImgModel[i].address
+            if(listOfTitleImgModel[i].rating != null){
+                v.ratingBar2.rating = listOfTitleImgModel[i].rating!!.toFloat()
+            }else{
+                v.ratingBar2.rating = 0.0.toFloat()
+            }
+            if(v.ratingBar2.rating == 0.0.toFloat()){
+                v.ratingBar2.visibility = View.GONE
+                v.tvRatingBar2.visibility = View.VISIBLE
+            }
+            Log.d(TAG, "getInfoWindow: ${p0.snippet}")
+            Picasso.get().load(listOfTitleImgModel[i].imgUrl)
+                    .into(v.ivInfo, MarkerCallback(p0))
+        }else{
+            v.tvInfo.text = getString(R.string.your_location)
             v.ratingBar2.visibility = View.GONE
             v.tvRatingBar2.visibility = View.VISIBLE
         }
-        Log.d(TAG, "getInfoWindow: ${p0.snippet}")
-        Picasso.get().load(listOfTitleImgModel[i].imgUrl)
-                .into(v.ivInfo, MarkerCallback(p0))
+
         return v
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        Log.d(TAG, "onRequestPermissionsResult: onRequestPermissionsResult Called")
+        mLocationPermissionsGranted = false
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty()) {
+                    for (i in 0 until grantResults.size) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                            mLocationPermissionsGranted = false
+                            Log.d(TAG, "onRequestPermissionsResult: permission failed")
+                            return
+                        }
+                    }
+                    Log.d(TAG, "onRequestPermissionsResult: permission granted")
+                    mLocationPermissionsGranted = true
+                    //initialize our map
+                    initMap()
+                }
+            }
+        }
     }
 
     private fun moveCamera(latLng: LatLng, zoom: Float, title: String){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
 
-        var icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
-        var options = MarkerOptions()
+        val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
+        val options = MarkerOptions()
                     .position(latLng)
                     .title(title)
                     .icon(icon)
@@ -290,7 +295,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
         try {
             if (mLocationPermissionsGranted){
-                var location = mFusedLocationProviderClient.lastLocation as Task<Location>
+                val location = mFusedLocationProviderClient.lastLocation as Task<Location>
                 location.addOnCompleteListener {
                     if(it.isSuccessful){
                         Log.d(TAG, "getDeviceLocation: found Location")
@@ -299,7 +304,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
                                 DEFAULT_ZOOM, "My Location")
                     }else{
                         Log.d(TAG, "getDeviceLocation: Current location is null")
-                        Toast.makeText(activity, "unable to get current location", Toast.LENGTH_LONG).show()
                     }
 
                 }

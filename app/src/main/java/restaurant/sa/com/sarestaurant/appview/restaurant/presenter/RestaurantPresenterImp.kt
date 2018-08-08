@@ -17,13 +17,13 @@ class RestaurantPresenterImp: RestaurantPresenter {
     override fun getListOfLocations(responseFromParse: ResponseModelClass): ArrayList<LatLng> {
 
         for(i in responseFromParse.results!!){
-            listOfLocations.add(LatLng(i.geometry!!.location!!.lat!!, i!!.geometry!!.location!!.lng!!))
+            listOfLocations.add(LatLng(i.geometry!!.location!!.lat!!, i.geometry!!.location!!.lng!!))
         }
 
         return listOfLocations
     }
 
-    override fun getListOfFavLocations(listOfFavoriteRestaurantModel: ArrayList<FavoriteRestaurantModel>, listener: RestaurantPresenter.onCallback) {
+    override fun getListOfFavLocations(listOfFavoriteRestaurantModel: ArrayList<FavoriteRestaurantModel>, listener: RestaurantPresenter.OnCallBack) {
 
         Log.d("RestaurantPresenterImp", "getListOfFavLocations: ${listOfFavoriteRestaurantModel.size}")
         Log.d("RestaurantPresenterImp", "getListOfFavLocations: ${listOfFavoriteRestaurantModel}")

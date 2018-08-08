@@ -12,7 +12,6 @@
         >
         <bitmap
             android:src="@drawable/splash_logo"
-            
             android:gravity="center"/>
 
     </item>

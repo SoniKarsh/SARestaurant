@@ -11,44 +11,56 @@ import android.os.Build
 import android.util.Log
 import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.database.UserDatabase
+import restaurant.sa.com.sarestaurant.utils.LogUtils
 
 class SARestaurantApp: Application() {
+    var sharedPreference: SharedPreferences? = null
+    val PREFERENCE_FILE_NAME = "restaurant.sa.com.sarestaurant.mainactivity"
+    val TAG = "SARestaurantApp"
+    var isMapVisible: Boolean = false
+    var isFavVisible: Boolean = false
+    var isRestVisible: Boolean = false
+    val jobId = 123
+    var isWeatherVisible: Boolean = false
+    var isClickableForMap: Boolean = false
 
     companion object {
+        var instance: SARestaurantApp? = null
         var database: UserDatabase? = null
-        var sharedPreference: SharedPreferences? = null
-        val PREFERENCE_FILE_NAME = "restaurant.sa.com.sarestaurant.mainactivity"
-        var countAdapter = 0
-        val TAG = "SARestaurantApp"
-        lateinit var componentName: ComponentName
-        var isMapVisible = false
-        var isFavVisible = false
-        var isRestVisible = false
-        var isRestDetailVisible = false
-        var isWeatherVisible = false
     }
 
     override fun onCreate() {
         super.onCreate()
-        SARestaurantApp.database = Room.databaseBuilder(this, UserDatabase::class.java, "SAResraurant-db").allowMainThreadQueries()
+
+        // Single Instance
+        instance = this
+
+        // Single Database instance
+        database = Room.databaseBuilder(this, UserDatabase::class.java, "SAResraurant-db").allowMainThreadQueries()
                 .fallbackToDestructiveMigration().build()
-        SARestaurantApp.sharedPreference = this.getSharedPreferences(SARestaurantApp.PREFERENCE_FILE_NAME, Context.MODE_PRIVATE)
-        componentName = ComponentName(this, ApiCallJobService::class.java)
+
+        // Create shared preference
+        sharedPreference = this.getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE)
+
+        val componentName = ComponentName(this, ApiCallJobService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val info = JobInfo.Builder(123, componentName)
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+            val info = JobInfo.Builder(jobId, componentName)
                     .setPersisted(true)
                     .setPeriodic((60* 60 *1000).toLong())
                     .build()
             val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
             val resultCode = scheduler.schedule(info)
             if (resultCode == JobScheduler.RESULT_SUCCESS) {
-                Log.d(TAG, "Job scheduled")
+                LogUtils.setTag(TAG)
+                LogUtils.i("Job scheduled")
             } else {
-                Log.d(TAG, "Job scheduling failed")
+                LogUtils.setTag(TAG)
+                LogUtils.e("Job scheduling failed")
             }
         } else {
-            Log.d(TAG, "VERSION.SDK_INT < LOLLIPOP")
+            LogUtils.setTag(TAG)
+            LogUtils.e("VERSION.SDK_INT < LOLLIPOP")
         }
+
     }
 }

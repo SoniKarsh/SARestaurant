@@ -9,11 +9,13 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.model.TypesConverters
 import restaurant.sa.com.sarestaurant.dao.FavoriteRestaurantDao
 import restaurant.sa.com.sarestaurant.dao.ResultDao
 import restaurant.sa.com.sarestaurant.dao.UserDao
+import restaurant.sa.com.sarestaurant.dao.WeatherDao
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import restaurant.sa.com.sarestaurant.model.UserModel
+import restaurant.sa.com.sarestaurant.model.WeatherModel
 
 
-@Database(entities = [(UserModel::class), (FavoriteRestaurantModel::class), (Result::class)], version = 4)
+@Database(entities = [(UserModel::class), (FavoriteRestaurantModel::class), (Result::class), (WeatherModel::class)], version = 4)
 @TypeConverters(TypesConverters::class, PhotoConverters::class)
 abstract class UserDatabase: RoomDatabase() {
 
@@ -22,5 +24,7 @@ abstract class UserDatabase: RoomDatabase() {
     abstract fun favoriteRestaurantDao(): FavoriteRestaurantDao
 
     abstract fun resultDao(): ResultDao
+
+    abstract fun weatherDao(): WeatherDao
 
 }

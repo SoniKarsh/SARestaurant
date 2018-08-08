@@ -25,6 +25,8 @@ import restaurant.sa.com.sarestaurant.dao.ResultDao;
 import restaurant.sa.com.sarestaurant.dao.ResultDao_Impl;
 import restaurant.sa.com.sarestaurant.dao.UserDao;
 import restaurant.sa.com.sarestaurant.dao.UserDao_Impl;
+import restaurant.sa.com.sarestaurant.dao.WeatherDao;
+import restaurant.sa.com.sarestaurant.dao.WeatherDao_Impl;
 
 @SuppressWarnings("unchecked")
 public class UserDatabase_Impl extends UserDatabase {
@@ -34,6 +36,8 @@ public class UserDatabase_Impl extends UserDatabase {
 
   private volatile ResultDao _resultDao;
 
+  private volatile WeatherDao _weatherDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(4) {
@@ -41,10 +45,11 @@ public class UserDatabase_Impl extends UserDatabase {
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `User` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `emailId` TEXT NOT NULL, `mobileNo` TEXT NOT NULL, `userName` TEXT NOT NULL, `password` TEXT NOT NULL)");
         _db.execSQL("CREATE UNIQUE INDEX `index_User_userName_emailId` ON `User` (`userName`, `emailId`)");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `FavoriteRestaurant` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `adapter_position` INTEGER NOT NULL, `restaurant_name` TEXT NOT NULL, `restaurant_address` TEXT NOT NULL, `restaurant_img_path` TEXT NOT NULL, `is_favorite` INTEGER, `latitude` REAL, `longitude` REAL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `FavoriteRestaurant` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `adapter_position` INTEGER NOT NULL, `restaurant_name` TEXT NOT NULL, `restaurant_address` TEXT NOT NULL, `restaurant_img_path` TEXT NOT NULL, `is_favorite` INTEGER, `latitude` REAL, `longitude` REAL, `rating` REAL, `restIsClosed` TEXT, `placeId` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `Result` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `icon` TEXT, `name` TEXT NOT NULL, `id` TEXT, `photos` TEXT, `placeId` TEXT, `rating` REAL, `reference` TEXT, `scope` TEXT, `types` TEXT, `vicinity` TEXT, `lat` REAL, `lng` REAL, `latitude` REAL, `longitude` REAL, `latitude1` REAL, `longitude2` REAL, `compoundCode` TEXT, `globalCode` TEXT, `openNow` INTEGER)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `Weather` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `temperature` TEXT, `imgUrl` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e6b6723699ae5ae975b8ee61db111ee2\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c3b23252d786038b2db9480c4b893af0\")");
       }
 
       @Override
@@ -52,6 +57,7 @@ public class UserDatabase_Impl extends UserDatabase {
         _db.execSQL("DROP TABLE IF EXISTS `User`");
         _db.execSQL("DROP TABLE IF EXISTS `FavoriteRestaurant`");
         _db.execSQL("DROP TABLE IF EXISTS `Result`");
+        _db.execSQL("DROP TABLE IF EXISTS `Weather`");
       }
 
       @Override
@@ -92,7 +98,7 @@ public class UserDatabase_Impl extends UserDatabase {
                   + " Expected:\n" + _infoUser + "\n"
                   + " Found:\n" + _existingUser);
         }
-        final HashMap<String, TableInfo.Column> _columnsFavoriteRestaurant = new HashMap<String, TableInfo.Column>(8);
+        final HashMap<String, TableInfo.Column> _columnsFavoriteRestaurant = new HashMap<String, TableInfo.Column>(11);
         _columnsFavoriteRestaurant.put("_id", new TableInfo.Column("_id", "INTEGER", false, 1));
         _columnsFavoriteRestaurant.put("adapter_position", new TableInfo.Column("adapter_position", "INTEGER", true, 0));
         _columnsFavoriteRestaurant.put("restaurant_name", new TableInfo.Column("restaurant_name", "TEXT", true, 0));
@@ -101,6 +107,9 @@ public class UserDatabase_Impl extends UserDatabase {
         _columnsFavoriteRestaurant.put("is_favorite", new TableInfo.Column("is_favorite", "INTEGER", false, 0));
         _columnsFavoriteRestaurant.put("latitude", new TableInfo.Column("latitude", "REAL", false, 0));
         _columnsFavoriteRestaurant.put("longitude", new TableInfo.Column("longitude", "REAL", false, 0));
+        _columnsFavoriteRestaurant.put("rating", new TableInfo.Column("rating", "REAL", false, 0));
+        _columnsFavoriteRestaurant.put("restIsClosed", new TableInfo.Column("restIsClosed", "TEXT", false, 0));
+        _columnsFavoriteRestaurant.put("placeId", new TableInfo.Column("placeId", "TEXT", false, 0));
         final HashSet<TableInfo.ForeignKey> _foreignKeysFavoriteRestaurant = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesFavoriteRestaurant = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoFavoriteRestaurant = new TableInfo("FavoriteRestaurant", _columnsFavoriteRestaurant, _foreignKeysFavoriteRestaurant, _indicesFavoriteRestaurant);
@@ -140,8 +149,21 @@ public class UserDatabase_Impl extends UserDatabase {
                   + " Expected:\n" + _infoResult + "\n"
                   + " Found:\n" + _existingResult);
         }
+        final HashMap<String, TableInfo.Column> _columnsWeather = new HashMap<String, TableInfo.Column>(3);
+        _columnsWeather.put("_id", new TableInfo.Column("_id", "INTEGER", false, 1));
+        _columnsWeather.put("temperature", new TableInfo.Column("temperature", "TEXT", false, 0));
+        _columnsWeather.put("imgUrl", new TableInfo.Column("imgUrl", "TEXT", false, 0));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysWeather = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesWeather = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoWeather = new TableInfo("Weather", _columnsWeather, _foreignKeysWeather, _indicesWeather);
+        final TableInfo _existingWeather = TableInfo.read(_db, "Weather");
+        if (! _infoWeather.equals(_existingWeather)) {
+          throw new IllegalStateException("Migration didn't properly handle Weather(restaurant.sa.com.sarestaurant.model.WeatherModel).\n"
+                  + " Expected:\n" + _infoWeather + "\n"
+                  + " Found:\n" + _existingWeather);
+        }
       }
-    }, "e6b6723699ae5ae975b8ee61db111ee2", "8b4ee35e1ce7f5ded6ff213187df618d");
+    }, "c3b23252d786038b2db9480c4b893af0", "02894fa736640d690f634dede573f9e6");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -152,7 +174,7 @@ public class UserDatabase_Impl extends UserDatabase {
 
   @Override
   protected InvalidationTracker createInvalidationTracker() {
-    return new InvalidationTracker(this, "User","FavoriteRestaurant","Result");
+    return new InvalidationTracker(this, "User","FavoriteRestaurant","Result","Weather");
   }
 
   @Override
@@ -164,6 +186,7 @@ public class UserDatabase_Impl extends UserDatabase {
       _db.execSQL("DELETE FROM `User`");
       _db.execSQL("DELETE FROM `FavoriteRestaurant`");
       _db.execSQL("DELETE FROM `Result`");
+      _db.execSQL("DELETE FROM `Weather`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -212,6 +235,20 @@ public class UserDatabase_Impl extends UserDatabase {
           _resultDao = new ResultDao_Impl(this);
         }
         return _resultDao;
+      }
+    }
+  }
+
+  @Override
+  public WeatherDao weatherDao() {
+    if (_weatherDao != null) {
+      return _weatherDao;
+    } else {
+      synchronized(this) {
+        if(_weatherDao == null) {
+          _weatherDao = new WeatherDao_Impl(this);
+        }
+        return _weatherDao;
       }
     }
   }

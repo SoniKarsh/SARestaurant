@@ -8,7 +8,7 @@ import restaurant.sa.com.sarestaurant.model.UserModel
 class SignInPresenterImp: SignInPresenter {
 
     override fun storeInSharedPreferences(userName: String, emailId: String, mobileNo: String) {
-        SARestaurantApp.sharedPreference!!.edit()
+        SARestaurantApp.instance!!.sharedPreference!!.edit()
                 .putString("username", userName)
                 .putString("emailid", emailId)
                 .putString("mobileno", mobileNo)

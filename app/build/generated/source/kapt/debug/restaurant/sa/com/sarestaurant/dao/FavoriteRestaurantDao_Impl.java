@@ -33,7 +33,7 @@ public class FavoriteRestaurantDao_Impl implements FavoriteRestaurantDao {
     this.__insertionAdapterOfFavoriteRestaurantModel = new EntityInsertionAdapter<FavoriteRestaurantModel>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `FavoriteRestaurant`(`_id`,`adapter_position`,`restaurant_name`,`restaurant_address`,`restaurant_img_path`,`is_favorite`,`latitude`,`longitude`) VALUES (?,?,?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `FavoriteRestaurant`(`_id`,`adapter_position`,`restaurant_name`,`restaurant_address`,`restaurant_img_path`,`is_favorite`,`latitude`,`longitude`,`rating`,`restIsClosed`,`placeId`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -75,13 +75,28 @@ public class FavoriteRestaurantDao_Impl implements FavoriteRestaurantDao {
           stmt.bindNull(8);
         } else {
           stmt.bindDouble(8, value.getLongitude());
+        }
+        if (value.getRating() == null) {
+          stmt.bindNull(9);
+        } else {
+          stmt.bindDouble(9, value.getRating());
+        }
+        if (value.getRest_isClosed() == null) {
+          stmt.bindNull(10);
+        } else {
+          stmt.bindString(10, value.getRest_isClosed());
+        }
+        if (value.getPlaceId() == null) {
+          stmt.bindNull(11);
+        } else {
+          stmt.bindString(11, value.getPlaceId());
         }
       }
     };
     this.__updateAdapterOfFavoriteRestaurantModel = new EntityDeletionOrUpdateAdapter<FavoriteRestaurantModel>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `FavoriteRestaurant` SET `_id` = ?,`adapter_position` = ?,`restaurant_name` = ?,`restaurant_address` = ?,`restaurant_img_path` = ?,`is_favorite` = ?,`latitude` = ?,`longitude` = ? WHERE `_id` = ?";
+        return "UPDATE OR ABORT `FavoriteRestaurant` SET `_id` = ?,`adapter_position` = ?,`restaurant_name` = ?,`restaurant_address` = ?,`restaurant_img_path` = ?,`is_favorite` = ?,`latitude` = ?,`longitude` = ?,`rating` = ?,`restIsClosed` = ?,`placeId` = ? WHERE `_id` = ?";
       }
 
       @Override
@@ -124,10 +139,25 @@ public class FavoriteRestaurantDao_Impl implements FavoriteRestaurantDao {
         } else {
           stmt.bindDouble(8, value.getLongitude());
         }
-        if (value.get_id() == null) {
+        if (value.getRating() == null) {
           stmt.bindNull(9);
         } else {
-          stmt.bindLong(9, value.get_id());
+          stmt.bindDouble(9, value.getRating());
+        }
+        if (value.getRest_isClosed() == null) {
+          stmt.bindNull(10);
+        } else {
+          stmt.bindString(10, value.getRest_isClosed());
+        }
+        if (value.getPlaceId() == null) {
+          stmt.bindNull(11);
+        } else {
+          stmt.bindString(11, value.getPlaceId());
+        }
+        if (value.get_id() == null) {
+          stmt.bindNull(12);
+        } else {
+          stmt.bindLong(12, value.get_id());
         }
       }
     };
@@ -191,6 +221,9 @@ public class FavoriteRestaurantDao_Impl implements FavoriteRestaurantDao {
       final int _cursorIndexOfIsFavorite = _cursor.getColumnIndexOrThrow("is_favorite");
       final int _cursorIndexOfLatitude = _cursor.getColumnIndexOrThrow("latitude");
       final int _cursorIndexOfLongitude = _cursor.getColumnIndexOrThrow("longitude");
+      final int _cursorIndexOfRating = _cursor.getColumnIndexOrThrow("rating");
+      final int _cursorIndexOfRestIsClosed = _cursor.getColumnIndexOrThrow("restIsClosed");
+      final int _cursorIndexOfPlaceId = _cursor.getColumnIndexOrThrow("placeId");
       final List<FavoriteRestaurantModel> _result = new ArrayList<FavoriteRestaurantModel>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final FavoriteRestaurantModel _item;
@@ -237,6 +270,19 @@ public class FavoriteRestaurantDao_Impl implements FavoriteRestaurantDao {
           _tmpLongitude = _cursor.getDouble(_cursorIndexOfLongitude);
         }
         _item.setLongitude(_tmpLongitude);
+        final Double _tmpRating;
+        if (_cursor.isNull(_cursorIndexOfRating)) {
+          _tmpRating = null;
+        } else {
+          _tmpRating = _cursor.getDouble(_cursorIndexOfRating);
+        }
+        _item.setRating(_tmpRating);
+        final String _tmpRest_isClosed;
+        _tmpRest_isClosed = _cursor.getString(_cursorIndexOfRestIsClosed);
+        _item.setRest_isClosed(_tmpRest_isClosed);
+        final String _tmpPlaceId;
+        _tmpPlaceId = _cursor.getString(_cursorIndexOfPlaceId);
+        _item.setPlaceId(_tmpPlaceId);
         _result.add(_item);
       }
       return _result;

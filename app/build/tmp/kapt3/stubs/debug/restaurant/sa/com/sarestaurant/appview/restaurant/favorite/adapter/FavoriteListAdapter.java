@@ -2,7 +2,7 @@ package restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000Z\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0002\b\u0017\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\b\n\u0000\n\u0002\u0010\t\n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\u0018\u00002\f\u0012\b\u0012\u00060\u0002R\u00020\u00000\u0001:\u00017B\u001b\u0012\f\u0010\u0003\u001a\b\u0012\u0004\u0012\u00020\u00050\u0004\u0012\u0006\u0010\u0006\u001a\u00020\u0007\u00a2\u0006\u0002\u0010\bJ\b\u0010\'\u001a\u00020(H\u0016J\u0010\u0010)\u001a\u00020*2\u0006\u0010+\u001a\u00020(H\u0016J\u0010\u0010,\u001a\u00020(2\u0006\u0010+\u001a\u00020(H\u0016J\u001c\u0010-\u001a\u00020.2\n\u0010/\u001a\u00060\u0002R\u00020\u00002\u0006\u0010+\u001a\u00020(H\u0016J\u001c\u00100\u001a\u00060\u0002R\u00020\u00002\u0006\u00101\u001a\u0002022\u0006\u00103\u001a\u00020(H\u0016J \u00104\u001a\u0012\u0012\u0004\u0012\u00020\u000505j\b\u0012\u0004\u0012\u00020\u0005`62\u0006\u0010+\u001a\u00020(H\u0002R\u0014\u0010\t\u001a\u00020\nX\u0086D\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000b\u0010\fR\u001a\u0010\u0006\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\r\u0010\u000e\"\u0004\b\u000f\u0010\u0010R\u001a\u0010\u0011\u001a\u00020\u0005X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0012\u0010\u0013\"\u0004\b\u0014\u0010\u0015R\u001a\u0010\u0016\u001a\u00020\nX\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0017\u0010\f\"\u0004\b\u0018\u0010\u0019R \u0010\u0003\u001a\b\u0012\u0004\u0012\u00020\u00050\u0004X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001a\u0010\u001b\"\u0004\b\u001c\u0010\u001dR\u001a\u0010\u001e\u001a\u00020\nX\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001f\u0010\f\"\u0004\b \u0010\u0019R\u001a\u0010!\u001a\u00020\"X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b#\u0010$\"\u0004\b%\u0010&\u00a8\u00068"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter;", "Landroid/support/v7/widget/RecyclerView$Adapter;", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter$CustomViewHolder;", "items", "", "Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;", "context", "Landroid/content/Context;", "(Ljava/util/List;Landroid/content/Context;)V", "TAG", "", "getTAG", "()Ljava/lang/String;", "getContext", "()Landroid/content/Context;", "setContext", "(Landroid/content/Context;)V", "favoriteRestaurantModel", "getFavoriteRestaurantModel", "()Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;", "setFavoriteRestaurantModel", "(Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;)V", "imgUrl", "getImgUrl", "setImgUrl", "(Ljava/lang/String;)V", "getItems", "()Ljava/util/List;", "setItems", "(Ljava/util/List;)V", "photoReference", "getPhotoReference", "setPhotoReference", "shareModel", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;", "getShareModel", "()Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;", "setShareModel", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;)V", "getItemCount", "", "getItemId", "", "position", "getItemViewType", "onBindViewHolder", "", "holder", "onCreateViewHolder", "parent", "Landroid/view/ViewGroup;", "viewType", "removeItem", "Ljava/util/ArrayList;", "Lkotlin/collections/ArrayList;", "CustomViewHolder", "app_debug"})
+@kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000r\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0002\b\t\n\u0002\u0018\u0002\n\u0002\b\b\n\u0002\u0018\u0002\n\u0002\b\u000e\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\b\n\u0000\n\u0002\u0010\t\n\u0002\b\u0003\n\u0002\u0010\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0004\u0018\u00002\f\u0012\b\u0012\u00060\u0002R\u00020\u00000\u0001:\u0001IB\u001d\u0012\u000e\u0010\u0003\u001a\n\u0012\u0004\u0012\u00020\u0005\u0018\u00010\u0004\u0012\u0006\u0010\u0006\u001a\u00020\u0007\u00a2\u0006\u0002\u0010\bJ\b\u00107\u001a\u000208H\u0016J\u0010\u00109\u001a\u00020:2\u0006\u0010;\u001a\u000208H\u0016J\u0010\u0010<\u001a\u0002082\u0006\u0010;\u001a\u000208H\u0016J\u001c\u0010=\u001a\u00020>2\n\u0010?\u001a\u00060\u0002R\u00020\u00002\u0006\u0010;\u001a\u000208H\u0016J\u001c\u0010@\u001a\u00060\u0002R\u00020\u00002\u0006\u0010A\u001a\u00020B2\u0006\u0010C\u001a\u000208H\u0016J \u0010D\u001a\u0012\u0012\u0004\u0012\u00020\u00050Ej\b\u0012\u0004\u0012\u00020\u0005`F2\u0006\u0010;\u001a\u000208H\u0002J\u000e\u0010G\u001a\u00020>2\u0006\u0010H\u001a\u00020\nR\u0014\u0010\t\u001a\u00020\nX\u0086D\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000b\u0010\fR\u0014\u0010\r\u001a\u00020\nX\u0086D\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000e\u0010\fR\u001a\u0010\u0006\u001a\u00020\u0007X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u000f\u0010\u0010\"\u0004\b\u0011\u0010\u0012R\u0011\u0010\u0013\u001a\u00020\u0014\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0015\u0010\u0016R\u001a\u0010\u0017\u001a\u00020\u0005X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0018\u0010\u0019\"\u0004\b\u001a\u0010\u001bR\u000e\u0010\u001c\u001a\u00020\u001dX\u0082.\u00a2\u0006\u0002\n\u0000R\u001a\u0010\u001e\u001a\u00020\nX\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001f\u0010\f\"\u0004\b \u0010!R\"\u0010\u0003\u001a\n\u0012\u0004\u0012\u00020\u0005\u0018\u00010\u0004X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\"\u0010#\"\u0004\b$\u0010%R\u0014\u0010&\u001a\u00020\nX\u0086D\u00a2\u0006\b\n\u0000\u001a\u0004\b\'\u0010\fR\u001a\u0010(\u001a\u00020\nX\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b)\u0010\f\"\u0004\b*\u0010!R\u001a\u0010+\u001a\u00020,X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b-\u0010.\"\u0004\b/\u00100R\u001a\u00101\u001a\u000202X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b3\u00104\"\u0004\b5\u00106\u00a8\u0006J"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter;", "Landroid/support/v7/widget/RecyclerView$Adapter;", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter$CustomViewHolder;", "items", "", "Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;", "context", "Landroid/content/Context;", "(Ljava/util/List;Landroid/content/Context;)V", "BASE_URL", "", "getBASE_URL", "()Ljava/lang/String;", "TAG", "getTAG", "getContext", "()Landroid/content/Context;", "setContext", "(Landroid/content/Context;)V", "dialog", "Landroid/app/Dialog;", "getDialog", "()Landroid/app/Dialog;", "favoriteRestaurantModel", "getFavoriteRestaurantModel", "()Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;", "setFavoriteRestaurantModel", "(Lrestaurant/sa/com/sarestaurant/model/FavoriteRestaurantModel;)V", "homeActivity", "Lrestaurant/sa/com/sarestaurant/HomeActivity;", "imgUrl", "getImgUrl", "setImgUrl", "(Ljava/lang/String;)V", "getItems", "()Ljava/util/List;", "setItems", "(Ljava/util/List;)V", "noImage", "getNoImage", "photoReference", "getPhotoReference", "setPhotoReference", "restaurantDetailModel", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/RestaurantDetailModel;", "getRestaurantDetailModel", "()Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/RestaurantDetailModel;", "setRestaurantDetailModel", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/RestaurantDetailModel;)V", "shareModel", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;", "getShareModel", "()Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;", "setShareModel", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/ShareModel;)V", "getItemCount", "", "getItemId", "", "position", "getItemViewType", "onBindViewHolder", "", "holder", "onCreateViewHolder", "parent", "Landroid/view/ViewGroup;", "viewType", "removeItem", "Ljava/util/ArrayList;", "Lkotlin/collections/ArrayList;", "retrofitCall", "placeId", "CustomViewHolder", "app_debug"})
 public final class FavoriteListAdapter extends android.support.v7.widget.RecyclerView.Adapter<restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter.FavoriteListAdapter.CustomViewHolder> {
     @org.jetbrains.annotations.NotNull()
     private final java.lang.String TAG = "FavoriteListAdapter";
@@ -15,6 +15,15 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
     @org.jetbrains.annotations.NotNull()
     public restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel shareModel;
     @org.jetbrains.annotations.NotNull()
+    private final android.app.Dialog dialog = null;
+    @org.jetbrains.annotations.NotNull()
+    public restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel restaurantDetailModel;
+    private restaurant.sa.com.sarestaurant.HomeActivity homeActivity;
+    @org.jetbrains.annotations.NotNull()
+    private final java.lang.String BASE_URL = "https://maps.googleapis.com";
+    @org.jetbrains.annotations.NotNull()
+    private final java.lang.String noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png";
+    @org.jetbrains.annotations.Nullable()
     private java.util.List<restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel> items;
     @org.jetbrains.annotations.NotNull()
     private android.content.Context context;
@@ -61,6 +70,30 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
     }
     
     @org.jetbrains.annotations.NotNull()
+    public final android.app.Dialog getDialog() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel getRestaurantDetailModel() {
+        return null;
+    }
+    
+    public final void setRestaurantDetailModel(@org.jetbrains.annotations.NotNull()
+    restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel p0) {
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getBASE_URL() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getNoImage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
     @java.lang.Override()
     public restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter.FavoriteListAdapter.CustomViewHolder onCreateViewHolder(@org.jetbrains.annotations.NotNull()
     android.view.ViewGroup parent, int viewType) {
@@ -77,6 +110,10 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
     restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter.FavoriteListAdapter.CustomViewHolder holder, int position) {
     }
     
+    public final void retrofitCall(@org.jetbrains.annotations.NotNull()
+    java.lang.String placeId) {
+    }
+    
     @java.lang.Override()
     public int getItemViewType(int position) {
         return 0;
@@ -91,12 +128,12 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
         return null;
     }
     
-    @org.jetbrains.annotations.NotNull()
+    @org.jetbrains.annotations.Nullable()
     public final java.util.List<restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel> getItems() {
         return null;
     }
     
-    public final void setItems(@org.jetbrains.annotations.NotNull()
+    public final void setItems(@org.jetbrains.annotations.Nullable()
     java.util.List<restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel> p0) {
     }
     
@@ -109,14 +146,15 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
     android.content.Context p0) {
     }
     
-    public FavoriteListAdapter(@org.jetbrains.annotations.NotNull()
+    public FavoriteListAdapter(@org.jetbrains.annotations.Nullable()
     java.util.List<restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel> items, @org.jetbrains.annotations.NotNull()
     android.content.Context context) {
         super();
     }
     
-    @kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u00002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\u000e\n\u0002\b\u000b\b\u0086\u0004\u0018\u00002\u00020\u0001B\r\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\u0002\u0010\u0004R\"\u0010\u0005\u001a\n \u0007*\u0004\u0018\u00010\u00060\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\b\u0010\t\"\u0004\b\n\u0010\u000bR\"\u0010\f\u001a\n \u0007*\u0004\u0018\u00010\r0\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u000e\u0010\u000f\"\u0004\b\u0010\u0010\u0011R\"\u0010\u0012\u001a\n \u0007*\u0004\u0018\u00010\u00130\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0014\u0010\u0015\"\u0004\b\u0016\u0010\u0017R\u001a\u0010\u0018\u001a\u00020\u0019X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001a\u0010\u001b\"\u0004\b\u001c\u0010\u001dR\"\u0010\u001e\u001a\n \u0007*\u0004\u0018\u00010\r0\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001f\u0010\u000f\"\u0004\b \u0010\u0011R\"\u0010!\u001a\n \u0007*\u0004\u0018\u00010\u00130\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\"\u0010\u0015\"\u0004\b#\u0010\u0017\u00a8\u0006$"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter$CustomViewHolder;", "Landroid/support/v7/widget/RecyclerView$ViewHolder;", "view", "Landroid/view/View;", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter;Landroid/view/View;)V", "favoriteButton", "Landroid/widget/ToggleButton;", "kotlin.jvm.PlatformType", "getFavoriteButton", "()Landroid/widget/ToggleButton;", "setFavoriteButton", "(Landroid/widget/ToggleButton;)V", "restaurantAddress", "Landroid/widget/TextView;", "getRestaurantAddress", "()Landroid/widget/TextView;", "setRestaurantAddress", "(Landroid/widget/TextView;)V", "restaurantImage", "Landroid/widget/ImageView;", "getRestaurantImage", "()Landroid/widget/ImageView;", "setRestaurantImage", "(Landroid/widget/ImageView;)V", "restaurantImgUrl", "", "getRestaurantImgUrl", "()Ljava/lang/String;", "setRestaurantImgUrl", "(Ljava/lang/String;)V", "restaurantName", "getRestaurantName", "setRestaurantName", "sharePost", "getSharePost", "setSharePost", "app_debug"})
+    @kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000:\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\u000e\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u000e\b\u0086\u0004\u0018\u00002\u00020\u0001B\r\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\u0002\u0010\u0004R\"\u0010\u0005\u001a\n \u0007*\u0004\u0018\u00010\u00060\u0006X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\b\u0010\t\"\u0004\b\n\u0010\u000bR\"\u0010\f\u001a\n \u0007*\u0004\u0018\u00010\r0\rX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u000e\u0010\u000f\"\u0004\b\u0010\u0010\u0011R\u001a\u0010\u0012\u001a\u00020\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0014\u0010\u0015\"\u0004\b\u0016\u0010\u0017R\"\u0010\u0018\u001a\n \u0007*\u0004\u0018\u00010\u00190\u0019X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001a\u0010\u001b\"\u0004\b\u001c\u0010\u001dR\"\u0010\u001e\u001a\n \u0007*\u0004\u0018\u00010\u001f0\u001fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b \u0010!\"\u0004\b\"\u0010#R\u001a\u0010$\u001a\u00020\u0013X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b%\u0010\u0015\"\u0004\b&\u0010\u0017R\"\u0010\'\u001a\n \u0007*\u0004\u0018\u00010\u00190\u0019X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b(\u0010\u001b\"\u0004\b)\u0010\u001dR\"\u0010*\u001a\n \u0007*\u0004\u0018\u00010\u001f0\u001fX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b+\u0010!\"\u0004\b,\u0010#\u00a8\u0006-"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter$CustomViewHolder;", "Landroid/support/v7/widget/RecyclerView$ViewHolder;", "view", "Landroid/view/View;", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/favorite/adapter/FavoriteListAdapter;Landroid/view/View;)V", "favoriteButton", "Landroid/widget/ToggleButton;", "kotlin.jvm.PlatformType", "getFavoriteButton", "()Landroid/widget/ToggleButton;", "setFavoriteButton", "(Landroid/widget/ToggleButton;)V", "holderView", "Landroid/support/v7/widget/CardView;", "getHolderView", "()Landroid/support/v7/widget/CardView;", "setHolderView", "(Landroid/support/v7/widget/CardView;)V", "placeId", "", "getPlaceId", "()Ljava/lang/String;", "setPlaceId", "(Ljava/lang/String;)V", "restaurantAddress", "Landroid/widget/TextView;", "getRestaurantAddress", "()Landroid/widget/TextView;", "setRestaurantAddress", "(Landroid/widget/TextView;)V", "restaurantImage", "Landroid/widget/ImageView;", "getRestaurantImage", "()Landroid/widget/ImageView;", "setRestaurantImage", "(Landroid/widget/ImageView;)V", "restaurantImgUrl", "getRestaurantImgUrl", "setRestaurantImgUrl", "restaurantName", "getRestaurantName", "setRestaurantName", "sharePost", "getSharePost", "setSharePost", "app_debug"})
     public final class CustomViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+        private android.support.v7.widget.CardView holderView;
         private android.widget.TextView restaurantName;
         private android.widget.TextView restaurantAddress;
         private android.widget.ToggleButton favoriteButton;
@@ -124,6 +162,15 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
         private android.widget.ImageView sharePost;
         @org.jetbrains.annotations.NotNull()
         private java.lang.String restaurantImgUrl;
+        @org.jetbrains.annotations.NotNull()
+        private java.lang.String placeId;
+        
+        public final android.support.v7.widget.CardView getHolderView() {
+            return null;
+        }
+        
+        public final void setHolderView(android.support.v7.widget.CardView p0) {
+        }
         
         public final android.widget.TextView getRestaurantName() {
             return null;
@@ -166,6 +213,15 @@ public final class FavoriteListAdapter extends android.support.v7.widget.Recycle
         }
         
         public final void setRestaurantImgUrl(@org.jetbrains.annotations.NotNull()
+        java.lang.String p0) {
+        }
+        
+        @org.jetbrains.annotations.NotNull()
+        public final java.lang.String getPlaceId() {
+            return null;
+        }
+        
+        public final void setPlaceId(@org.jetbrains.annotations.NotNull()
         java.lang.String p0) {
         }
         

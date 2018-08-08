@@ -32,7 +32,6 @@ class ApiCallJobService: JobService(), HomeCallback {
     private val TAG = "ApiCallJobService"
     private var jobCancelled = false
     lateinit var builder: NotificationCompat.Builder
-    lateinit var builderLess: Notification.Builder
     private val channelId= "restaurant.sa.com.sarestaurant.appview.alarm"
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private var weatherFragment: WeatherFragment? = null
@@ -49,7 +48,8 @@ class ApiCallJobService: JobService(), HomeCallback {
     }
 
     override fun sendWeatherData(weatherData: WeatherData) {
-        Log.d(TAG, "sendWeatherData: $weatherData");
+        Log.d(TAG, "sendWeatherData: $weatherData")
+
         updateNotification()
     }
 
@@ -61,15 +61,14 @@ class ApiCallJobService: JobService(), HomeCallback {
         Thread(Runnable {
             weatherFragment = WeatherFragment()
             mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-            var getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
+            val getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
             getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
                 override fun getDeviceLastLocation(location: Location) {
-                    Log.d(TAG, "getDeviceLastLocation: $location")
                     weatherFragment!!.retrofitCall(location, this@ApiCallJobService, false)
                 }
 
                 override fun onError(error: String) {
-                    Toast.makeText(this@ApiCallJobService, error, Toast.LENGTH_LONG).show()
+                    Log.d(TAG, "error: $error")
                 }
 
             })
@@ -82,7 +81,6 @@ class ApiCallJobService: JobService(), HomeCallback {
     }
 
     override fun onStopJob(params: JobParameters): Boolean {
-        Log.d(TAG, "Job cancelled before completion")
         jobCancelled = true
         return true
     }
@@ -90,7 +88,7 @@ class ApiCallJobService: JobService(), HomeCallback {
     fun shownotification(){
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         var notificationIntent = Intent(this, HomeActivity::class.java)
-        var pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
+
         notificationLayout  = RemoteViews(this.packageName, R.layout.status_bar)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
@@ -104,8 +102,8 @@ class ApiCallJobService: JobService(), HomeCallback {
             builder = NotificationCompat.Builder(this, channelId)
             val intent = Intent(this, HomeActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            builder.setContentTitle("this")  // required
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("Job Scheduled")  // required
                     .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
                     .setContentText(this.getString(R.string.app_name))  // required
                     .setDefaults(Notification.DEFAULT_ALL)
@@ -118,26 +116,16 @@ class ApiCallJobService: JobService(), HomeCallback {
             builder = NotificationCompat.Builder(this)
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            builder.setContentTitle("This")                           // required
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentTitle("Job Scheduled")                           // required
                     .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
                     .setContentText(this.getString(R.string.app_name))  // required
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
                     .setTicker("This")
-                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
-                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)).priority = Notification.PRIORITY_HIGH
         }
-
-//        notification = NotificationCompat.Builder(this, channelId)
-//                .setContentTitle("Example Service")
-//                .setContentText("Working")
-//                .setOngoing(true)
-//                .setSmallIcon(R.drawable.ic_launcher_background)
-//                .setCustomContentView(notificationLayout)
-//                .setContentIntent(pendingIntent)
-//                .build()
 
         notification = builder.build()
         startForeground(1, notification)

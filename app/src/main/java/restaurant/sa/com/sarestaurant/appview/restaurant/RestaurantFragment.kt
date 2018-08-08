@@ -4,6 +4,7 @@ import android.content.Context
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -36,6 +37,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.net.NetworkInfo
+import android.net.ConnectivityManager
+
+
 
 /**
  *
@@ -80,7 +85,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         homeActivity = context as HomeActivity
-        SARestaurantApp.isRestVisible = true
+        SARestaurantApp.instance!!.isRestVisible = true
         restContext = context
         context.supportActionBar?.show()
         context.supportActionBar?.title = TAG
@@ -193,12 +198,18 @@ class RestaurantFragment: Fragment(), RestaurantView {
     // Remove progress bar on onStop of fragment lifecycler to avoid null object reference error
     override fun onStop() {
         super.onStop()
-        when {
-            progressBar.visibility == View.VISIBLE -> progressBar.visibility = View.GONE
-            progressBarRest.visibility == View.VISIBLE -> progressBarRest.visibility = View.GONE
-            simpleSwipeRefreshLayout.visibility == View.VISIBLE -> simpleSwipeRefreshLayout.visibility = View.GONE
-            handler!=null -> handler!!.removeCallbacksAndMessages(null)
+
+        if(handler!=null) {
+            handler!!.removeCallbacks(runnable)
         }
+
+//        when {
+////            progressBar.visibility == View.VISIBLE -> progressBar.visibility = View.GONE
+////            progressBarRest.visibility == View.VISIBLE -> progressBarRest.visibility = View.GONE
+////            simpleSwipeRefreshLayout.visibility == View.VISIBLE -> simpleSwipeRefreshLayout.visibility = View.GONE
+//            handler!=null -> handler!!.removeCallbacksAndMessages(null)
+//
+//        }
     }
 
     // Fetch data from db for pagination
@@ -214,19 +225,22 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 progressBarRest.visibility = View.VISIBLE // Changed
             }
 
-            Handler().postDelayed( {
-                // Add all to adapter
-                adapter!!.items.addAll(listOfModel)
-                x+=5
-                adapter!!.notifyDataSetChanged()
-                if(progressBarRest!= null && progressBarRest.visibility == View.VISIBLE){
-                    progressBarRest.visibility = View.GONE // Changed
-                }
-                isLoading = false
-            }, 3000)
+            Handler().postDelayed( runnable, 3000)
             stop += 5
         }
     }
+
+    private val runnable = Runnable {
+            // Add all to adapter
+            adapter!!.items.addAll(listOfModel)
+            x+=5
+            adapter!!.notifyDataSetChanged()
+            if(progressBarRest!= null && progressBarRest.visibility == View.VISIBLE){
+                progressBarRest.visibility = View.GONE // Changed
+            }
+            isLoading = false
+    }
+
 
     // API call
     fun retrofitCall(location: Location){
@@ -246,57 +260,77 @@ class RestaurantFragment: Fragment(), RestaurantView {
                 LogUtils.e(t.toString())
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthLong(context!!, error)
+                SARestaurantApp.instance!!.isClickableForMap = false
             }
 
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
+                if(isVisible && isAdded) {
+                    if (responseModelClass!!.body() != null && isNetworkAvailable()) {
+                        // Get list of locations from response
+                        listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
 
-                // Get list of locations from response
-                listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass!!.body()!!)
+                        //  Get list of titles, images, rating, address from response
+                        listOfTitleImgModel = restaurantPresenterImp.getListOfTitleImg(responseModelClass.body()!!)
 
-                //  Get list of titles, images, rating, address from response
-                listOfTitleImgModel = restaurantPresenterImp.getListOfTitleImg(responseModelClass.body()!!)
+                        if (progressBar != null && progressBar.visibility == View.VISIBLE) {
+                            restaurantView!!.stopProgress()
+                        }
 
-                if(progressBar != null && progressBar.visibility == View.VISIBLE){
-                    restaurantView!!.stopProgress()
+                        // Send list of locations to listener
+                        locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
+
+                        // Send list of TitleImgModel to listener
+                        locationCommunication!!.sendNameImgFromRestaurant(listOfTitleImgModel)
+
+                        // Delete all previous data to avoid un-necessary data
+                        SARestaurantApp.database!!.resultDao().deleteAll()
+
+                        // Reset to 0
+                        x = 0
+                        stop = 0
+
+                        layout = LinearLayoutManageScroll(activity!!)
+
+                        for (i in responseModelClass.body()!!.results!!) {
+                            SARestaurantApp.database!!.resultDao().insertData(i)
+                            Log.d(TAG, "onResponseAfter Refresh: $i")
+                        }
+
+                        adapter = RestListAdapter(resultList, SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
+
+                        if (recyclerView != null) {
+                            recyclerView.layoutManager = layout
+                            recyclerView.adapter = adapter
+                        }
+                        // Return whole response from database
+                        listOfModel = SARestaurantApp.database!!.resultDao().getAll() as ArrayList<Result>
+                        totalListSize = listOfModel.size
+
+                        // isClickableForMap
+                        SARestaurantApp.instance!!.isClickableForMap = true
+
+                        fetchData()
+                    } else if (!isNetworkAvailable()) {
+                        Snackbar.make(homeActivity.constraintLayoutRest, "Check Your Network Connectivity :(", Snackbar.LENGTH_LONG)
+                                .setAction("OK", null).show()
+                    } else {
+                        Snackbar.make(homeActivity.constraintLayoutRest, "Data not Found :(", Snackbar.LENGTH_LONG)
+                                .setAction("OK", null).show()
+                    }
                 }
-
-                // Send list of locations to listener
-                locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
-
-                // Send list of TitleImgModel to listener
-                locationCommunication!!.sendNameImgFromRestaurant(listOfTitleImgModel)
-
-                // Delete all previous data to avoid un-necessary data
-                SARestaurantApp.database!!.resultDao().deleteAll()
-
-                // Reset to 0
-                x = 0
-                stop = 0
-
-                layout = LinearLayoutManageScroll(activity!!)
-
-                for (i in responseModelClass.body()!!.results!!) {
-                    SARestaurantApp.database!!.resultDao().insertData(i)
-                    Log.d(TAG, "onResponseAfter Refresh: $i")
-                }
-
-                adapter = RestListAdapter(resultList, SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
-
-                if(recyclerView != null){
-                    recyclerView.layoutManager = layout
-                    recyclerView.adapter = adapter
-                }
-                // Return whole response from database
-                listOfModel = SARestaurantApp.database!!.resultDao().getAll() as ArrayList<Result>
-                totalListSize = listOfModel.size
-                fetchData()
             }
         })
     }
 
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = homeActivity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
     // On Fragment Detach
     override fun onDetach() {
-        SARestaurantApp.isRestVisible = false
+        SARestaurantApp.instance!!.isRestVisible = false
         super.onDetach()
     }
 

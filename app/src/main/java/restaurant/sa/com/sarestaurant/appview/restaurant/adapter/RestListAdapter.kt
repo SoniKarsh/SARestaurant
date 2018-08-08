@@ -3,9 +3,9 @@ package restaurant.sa.com.sarestaurant.appview.restaurant.adapter
 import android.app.Dialog
 import android.support.v7.widget.RecyclerView
 import android.content.Context
-//import restaurant.sa.com.sarestaurant.model.models.Result
-import android.location.Location
 import android.os.Build
+import android.support.design.widget.Snackbar
+import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +14,17 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.restaurant_list_view.view.*
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
-import restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_restaurant.*
 import kotlinx.android.synthetic.main.fragment_restaurant_detail.*
 import restaurant.sa.com.sarestaurant.HomeActivity
-import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantDetailFragment
-import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.PhotosModel.ResponsePhotoModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.Result
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
-import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesClient
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesPhotoClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,12 +45,12 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     val TAG = "RestaurantListAdapter"
     lateinit var favoriteRestaurantModel: FavoriteRestaurantModel
     lateinit var shareModel: ShareModel
-    var detailFragment : RestaurantDetailFragment? = null
     var homeActivity: HomeActivity? = null
     var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var detailPresenter: DetailPresenter? = null
     lateinit var restaurantDetailModel: RestaurantDetailModel
     var isClickable: Boolean = true
+    private var mPager: ViewPager? = null
     val BASE_URL = "https://maps.googleapis.com"
     val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
     val dialog = Dialog(this.context)
@@ -70,8 +66,6 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
         favoriteRestaurantModel = FavoriteRestaurantModel()
         restaurantDetailModel = RestaurantDetailModel()
         shareModel = ShareModel()
-        detailFragment = RestaurantDetailFragment()
-        detailPresenter = detailFragment
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.restaurantImage.clipToOutline = true
         }
@@ -86,7 +80,6 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
         Picasso.get().load(holder.restaurantImgUrl)
                 .into(holder.restaurantImage)
         holder.placeId = items[holder.adapterPosition].placeId!!
-//        https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${resources.getString(R.string.google_maps_key)}
         Log.d(TAG, "onBindViewHolder: ${holder.adapterPosition}")
 
         for (i in favItems){
@@ -138,9 +131,9 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
                 }
 //            holder.placeId = items.results!![holder.adapterPosition].placeId
                 if(items[holder.adapterPosition].openingHours != null){
-                    restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
+                    restaurantDetailModel.rest_isClosed = "Is Restaurant Open? -> " + items[holder.adapterPosition].openingHours!!.openNow.toString()
                 }else{
-                    restaurantDetailModel.rest_isClosed = "No Data Available"
+                    restaurantDetailModel.rest_isClosed = "Is Restaurant Open? -> No Data Available"
                 }
                 Log.d(TAG, "onBindViewHolder: Clicked");
                 retrofitCall(holder.placeId)
@@ -178,6 +171,18 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
 
             favoriteRestaurantModel.latitude = items[holder.adapterPosition].geometry!!.location!!.lat
             favoriteRestaurantModel.longitude = items[holder.adapterPosition].geometry!!.location!!.lng
+            favoriteRestaurantModel.rating = items[holder.adapterPosition].rating
+            favoriteRestaurantModel.placeId = items[holder.adapterPosition].placeId
+            if(items[holder.adapterPosition].rating != null){
+                favoriteRestaurantModel.rating = items[holder.adapterPosition].rating!!
+            }else{
+                favoriteRestaurantModel.rating = 0.0
+            }
+            if(items[holder.adapterPosition].openingHours != null){
+                favoriteRestaurantModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
+            }else{
+                favoriteRestaurantModel.rest_isClosed = "No Data Available"
+            }
             favoriteRestaurantModel.isFavorite = isFavorite
 
             if(isFavorite){
@@ -187,57 +192,66 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
                 holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
                 removeItem(holder.adapterPosition)
             }
-
         }
     }
 
     fun retrofitCall(placeId: String){
+        var imgUrl: String
+        var imageArrayList = ArrayList<String>()
         val builder = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
         val retrofit: Retrofit = builder.build()
-
         val client: GooglePlacesPhotoClient = retrofit.create(GooglePlacesPhotoClient::class.java)
         homeActivity = context as HomeActivity
         val call = client.sendRequestForPlacesPhotos(placeId, homeActivity!!.resources.getString(R.string.google_maps_key))
         call.enqueue(object : Callback<ResponsePhotoModelClass> {
             override fun onFailure(call: Call<ResponsePhotoModelClass>?, t: Throwable?) {
-                Log.e(TAG, "onFailure: $t");
+                Log.e(TAG, "onFailure: $t")
             }
 
             override fun onResponse(call: Call<ResponsePhotoModelClass>?, responseModelClass: Response<ResponsePhotoModelClass>?) {
-                Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!}")
-
-                if(responseModelClass.body()!!.result!!.photos != null){
-                    for(i in responseModelClass.body()!!.result!!.photos!!){
-                        restaurantDetailModel.imageUrlList!!.add(i.photoReference!!)
+                Log.d(TAG, "onResponse: ${responseModelClass!!}")
+                if(responseModelClass.body()!!.result != null){
+                    if(responseModelClass.body()!!.result!!.photos != null){
+                        for(i in responseModelClass.body()!!.result!!.photos!!){
+                            restaurantDetailModel.imageUrlList!!.add(i.photoReference!!)
+                        }
+                    }else{
+                        restaurantDetailModel.imageUrlList!!.add("")
                     }
+                    detailPresenter?.getRestaurantData(restaurantDetailModel)
+                    if(restaurantDetailModel.imageUrlList!![0] != ""){
+                        for(i in restaurantDetailModel.imageUrlList!!){
+                            imgUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$i&sensor=false&key=${context.resources.getString(R.string.google_maps_key)}"
+                            imageArrayList.add(imgUrl)
+                        }
+                    }else{
+                        imageArrayList.add(noImage)
+                    }
+                    mPager = dialog.findViewById(R.id.viewPager) as ViewPager
+                    mPager!!.setAdapter(ImageSlideAdapter(context, imageArrayList))
+                    dialog.restDetailAddress.text = restaurantDetailModel.rest_address
+                    dialog.ratingBar.rating = restaurantDetailModel.rating.toFloat()
+                    if(dialog.ratingBar.rating == 0.0.toFloat()){
+                        dialog.ratingBar.visibility = View.GONE
+                        dialog.noRatingTV.visibility = View.VISIBLE
+                        dialog.noRatingTV.text = context.getString(R.string.no_rate_available)
+                    }
+                    if(restaurantDetailModel.rest_isClosed == "true"){
+                        dialog.openingHours.text = context.getString(R.string.yes)
+                    }else if(restaurantDetailModel.rest_isClosed == "false"){
+                        dialog.openingHours.text = context.getString(R.string.no)
+                    }else{
+                        dialog.openingHours.text = context.getString(R.string.not_available)
+                    }
+                    dialog.restDetailName.text = restaurantDetailModel.rest_name
+                    dialog.show()
                 }else{
-                    restaurantDetailModel.imageUrlList!!.add("")
+                    Snackbar.make(homeActivity!!.constraintLayoutRest, "Data not Found :(", Snackbar.LENGTH_LONG)
+                    .setAction("OK", null).show()
                 }
-                detailPresenter?.getRestaurantData(restaurantDetailModel)
 
-                dialog.restDetailAddress.text = restaurantDetailModel.rest_address
-                dialog.ratingBar.rating = restaurantDetailModel.rating.toFloat()
-                if(dialog.ratingBar.rating == 0.0.toFloat()){
-                    dialog.ratingBar.visibility = View.GONE
-                    dialog.noRatingTV.visibility = View.VISIBLE
-                    dialog.noRatingTV.text = context.getString(R.string.no_rate_available)
-                }
-                if(restaurantDetailModel.rest_isClosed == "true"){
-                    dialog.openingHours.text = context.getString(R.string.yes)
-                }else if(restaurantDetailModel.rest_isClosed == "false"){
-                    dialog.openingHours.text = context.getString(R.string.no)
-                }else{
-                    dialog.openingHours.text = context.getString(R.string.not_available)
-                }
-                dialog.restDetailName.text = restaurantDetailModel.rest_name
-                dialog.show()
-//                homeActivity!!.supportFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.fragmentHolder, detailFragment, FRAGMENT_DETAIL_REST)
-//                        .addToBackStack("RestDetail")
-//                        .commit()
             }
         })
     }

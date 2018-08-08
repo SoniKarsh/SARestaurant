@@ -16,7 +16,7 @@ import restaurant.sa.com.sarestaurant.appview.signin.SignInFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity";
+    private val TAG = "MainActivity"
     private var name: String? = null
     private var password: String? = null
     private val FRAGMENT_TAG = "SignInFragment"
@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if(savedInstanceState == null){
-            name = SARestaurantApp.sharedPreference!!.getString("username", "")
-            password = SARestaurantApp.sharedPreference!!.getString("password", "")
+            name = SARestaurantApp.instance!!.sharedPreference!!.getString("username", "")
+            password = SARestaurantApp.instance!!.sharedPreference!!.getString("password", "")
             if(name != ""){
-                Log.d(TAG, "$name: $password");
+                Log.d(TAG, "$name: $password")
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)

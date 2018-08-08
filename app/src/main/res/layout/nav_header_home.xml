@@ -14,17 +14,21 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="115dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/nav_img"
-            android:layout_width="226dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="@dimen/_32sdp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginTop="26dp"
+            android:contentDescription="@string/navigation_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/nav_tv"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_map" />
@@ -33,27 +37,41 @@
             android:id="@+id/nav_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/_36sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/nav_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Temperature" />
 
+        <TextView
+            android:id="@+id/navUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toTopOf="@+id/navEmailId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_img"
+            tools:text="@string/nav_header_title" />
+
+        <TextView
+            android:id="@+id/navEmailId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/nav_header_subtitle" />
+
     </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/navUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        tools:text="@string/nav_header_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <TextView
-        android:id="@+id/navEmailId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@string/nav_header_subtitle" />
 
 </LinearLayout>
