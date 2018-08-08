@@ -26,8 +26,6 @@ import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import restaurant.sa.com.sarestaurant.MainActivity
 import android.app.NotificationChannel
 
-
-
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class ApiCallJobService: JobService(), HomeCallback {
 
@@ -68,10 +66,6 @@ class ApiCallJobService: JobService(), HomeCallback {
                 override fun getDeviceLastLocation(location: Location) {
                     Log.d(TAG, "getDeviceLastLocation: $location")
                     weatherFragment!!.retrofitCall(location, this@ApiCallJobService, false)
-                }
-
-                override fun receiveLocationUpdatesFun() {
-
                 }
 
                 override fun onError(error: String) {

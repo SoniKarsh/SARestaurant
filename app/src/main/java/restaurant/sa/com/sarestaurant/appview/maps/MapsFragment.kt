@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.Task
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_info_window.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
+import kotlinx.android.synthetic.main.fragment_restaurant_detail.*
+import kotlinx.android.synthetic.main.fragment_restaurant_detail.view.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
@@ -73,17 +75,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         interface onReceiveLoc{
             fun successForLoc()
         }
-    }
-
-    override fun getInfoWindow(p0: Marker?): View {
-
-        inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
-        val v: View = inflater!!.inflate(R.layout.custom_info_window, null)
-        v.tvInfo.text = p0!!.title
-        Log.d(TAG, "getInfoWindow: ${p0.snippet}");
-        Picasso.get().load(p0.snippet)
-                .into(v.ivInfo, MarkerCallback(p0))
-        return v
     }
 
     override fun getInfoContents(p0: Marker?): View? {
@@ -251,7 +242,7 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
                         options.position(listOfLocations[i])
                             .icon(icon)
                             .title(listOfTitleImgModel[i].name)
-                                .snippet(listOfTitleImgModel[i].imgUrl)
+                            .snippet(i.toString())
                 googleMap.addMarker(options)
             }
 
@@ -262,50 +253,21 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     }
 
-    private fun getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions")
-        val permissions = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-
-        if(ContextCompat.checkSelfPermission(activity as Context,
-                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(activity as Context,
-                            Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true
-                initMap()
-            }else{
-                ActivityCompat.requestPermissions(activity as HomeActivity,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE)
-            }
-        }else{
-            ActivityCompat.requestPermissions(activity as HomeActivity,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE)
+    override fun getInfoWindow(p0: Marker?): View {
+        val i = p0!!.snippet.toInt()
+        inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+        val v: View = inflater!!.inflate(R.layout.custom_info_window, null)
+        v.tvInfo.text = p0.title
+        v.tvAddress.text = listOfTitleImgModel[i].address
+        v.ratingBar2.rating = listOfTitleImgModel[i].rating!!.toFloat()
+        if(v.ratingBar2.rating == 0.0.toFloat()){
+            v.ratingBar2.visibility = View.GONE
+            v.tvRatingBar2.visibility = View.VISIBLE
         }
-
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        Log.d(TAG, "onRequestPermissionsResult: onRequestPermissionsResult Called")
-        mLocationPermissionsGranted = false
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty()) {
-                    for (i in 0 until grantResults.size) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            mLocationPermissionsGranted = false
-                            Log.d(TAG, "onRequestPermissionsResult: permission failed")
-                            return
-                        }
-                    }
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted")
-                    mLocationPermissionsGranted = true
-                    //initialize our map
-                    initMap()
-                }
-            }
-        }
+        Log.d(TAG, "getInfoWindow: ${p0.snippet}")
+        Picasso.get().load(listOfTitleImgModel[i].imgUrl)
+                .into(v.ivInfo, MarkerCallback(p0))
+        return v
     }
 
     private fun moveCamera(latLng: LatLng, zoom: Float, title: String){

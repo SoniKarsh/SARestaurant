@@ -7,10 +7,11 @@
     <item android:drawable="@android:color/white"/>
 
     <!-- Your product logo - 144dp color version of your app icon -->
+    <!--android:src="@drawable/ic_sarestaurant"-->
     <item
         >
         <bitmap
-            android:src="@drawable/ic_sarestaurant"
+            android:src="@drawable/splash_logo"
             
             android:gravity="center"/>
 

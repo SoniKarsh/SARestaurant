@@ -1,12 +1,10 @@
 package restaurant.sa.com.sarestaurant.appview.restaurant
 
 import android.content.Context
-//import restaurant.sa.com.sarestaurant.model.models.Result
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,58 +29,53 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPresenterImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesClient
 import restaurant.sa.com.sarestaurant.appview.restaurant.view.RestaurantView
-import restaurant.sa.com.sarestaurant.utils.PermissionUtils
+import restaurant.sa.com.sarestaurant.utils.LogUtils
+import restaurant.sa.com.sarestaurant.utils.ToastUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ *
+ * @author Karsh Soni
+ *
+ * 7th August, 2018
+ *
+ */
+
 class RestaurantFragment: Fragment(), RestaurantView {
 
-    lateinit var homeActivity: HomeActivity
-    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
-    var granted = false
+    private lateinit var homeActivity: HomeActivity
     private val TAG = "RestaurantFragment"
-    var currentLocation: Location? = null
+    private var currentLocation: Location? = null
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    val result_type = "restaurant"
-    val BASE_URL = "https://maps.googleapis.com"
-    lateinit var restaurantPresenterImp: RestaurantPresenterImp
-    var locationCommunication: LocationCommunication? = null
-    var restaurantView: RestaurantView? = null
-    val radius = 2000
-    val sensor = true
-    var isScrolling : Boolean = false
-    var currentItems: Int = 0
-    var scrolledOutItems: Int = 0
-    var totalItems: Int = 0
-    lateinit var layout: LinearLayoutManageScroll
-    lateinit var listOfPlacesLocation: ArrayList<LatLng>
-    lateinit var listOfTitleImgModel: ArrayList<TitleImgModel>
-    var isRetrofitCall = false
-    lateinit var listOfModel :ArrayList<Result>
-    var adapter: RestListAdapter? = null
-    lateinit var resultList: ArrayList<Result>
-    var c = 0
-    var start = 6
-    var x = 0
-    var total = 0
-    var stop = 0
-    var isLoading = false
-    var totalListSize: Int = 0
-    var permissionUtils: PermissionUtils? = null
-    var linearLayoutManageScroll: LinearLayoutManageScroll? = null
-    var restContext: Context? = null
-    var handler: Handler? = null
-
-    override fun stopProgress() {
-        progressBar.visibility = View.GONE
-    }
-
-    override fun startProgress() {
-        Log.d(TAG, ": Progress Started");
-    }
+    private val resultType = "restaurant"
+    private val BASE_URL = "https://maps.googleapis.com"
+    private lateinit var restaurantPresenterImp: RestaurantPresenterImp
+    private var locationCommunication: LocationCommunication? = null
+    private var restaurantView: RestaurantView? = null
+    private val radius = 2000
+    private val sensor = true
+    private var isScrolling : Boolean = false
+    private var currentItems: Int = 0
+    private var scrolledOutItems: Int = 0
+    private var totalItems: Int = 0
+    private lateinit var layout: LinearLayoutManageScroll
+    private lateinit var listOfPlacesLocation: ArrayList<LatLng>
+    private lateinit var listOfTitleImgModel: ArrayList<TitleImgModel>
+    private var isRetrofitCall = false
+    private lateinit var listOfModel :ArrayList<Result>
+    private var adapter: RestListAdapter? = null
+    private lateinit var resultList: ArrayList<Result>
+    private var x = 0
+    private var stop = 0
+    private var isLoading = false
+    private var totalListSize: Int = 0
+    private var restContext: Context? = null
+    private var handler: Handler? = null
+    private val error = "Error Occurred"
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -95,79 +88,85 @@ class RestaurantFragment: Fragment(), RestaurantView {
         restaurantView = this
     }
 
-    override fun onDetach() {
-        SARestaurantApp.isRestVisible = false
-        super.onDetach()
-    }
-
+    // On Create View -> Inflate Fragment Layout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_restaurant, container, false)
     }
 
+    // UI access, Getting Location
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        permissionUtils = PermissionUtils(homeActivity)
-//        granted =
-        permissionUtils!!.checkPermissions(permissionList)
+
         restaurantPresenterImp = RestaurantPresenterImp()
         resultList = ArrayList()
-        if(!granted){
-            Log.d(TAG, ": Not Granted:(");
-//            permissionUtils.askForPermissions(permissionList)
-            granted = true
-//            permissionUtils.askForPermissions()
-        }
+
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(homeActivity)
-        var getLocation = GetLocationImp(granted, mFusedLocationProviderClient, homeActivity)
+        val getLocation = GetLocationImp(true, mFusedLocationProviderClient, homeActivity)
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
+
             override fun getDeviceLastLocation(location: Location) {
-                Log.d(TAG, "getDeviceLastLocation: $location Mil");
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthLong(context!!, "Got Location")
                 currentLocation = location
                 retrofitCall(location)
             }
 
-            override fun receiveLocationUpdatesFun() {
-
-            }
-
             override fun onError(error: String) {
-//                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthLong(context!!, error)
             }
-
         })
 
+        // Custom LinearLayoutManager for handling scrolling event
         layout = LinearLayoutManageScroll(activity!!)
-//        linearLayoutManageScroll = LinearLayoutManageScroll(activity!!)
+
+        // simpleSwipeRefreshLayout for Pull to Refresh
         simpleSwipeRefreshLayout.setOnRefreshListener {
+            // On pull disable scrolling
             layout.setScrollEnabled(false)
+
+            // isClickable for handling item click during pull to refresh
+            // To avoid crash and index out of bound or null object reference error
             if(adapter!=null){
                 adapter!!.isClickable = false
             }
+
+            // Handler for delayed UI work from worker thread.
             handler = Handler()
             handler!!.postDelayed({
+
+                // To avoid infinite progress bar
                 if(simpleSwipeRefreshLayout!=null){
-                    simpleSwipeRefreshLayout.setRefreshing(false);
+                    simpleSwipeRefreshLayout.isRefreshing = false
                 }
-                // Generate a random integer number
+
+                // On refresh clear current adapter
                 if(adapter!=null){
                     adapter!!.items.clear()
                 }
+                // API call
                 retrofitCall(currentLocation!!)
-                // set the number value in TextView
-                Log.d(TAG, "onActivityCreated: $currentLocation")
+
+                // Enabled scroll on result retrieval
                 layout.setScrollEnabled(true)
+
+                // Enabled Item Click on result retrieval
                 if(adapter!=null){
                     adapter!!.isClickable = true
                 }
+
             }, 3000)
         }
 
+        // For pagination addOnScrollListener to observe available items and recycled items
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            // Scrolling has completed
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                currentItems = 0
-                totalItems = 0
-                scrolledOutItems = 0
+                currentItems = 0 // Current Visible items in Recycler View
+                totalItems = 0 // Total items in adapter
+                scrolledOutItems = 0 // Scrolled out items which are no longer visible
                 currentItems = layout.childCount
                 totalItems = layout.itemCount
                 scrolledOutItems = layout.findFirstVisibleItemPosition()
@@ -180,6 +179,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
             }
 
+            // Scroll is in motion
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
@@ -190,57 +190,46 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: ");
-    }
-
+    // Remove progress bar on onStop of fragment lifecycler to avoid null object reference error
     override fun onStop() {
         super.onStop()
-        if(progressBar.visibility == View.VISIBLE){
-            progressBar.visibility = View.GONE
-        }else if(progressBarRest.visibility == View.VISIBLE){
-            progressBarRest.visibility = View.GONE
-        }else if(simpleSwipeRefreshLayout.visibility == View.VISIBLE){
-            simpleSwipeRefreshLayout.visibility = View.GONE
-        }else if(handler!=null){
-            handler!!.removeCallbacksAndMessages(null)
+        when {
+            progressBar.visibility == View.VISIBLE -> progressBar.visibility = View.GONE
+            progressBarRest.visibility == View.VISIBLE -> progressBarRest.visibility = View.GONE
+            simpleSwipeRefreshLayout.visibility == View.VISIBLE -> simpleSwipeRefreshLayout.visibility = View.GONE
+            handler!=null -> handler!!.removeCallbacksAndMessages(null)
         }
-        Log.d(TAG, "onStop: ");
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(TAG, "onDestroyView: ");
-    }
-
+    // Fetch data from db for pagination
     private fun fetchData() {
         isLoading = true
+
+        // Fetch data with limit of 5 results
         listOfModel = SARestaurantApp.database!!.resultDao().loadAllUsersByPage(5, stop) as ArrayList<Result>
-        Log.d(TAG, "fetchData: ${listOfModel}");
+
+        // Check whether we reached the end of list or not
         if(x<totalListSize){
             if(progressBarRest!= null){
                 progressBarRest.visibility = View.VISIBLE // Changed
             }
-            Handler().postDelayed(Runnable {
+
+            Handler().postDelayed( {
+                // Add all to adapter
                 adapter!!.items.addAll(listOfModel)
                 x+=5
-                Log.d(TAG, "fetchData: $x");
                 adapter!!.notifyDataSetChanged()
-//                startC += 5
                 if(progressBarRest!= null && progressBarRest.visibility == View.VISIBLE){
                     progressBarRest.visibility = View.GONE // Changed
                 }
                 isLoading = false
             }, 3000)
             stop += 5
-
         }
-
     }
 
+    // API call
     fun retrofitCall(location: Location){
-        c++
         val builder = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -250,45 +239,74 @@ class RestaurantFragment: Fragment(), RestaurantView {
 
         val client: GooglePlacesClient = retrofit.create(GooglePlacesClient::class.java)
 
-        val call = client.sendRequestForPlaces("${location.latitude},${location.longitude}", radius.toString(), result_type, sensor.toString(), resources.getString(R.string.google_maps_key))
+        val call = client.sendRequestForPlaces("${location.latitude},${location.longitude}", radius.toString(), resultType, sensor.toString(), resources.getString(R.string.google_maps_key))
         call.enqueue(object : Callback<ResponseModelClass> {
             override fun onFailure(call: Call<ResponseModelClass>?, t: Throwable?) {
-                Log.e(TAG, "onFailure: $t")
+                LogUtils.setTag(TAG)
+                LogUtils.e(t.toString())
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthLong(context!!, error)
             }
 
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
-                Log.d(TAG, "onResponse: ${responseModelClass!!.body()!!.results}")
-                listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass.body()!!)
+
+                // Get list of locations from response
+                listOfPlacesLocation = restaurantPresenterImp.getListOfLocations(responseModelClass!!.body()!!)
+
+                //  Get list of titles, images, rating, address from response
                 listOfTitleImgModel = restaurantPresenterImp.getListOfTitleImg(responseModelClass.body()!!)
-                Log.d("OnREsponse", "${listOfPlacesLocation}")
-//                linearLayoutManageScroll!!.setScrollEnabled(true)
+
                 if(progressBar != null && progressBar.visibility == View.VISIBLE){
                     restaurantView!!.stopProgress()
                 }
+
+                // Send list of locations to listener
                 locationCommunication!!.sendLocationFromRestaurant(listOfPlacesLocation)
+
+                // Send list of TitleImgModel to listener
                 locationCommunication!!.sendNameImgFromRestaurant(listOfTitleImgModel)
+
+                // Delete all previous data to avoid un-necessary data
                 SARestaurantApp.database!!.resultDao().deleteAll()
-                Log.d(TAG, "onResponse: x: $x stop: $stop")
+
+                // Reset to 0
                 x = 0
                 stop = 0
+
                 layout = LinearLayoutManageScroll(activity!!)
-//                recyclerView.layoutManager = null
+
                 for (i in responseModelClass.body()!!.results!!) {
                     SARestaurantApp.database!!.resultDao().insertData(i)
                     Log.d(TAG, "onResponseAfter Refresh: $i")
                 }
-//                Log.d(TAG, "onResponseFrmFet: ${responseModelFromFetch.results[0].name}")
+
                 adapter = RestListAdapter(resultList, SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
+
                 if(recyclerView != null){
                     recyclerView.layoutManager = layout
                     recyclerView.adapter = adapter
                 }
-//                fetchData(responseModelClass.body()!!.results as ArrayList<Result>)
+                // Return whole response from database
                 listOfModel = SARestaurantApp.database!!.resultDao().getAll() as ArrayList<Result>
                 totalListSize = listOfModel.size
-                Log.d(TAG, "TotalSize: $totalListSize")
                 fetchData()
             }
         })
     }
+
+    // On Fragment Detach
+    override fun onDetach() {
+        SARestaurantApp.isRestVisible = false
+        super.onDetach()
+    }
+
+    // Progress Bar Handler Methods
+    override fun stopProgress() {
+        progressBar.visibility = View.GONE
+    }
+
+    override fun startProgress() {
+        Log.d(TAG, ": Progress Started")
+    }
+
 }

@@ -97,10 +97,6 @@ class WeatherFragment : Fragment() {
                 retrofitCall(location, homeActivity, false)
             }
 
-            override fun receiveLocationUpdatesFun() {
-
-            }
-
             override fun onError(error: String) {
                 Toast.makeText(homeActivity, error, Toast.LENGTH_LONG).show()
             }

@@ -20,7 +20,6 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragme
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
-import android.os.PersistableBundle
 import android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import android.support.v7.app.AlertDialog
 import android.support.v7.view.menu.ActionMenuItemView
@@ -166,15 +165,11 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     }
 
     fun getGPSLocation(){
-        var getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
+        val getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
                 Log.d(TAG, "getDeviceLastLocation: $location Mil");
                 weatherFragment.retrofitCall(location, this@HomeActivity, true)
-            }
-
-            override fun receiveLocationUpdatesFun() {
-
             }
 
             override fun onError(error: String) {
@@ -182,10 +177,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             }
 
         })
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     override fun onBackPressed() {

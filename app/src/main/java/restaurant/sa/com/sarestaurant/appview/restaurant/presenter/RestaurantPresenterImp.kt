@@ -1,13 +1,10 @@
 package restaurant.sa.com.sarestaurant.appview.restaurant.presenter
 
-import android.content.res.Resources
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
-import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
-import javax.sql.RowSetListener
 
 class RestaurantPresenterImp: RestaurantPresenter {
 
@@ -19,7 +16,7 @@ class RestaurantPresenterImp: RestaurantPresenter {
 
     override fun getListOfLocations(responseFromParse: ResponseModelClass): ArrayList<LatLng> {
 
-        for(i in responseFromParse.results){
+        for(i in responseFromParse.results!!){
             listOfLocations.add(LatLng(i.geometry!!.location!!.lat!!, i!!.geometry!!.location!!.lng!!))
         }
 
@@ -40,12 +37,12 @@ class RestaurantPresenterImp: RestaurantPresenter {
     }
 
     override fun getListOfTitleImg(responseFromParse: ResponseModelClass): ArrayList<TitleImgModel> {
-        for(i in responseFromParse.results){
+        for(i in responseFromParse.results!!){
             if(i.photos!=null){
                 imgUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${i.photos!![0].photoReference!!}&sensor=false&key=AIzaSyC6Smj8wi2qTcaacRBzOVRBNpZUTpEIgvg"
-                listOfTitleImgModel.add(TitleImgModel(i.name, imgUrl))
+                listOfTitleImgModel.add(TitleImgModel(i.name, imgUrl, i.vicinity!!, i.rating))
             }else{
-                listOfTitleImgModel.add(TitleImgModel(i.name, noImage))
+                listOfTitleImgModel.add(TitleImgModel(i.name, noImage, i.vicinity!!, i.rating))
             }
         }
 
