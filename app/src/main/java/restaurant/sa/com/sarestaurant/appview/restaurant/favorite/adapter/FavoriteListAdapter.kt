@@ -1,8 +1,11 @@
 package restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter
 
+import android.app.Dialog
 import android.support.v7.widget.RecyclerView
 import android.content.Context
 import android.os.Build
+import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +14,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.restaurant_list_view.view.*
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
+import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.RecyclerAdapterclass
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 
 class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context: Context) : RecyclerView.Adapter<FavoriteListAdapter.CustomViewHolder>(){
@@ -19,6 +24,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
     lateinit var favoriteRestaurantModel: FavoriteRestaurantModel
     lateinit var photoReference: String
     lateinit var imgUrl: String
+    lateinit var shareModel: ShareModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteListAdapter.CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
@@ -34,12 +40,14 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.restaurantImage.clipToOutline = true
         }
+        shareModel = ShareModel()
         holder.restaurantAddress.text = items[holder.adapterPosition].restaurantAddress
         holder.restaurantName.text = items[holder.adapterPosition].restaurantName
 //        holder.favoriteButton.isChecked = items[holder.adapterPosition].isFavorite!!
         imgUrl = items[holder.adapterPosition].restaurantImagePath
         Picasso.get().load(imgUrl)
                 .into(holder.restaurantImage)
+        holder.restaurantImgUrl = imgUrl
         if(items[holder.adapterPosition].isFavorite!!){
             holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
 //            addItem(favoriteRestaurantModel)
@@ -49,6 +57,24 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
             items = removeItem(adapterPos)
             notifyItemRemoved(holder.adapterPosition)
             notifyItemRangeChanged(holder.adapterPosition, items.size)
+        }
+
+        holder.sharePost.setOnClickListener{
+            shareModel.address = items[holder.adapterPosition].restaurantAddress
+            shareModel.name = items[holder.adapterPosition].restaurantName
+            shareModel.imgUrl = holder.restaurantImgUrl
+
+            val dialogBuilder = AlertDialog.Builder(context)
+            val rcvDialog = RecyclerView(context)
+            val myImageList = arrayListOf<Int>(R.drawable.ic_facebook, R.drawable.ic_google_plus,
+                    R.drawable.ic_add_black_24dp)
+            val arrayList = arrayListOf<String>("Facebook", "Google Plus", "Open Chooser")
+            rcvDialog.adapter = RecyclerAdapterclass(context, arrayList, myImageList, shareModel) //DialogAdapter create by your self
+            rcvDialog.layoutManager = LinearLayoutManager(context)
+            dialogBuilder.setView(rcvDialog)
+
+            val shareDialog: Dialog = dialogBuilder.create()
+            shareDialog.show()
         }
 
 //        holder.restaurantAddress.text = items[]
@@ -118,6 +144,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>, var context:
         var favoriteButton = view.toggleButton2
         var restaurantImage = view.restImageView
         var sharePost = view.restShareImgView
+        var restaurantImgUrl:String = ""
     }
 
 }
