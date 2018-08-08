@@ -58,7 +58,7 @@
 
     <RatingBar
         android:id="@+id/ratingBar2"
-        android:layout_width="@dimen/_242sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_42sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_16sdp"

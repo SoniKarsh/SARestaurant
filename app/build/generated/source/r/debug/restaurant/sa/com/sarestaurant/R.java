@@ -2335,7 +2335,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td></td></tr>
+     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>
@@ -5212,10 +5212,9 @@ public final class R {
     public static final int visible=0x7f080126;
     public static final int weatherFrag=0x7f080127;
     public static final int wide=0x7f080128;
-    public static final int windSpeed=0x7f080129;
-    public static final int withText=0x7f08012a;
-    public static final int wrap=0x7f08012b;
-    public static final int wrap_content=0x7f08012c;
+    public static final int withText=0x7f080129;
+    public static final int wrap=0x7f08012a;
+    public static final int wrap_content=0x7f08012b;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f090000;
@@ -5371,99 +5370,105 @@ public final class R {
     public static final int bottom_sheet_behavior=0x7f0d0021;
     public static final int change_map_type=0x7f0d0022;
     public static final int character_counter_pattern=0x7f0d0023;
-    public static final int com_facebook_device_auth_instructions=0x7f0d0024;
-    public static final int com_facebook_image_download_unknown_error=0x7f0d0025;
-    public static final int com_facebook_internet_permission_error_message=0x7f0d0026;
-    public static final int com_facebook_internet_permission_error_title=0x7f0d0027;
-    public static final int com_facebook_like_button_liked=0x7f0d0028;
-    public static final int com_facebook_like_button_not_liked=0x7f0d0029;
-    public static final int com_facebook_loading=0x7f0d002a;
-    public static final int com_facebook_loginview_cancel_action=0x7f0d002b;
-    public static final int com_facebook_loginview_log_in_button=0x7f0d002c;
-    public static final int com_facebook_loginview_log_in_button_continue=0x7f0d002d;
-    public static final int com_facebook_loginview_log_in_button_long=0x7f0d002e;
-    public static final int com_facebook_loginview_log_out_action=0x7f0d002f;
-    public static final int com_facebook_loginview_log_out_button=0x7f0d0030;
-    public static final int com_facebook_loginview_logged_in_as=0x7f0d0031;
-    public static final int com_facebook_loginview_logged_in_using_facebook=0x7f0d0032;
-    public static final int com_facebook_send_button_text=0x7f0d0033;
-    public static final int com_facebook_share_button_text=0x7f0d0034;
-    public static final int com_facebook_smart_device_instructions=0x7f0d0035;
-    public static final int com_facebook_smart_device_instructions_or=0x7f0d0036;
-    public static final int com_facebook_smart_login_confirmation_cancel=0x7f0d0037;
-    public static final int com_facebook_smart_login_confirmation_continue_as=0x7f0d0038;
-    public static final int com_facebook_smart_login_confirmation_title=0x7f0d0039;
-    public static final int com_facebook_tooltip_default=0x7f0d003a;
-    public static final int common_google_play_services_enable_button=0x7f0d003b;
-    public static final int common_google_play_services_enable_text=0x7f0d003c;
-    public static final int common_google_play_services_enable_title=0x7f0d003d;
-    public static final int common_google_play_services_install_button=0x7f0d003e;
-    public static final int common_google_play_services_install_text=0x7f0d003f;
-    public static final int common_google_play_services_install_title=0x7f0d0040;
-    public static final int common_google_play_services_notification_channel_name=0x7f0d0041;
-    public static final int common_google_play_services_notification_ticker=0x7f0d0042;
-    public static final int common_google_play_services_unknown_issue=0x7f0d0043;
-    public static final int common_google_play_services_unsupported_text=0x7f0d0044;
-    public static final int common_google_play_services_update_button=0x7f0d0045;
-    public static final int common_google_play_services_update_text=0x7f0d0046;
-    public static final int common_google_play_services_update_title=0x7f0d0047;
-    public static final int common_google_play_services_updating_text=0x7f0d0048;
-    public static final int common_google_play_services_wear_update_text=0x7f0d0049;
-    public static final int common_open_on_phone=0x7f0d004a;
-    public static final int common_signin_button_text=0x7f0d004b;
-    public static final int common_signin_button_text_long=0x7f0d004c;
-    public static final int confirm_password=0x7f0d004d;
-    public static final int don_t_have_an_account_register_here=0x7f0d004e;
-    public static final int email_id=0x7f0d004f;
-    public static final int email_or_username=0x7f0d0050;
-    public static final int facebook=0x7f0d0051;
-    public static final int facebook_app_id=0x7f0d0052;
-    public static final int facebook_sign_in=0x7f0d0053;
-    public static final int favorite=0x7f0d0054;
-    public static final int fb_login_protocol_scheme=0x7f0d0055;
-    public static final int forgot_your_password=0x7f0d0056;
-    public static final int google_maps_key=0x7f0d0057;
-    public static final int home=0x7f0d0058;
-    public static final int is_available_to_serve_you=0x7f0d0059;
-    public static final int logout=0x7f0d005a;
-    public static final int map=0x7f0d005b;
-    public static final int messenger_send_button_text=0x7f0d005c;
-    public static final int mobile_no=0x7f0d005d;
-    public static final int nav_header_desc=0x7f0d005e;
-    public static final int nav_header_subtitle=0x7f0d005f;
-    public static final int nav_header_title=0x7f0d0060;
-    public static final int navigation_drawer_close=0x7f0d0061;
-    public static final int navigation_drawer_open=0x7f0d0062;
-    public static final int navigation_image=0x7f0d0063;
-    public static final int no=0x7f0d0064;
-    public static final int no_rate_available=0x7f0d0065;
-    public static final int not_available=0x7f0d0066;
-    public static final int password=0x7f0d0067;
-    public static final int password_toggle_content_description=0x7f0d0068;
-    public static final int path_password_eye=0x7f0d0069;
-    public static final int path_password_eye_mask_strike_through=0x7f0d006a;
-    public static final int path_password_eye_mask_visible=0x7f0d006b;
-    public static final int path_password_strike_through=0x7f0d006c;
-    public static final int previous=0x7f0d006d;
-    public static final int request_permission=0x7f0d006e;
-    public static final int restLogo=0x7f0d006f;
-    public static final int restaurant_address=0x7f0d0070;
-    public static final int restaurant_name=0x7f0d0071;
-    public static final int sarestaurant=0x7f0d0072;
-    public static final int search_menu_title=0x7f0d0073;
-    public static final int show_map=0x7f0d0074;
-    public static final int sign_in=0x7f0d0075;
-    public static final int sign_up=0x7f0d0076;
-    public static final int slide_description=0x7f0d0077;
-    public static final int status_bar_notification_info_overflow=0x7f0d0078;
-    public static final int temperature=0x7f0d0079;
-    public static final int text=0x7f0d007a;
-    public static final int title_activity_home=0x7f0d007b;
-    public static final int user_name=0x7f0d007c;
-    public static final int weather=0x7f0d007d;
-    public static final int weather_image=0x7f0d007e;
-    public static final int yes=0x7f0d007f;
-    public static final int your_location=0x7f0d0080;
+    public static final int close_dialog=0x7f0d0024;
+    public static final int close_txt=0x7f0d0025;
+    public static final int com_facebook_device_auth_instructions=0x7f0d0026;
+    public static final int com_facebook_image_download_unknown_error=0x7f0d0027;
+    public static final int com_facebook_internet_permission_error_message=0x7f0d0028;
+    public static final int com_facebook_internet_permission_error_title=0x7f0d0029;
+    public static final int com_facebook_like_button_liked=0x7f0d002a;
+    public static final int com_facebook_like_button_not_liked=0x7f0d002b;
+    public static final int com_facebook_loading=0x7f0d002c;
+    public static final int com_facebook_loginview_cancel_action=0x7f0d002d;
+    public static final int com_facebook_loginview_log_in_button=0x7f0d002e;
+    public static final int com_facebook_loginview_log_in_button_continue=0x7f0d002f;
+    public static final int com_facebook_loginview_log_in_button_long=0x7f0d0030;
+    public static final int com_facebook_loginview_log_out_action=0x7f0d0031;
+    public static final int com_facebook_loginview_log_out_button=0x7f0d0032;
+    public static final int com_facebook_loginview_logged_in_as=0x7f0d0033;
+    public static final int com_facebook_loginview_logged_in_using_facebook=0x7f0d0034;
+    public static final int com_facebook_send_button_text=0x7f0d0035;
+    public static final int com_facebook_share_button_text=0x7f0d0036;
+    public static final int com_facebook_smart_device_instructions=0x7f0d0037;
+    public static final int com_facebook_smart_device_instructions_or=0x7f0d0038;
+    public static final int com_facebook_smart_login_confirmation_cancel=0x7f0d0039;
+    public static final int com_facebook_smart_login_confirmation_continue_as=0x7f0d003a;
+    public static final int com_facebook_smart_login_confirmation_title=0x7f0d003b;
+    public static final int com_facebook_tooltip_default=0x7f0d003c;
+    public static final int common_google_play_services_enable_button=0x7f0d003d;
+    public static final int common_google_play_services_enable_text=0x7f0d003e;
+    public static final int common_google_play_services_enable_title=0x7f0d003f;
+    public static final int common_google_play_services_install_button=0x7f0d0040;
+    public static final int common_google_play_services_install_text=0x7f0d0041;
+    public static final int common_google_play_services_install_title=0x7f0d0042;
+    public static final int common_google_play_services_notification_channel_name=0x7f0d0043;
+    public static final int common_google_play_services_notification_ticker=0x7f0d0044;
+    public static final int common_google_play_services_unknown_issue=0x7f0d0045;
+    public static final int common_google_play_services_unsupported_text=0x7f0d0046;
+    public static final int common_google_play_services_update_button=0x7f0d0047;
+    public static final int common_google_play_services_update_text=0x7f0d0048;
+    public static final int common_google_play_services_update_title=0x7f0d0049;
+    public static final int common_google_play_services_updating_text=0x7f0d004a;
+    public static final int common_google_play_services_wear_update_text=0x7f0d004b;
+    public static final int common_open_on_phone=0x7f0d004c;
+    public static final int common_signin_button_text=0x7f0d004d;
+    public static final int common_signin_button_text_long=0x7f0d004e;
+    public static final int confirm_password=0x7f0d004f;
+    public static final int don_t_have_an_account_register_here=0x7f0d0050;
+    public static final int email_id=0x7f0d0051;
+    public static final int email_or_username=0x7f0d0052;
+    public static final int enter_valid_details=0x7f0d0053;
+    public static final int f=0x7f0d0054;
+    public static final int facebook=0x7f0d0055;
+    public static final int facebook_app_id=0x7f0d0056;
+    public static final int facebook_sign_in=0x7f0d0057;
+    public static final int favorite=0x7f0d0058;
+    public static final int fb_login_protocol_scheme=0x7f0d0059;
+    public static final int forgot_your_password=0x7f0d005a;
+    public static final int google_maps_key=0x7f0d005b;
+    public static final int home=0x7f0d005c;
+    public static final int is_available_to_serve_you=0x7f0d005d;
+    public static final int logout=0x7f0d005e;
+    public static final int logout_dialog=0x7f0d005f;
+    public static final int logout_txt=0x7f0d0060;
+    public static final int map=0x7f0d0061;
+    public static final int messenger_send_button_text=0x7f0d0062;
+    public static final int mobile_no=0x7f0d0063;
+    public static final int nav_header_desc=0x7f0d0064;
+    public static final int nav_header_subtitle=0x7f0d0065;
+    public static final int nav_header_title=0x7f0d0066;
+    public static final int navigation_drawer_close=0x7f0d0067;
+    public static final int navigation_drawer_open=0x7f0d0068;
+    public static final int navigation_image=0x7f0d0069;
+    public static final int no=0x7f0d006a;
+    public static final int no_rate_available=0x7f0d006b;
+    public static final int not_available=0x7f0d006c;
+    public static final int password=0x7f0d006d;
+    public static final int password_toggle_content_description=0x7f0d006e;
+    public static final int path_password_eye=0x7f0d006f;
+    public static final int path_password_eye_mask_strike_through=0x7f0d0070;
+    public static final int path_password_eye_mask_visible=0x7f0d0071;
+    public static final int path_password_strike_through=0x7f0d0072;
+    public static final int previous=0x7f0d0073;
+    public static final int request_permission=0x7f0d0074;
+    public static final int restLogo=0x7f0d0075;
+    public static final int restaurant_address=0x7f0d0076;
+    public static final int restaurant_name=0x7f0d0077;
+    public static final int sarestaurant=0x7f0d0078;
+    public static final int search_menu_title=0x7f0d0079;
+    public static final int show_map=0x7f0d007a;
+    public static final int sign_in=0x7f0d007b;
+    public static final int sign_up=0x7f0d007c;
+    public static final int slide_description=0x7f0d007d;
+    public static final int status_bar_notification_info_overflow=0x7f0d007e;
+    public static final int temperature=0x7f0d007f;
+    public static final int text=0x7f0d0080;
+    public static final int title_activity_home=0x7f0d0081;
+    public static final int user_name=0x7f0d0082;
+    public static final int weather=0x7f0d0083;
+    public static final int weather_image=0x7f0d0084;
+    public static final int yes=0x7f0d0085;
+    public static final int your_location=0x7f0d0086;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0e0000;
@@ -10798,7 +10803,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td></td></tr>
+     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>

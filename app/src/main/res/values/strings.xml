@@ -65,5 +65,11 @@
     <!--Temperature-->
     <string name="temperature">Temp:</string>
     <string name="your_location">Your Location</string>
+    <string name="enter_valid_details">Enter Valid Details.</string>
+    <string name="logout_dialog">Are you sure you want to Logout?</string>
+    <string name="logout_txt">Logout</string>
+    <string name="close_dialog">Closing Activity</string>
+    <string name="close_txt">Are you sure you want to close this activity?</string>
+    <string name="f">F</string>
 
 </resources>

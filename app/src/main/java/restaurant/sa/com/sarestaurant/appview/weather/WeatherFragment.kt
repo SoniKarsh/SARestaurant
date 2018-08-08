@@ -56,11 +56,12 @@ class WeatherFragment : Fragment() {
         contextRestFrag = context!!
         homeActivity = context as HomeActivity
         context.supportActionBar?.title = TAG
-        context.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.VISIBLE
+        context.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.GONE
 
     }
 
     override fun onDetach() {
+        homeActivity.toolbar.findViewById<ActionMenuItemView>(R.id.action_map).visibility = View.VISIBLE
         SARestaurantApp.instance!!.isWeatherVisible = false
         super.onDetach()
     }
@@ -76,20 +77,10 @@ class WeatherFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         isRunning = true
-        permissionUtils = PermissionUtils(homeActivity)
-//        granted = permissionUtils!!.checkPermissions(permissionList)
-        permissionUtils!!.checkPermissions(permissionList)
         weatherPresenterImp = WeatherPresenterImp()
 
-        if(!granted){
-            Log.d(TAG, ": Not Granted:(");
-//            permissionUtils!!.askForPermissions(permissionList as Array<String>)
-            granted = true
-//            permissionUtils.askForPermissions()
-        }
-
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(homeActivity)
-        var getLocation = GetLocationImp(granted, mFusedLocationProviderClient, contextRestFrag)
+        var getLocation = GetLocationImp(true, mFusedLocationProviderClient, contextRestFrag)
         getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
             override fun getDeviceLastLocation(location: Location) {
                 Log.d(TAG, "getDeviceLastLocation: $location")
@@ -157,19 +148,17 @@ class WeatherFragment : Fragment() {
                         })
                     }
                 } else {
-                    if (!isRunning) {
-                        val temperature = responseModelClass!!.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp
-                        val imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
-                        weatherData.imgUrl = imgUrl
-                        weatherData.temp = temperature!!
-                        val service = context as ApiCallJobService
-                        homeCallback = service
-                        homeCallback!!.sendWeatherData(weatherData)
-                        SARestaurantApp.instance!!.sharedPreference!!.edit()
-                                .putString("temp", responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp)
-                                .putString("imgurl", imgUrl)
-                                .apply()
-                    }
+                    val temperature = responseModelClass!!.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp
+                    val imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
+                    weatherData.imgUrl = imgUrl
+                    weatherData.temp = temperature!!
+                    val service = context as ApiCallJobService
+                    homeCallback = service
+                    homeCallback!!.sendWeatherData(weatherData)
+                    SARestaurantApp.instance!!.sharedPreference!!.edit()
+                            .putString("temp", responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp)
+                            .putString("imgurl", imgUrl)
+                            .apply()
 
                 }
             }

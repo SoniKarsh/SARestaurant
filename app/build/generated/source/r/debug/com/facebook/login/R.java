@@ -797,7 +797,7 @@ public final class R {
         public static final int uniform = 0x7f08011f;
         public static final int unknown = 0x7f080120;
         public static final int up = 0x7f080121;
-        public static final int wrap_content = 0x7f08012c;
+        public static final int wrap_content = 0x7f08012b;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f090000;
@@ -888,31 +888,31 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0d001a;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0d001b;
         public static final int abc_toolbar_collapse_description = 0x7f0d001c;
-        public static final int com_facebook_device_auth_instructions = 0x7f0d0024;
-        public static final int com_facebook_image_download_unknown_error = 0x7f0d0025;
-        public static final int com_facebook_internet_permission_error_message = 0x7f0d0026;
-        public static final int com_facebook_internet_permission_error_title = 0x7f0d0027;
-        public static final int com_facebook_like_button_liked = 0x7f0d0028;
-        public static final int com_facebook_like_button_not_liked = 0x7f0d0029;
-        public static final int com_facebook_loading = 0x7f0d002a;
-        public static final int com_facebook_loginview_cancel_action = 0x7f0d002b;
-        public static final int com_facebook_loginview_log_in_button = 0x7f0d002c;
-        public static final int com_facebook_loginview_log_in_button_continue = 0x7f0d002d;
-        public static final int com_facebook_loginview_log_in_button_long = 0x7f0d002e;
-        public static final int com_facebook_loginview_log_out_action = 0x7f0d002f;
-        public static final int com_facebook_loginview_log_out_button = 0x7f0d0030;
-        public static final int com_facebook_loginview_logged_in_as = 0x7f0d0031;
-        public static final int com_facebook_loginview_logged_in_using_facebook = 0x7f0d0032;
-        public static final int com_facebook_send_button_text = 0x7f0d0033;
-        public static final int com_facebook_share_button_text = 0x7f0d0034;
-        public static final int com_facebook_smart_device_instructions = 0x7f0d0035;
-        public static final int com_facebook_smart_device_instructions_or = 0x7f0d0036;
-        public static final int com_facebook_smart_login_confirmation_cancel = 0x7f0d0037;
-        public static final int com_facebook_smart_login_confirmation_continue_as = 0x7f0d0038;
-        public static final int com_facebook_smart_login_confirmation_title = 0x7f0d0039;
-        public static final int com_facebook_tooltip_default = 0x7f0d003a;
-        public static final int search_menu_title = 0x7f0d0073;
-        public static final int status_bar_notification_info_overflow = 0x7f0d0078;
+        public static final int com_facebook_device_auth_instructions = 0x7f0d0026;
+        public static final int com_facebook_image_download_unknown_error = 0x7f0d0027;
+        public static final int com_facebook_internet_permission_error_message = 0x7f0d0028;
+        public static final int com_facebook_internet_permission_error_title = 0x7f0d0029;
+        public static final int com_facebook_like_button_liked = 0x7f0d002a;
+        public static final int com_facebook_like_button_not_liked = 0x7f0d002b;
+        public static final int com_facebook_loading = 0x7f0d002c;
+        public static final int com_facebook_loginview_cancel_action = 0x7f0d002d;
+        public static final int com_facebook_loginview_log_in_button = 0x7f0d002e;
+        public static final int com_facebook_loginview_log_in_button_continue = 0x7f0d002f;
+        public static final int com_facebook_loginview_log_in_button_long = 0x7f0d0030;
+        public static final int com_facebook_loginview_log_out_action = 0x7f0d0031;
+        public static final int com_facebook_loginview_log_out_button = 0x7f0d0032;
+        public static final int com_facebook_loginview_logged_in_as = 0x7f0d0033;
+        public static final int com_facebook_loginview_logged_in_using_facebook = 0x7f0d0034;
+        public static final int com_facebook_send_button_text = 0x7f0d0035;
+        public static final int com_facebook_share_button_text = 0x7f0d0036;
+        public static final int com_facebook_smart_device_instructions = 0x7f0d0037;
+        public static final int com_facebook_smart_device_instructions_or = 0x7f0d0038;
+        public static final int com_facebook_smart_login_confirmation_cancel = 0x7f0d0039;
+        public static final int com_facebook_smart_login_confirmation_continue_as = 0x7f0d003a;
+        public static final int com_facebook_smart_login_confirmation_title = 0x7f0d003b;
+        public static final int com_facebook_tooltip_default = 0x7f0d003c;
+        public static final int search_menu_title = 0x7f0d0079;
+        public static final int status_bar_notification_info_overflow = 0x7f0d007e;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0e0000;

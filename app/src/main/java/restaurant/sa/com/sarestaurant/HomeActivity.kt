@@ -113,8 +113,10 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             }
 
             override fun onPermissionDenied() {
-                // Create New Fragment
                 fragmentHolder.visibility = View.GONE
+                homeBtn.setOnClickListener {
+                    permissionUtils!!.checkPermissions(permissionList)
+                }
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthShort(this@HomeActivity, "Permission Denied")
             }
@@ -136,16 +138,12 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         val navEmailId = headerView.findViewById<TextView>(R.id.navEmailId)
         navUserName.text = SARestaurantApp.instance!!.sharedPreference!!.getString("username", "")
         navEmailId.text = SARestaurantApp.instance!!.sharedPreference!!.getString("emailid", "")
-//        val arrayListOfWeather: List<WeatherModel>? = SARestaurantApp.database!!.weatherDao().getAll()
-//        if(arrayListOfWeather!![arrayListOfWeather.size-1].temperature != null){
-//            nav_tv.text = arrayListOfWeather[arrayListOfWeather.size-1].temperature
-//            Picasso.get().load(arrayListOfWeather[arrayListOfWeather.size-1].imgUrl)
-//                    .into(nav_img)
-//        }
-
         val navTv = headerView.findViewById<TextView>(R.id.nav_tv)
         val navImgUrl = headerView.findViewById<ImageView>(R.id.nav_img)
-        navTv.text = SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "")
+        val f = getString(R.string.f)
+        val temp = SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "")
+        val temperature = temp+f
+        navTv.text = temperature
         val imgUrl = SARestaurantApp.instance!!.sharedPreference!!.getString("imgurl", "")
         if(imgUrl != ""){
             Picasso.get().load(imgUrl)
@@ -171,10 +169,10 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             }else {
                 AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Closing Activity")
-                        .setMessage("Are you sure you want to close this activity?")
-                        .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> finish() })
-                        .setNegativeButton("No", null)
+                        .setTitle(getString(R.string.close_dialog))
+                        .setMessage(getString(R.string.close_txt))
+                        .setPositiveButton((getString(R.string.yes)), DialogInterface.OnClickListener { dialog, which -> finish() })
+                        .setNegativeButton((getString(R.string.no)), null)
                         .show()
             }
         }
@@ -214,12 +212,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         when (item.itemId) {
             R.id.nav_home -> {
                 permissionUtils!!.checkPermissions(permissionList)
-//                val fragmentManager = supportFragmentManager
-//                val transaction = fragmentManager.beginTransaction()
-//                transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-//                transaction.replace(R.id.fragmentHolder, RestaurantFragment(), RESTAURANT_FRAGMENT_TAG)
-//                transaction.addToBackStack(null)
-//                transaction.commit()
             }
             R.id.nav_favorite -> {
 
@@ -229,7 +221,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 }
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, FavoriteFragment(), FAVORITE_RESTAURANT_FRAGMENT_TAG)
-//                transaction.addToBackStack("Favorite")
                 transaction.commit()
             }
             R.id.nav_weather -> {
@@ -239,20 +230,19 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 }
                 val transaction = fragmentManager.beginTransaction()
                 transaction.replace(R.id.fragmentHolder, WeatherFragment(), WEATHER_FRAGMENT_TAG)
-//                transaction.addToBackStack("Weather")
                 transaction.commit()
             }
             R.id.nav_logout -> {
                 AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Logout")
-                        .setMessage("Are you sure you want to Logout?")
-                        .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which -> LoginManager.getInstance().logOut()
+                        .setTitle(getString(R.string.logout_txt))
+                        .setMessage(getString(R.string.logout_dialog))
+                        .setPositiveButton(getString(R.string.yes), DialogInterface.OnClickListener { dialog, which -> LoginManager.getInstance().logOut()
                             SARestaurantApp.instance!!.sharedPreference!!.edit().clear().apply()
                             val intent = Intent(this, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)})
-                        .setNegativeButton("No", null)
+                        .setNegativeButton(getString(R.string.no), null)
                         .show()
             }
         }

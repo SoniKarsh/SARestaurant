@@ -202,14 +202,6 @@ class RestaurantFragment: Fragment(), RestaurantView {
         if(handler!=null) {
             handler!!.removeCallbacks(runnable)
         }
-
-//        when {
-////            progressBar.visibility == View.VISIBLE -> progressBar.visibility = View.GONE
-////            progressBarRest.visibility == View.VISIBLE -> progressBarRest.visibility = View.GONE
-////            simpleSwipeRefreshLayout.visibility == View.VISIBLE -> simpleSwipeRefreshLayout.visibility = View.GONE
-//            handler!=null -> handler!!.removeCallbacksAndMessages(null)
-//
-//        }
     }
 
     // Fetch data from db for pagination
@@ -340,7 +332,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
     }
 
     override fun startProgress() {
-        Log.d(TAG, ": Progress Started")
+
     }
 
 }

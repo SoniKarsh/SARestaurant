@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -51,8 +50,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
     lateinit var locationCommunication: LocationCommunication
     var geofencingClient: GeofencingClient? = null
     lateinit var homeActivity: HomeActivity
-    var LOCATION_PERMISSION_REQUEST_CODE = 9999
-    lateinit var curLocation: LatLng
     private val GEOFENCE_RADIUS = 100000
     var inflater: LayoutInflater? = null
 
@@ -62,15 +59,12 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
 
     override fun onConnectionSuspended(p0: Int) {
-        Log.d(TAG, "onConnectionSuspended: ")
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        Log.d(TAG, "onConnectionFailed: ");
     }
 
     override fun onConnected(p0: Bundle?) {
-        Log.d(TAG, "onConnected: ");
         for(i in listOfLocations){
             addLocationAlert(i.latitude, i.longitude);
         }
@@ -103,21 +97,15 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         mMapView?.onResume()
         mMapView?.getMapAsync(this)
         synchronized(this) {
-            Log.i("Client", "created")
             val gclient = GoogleApiClient.Builder(context!!).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build()
             gclient.connect()
-//            mydb= Room.databaseBuilder(context, Mydatabase::class.java,"Database").allowMainThreadQueries().build()
 
         }
         geofencingClient = LocationServices.getGeofencingClient(homeActivity);
-
-        Log.d(TAG, "initMap: ")
-//        getLocationPermission()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d(TAG, "onActivityCreated: ");
 
         listOfLocations = locationCommunication.getLocationFromRestaurant()
         listOfTitleImgModel = locationCommunication.getNameImgFromRestaurant()
@@ -143,18 +131,9 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap?) {
-        Log.d(TAG, "onMapReady: Map is Ready")
         googleMap = p0!!
         googleMap.isMyLocationEnabled = true
         googleMap.setInfoWindowAdapter(this)
-        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
-
-            override fun onMapClick(p0: LatLng?) {
-//                Log.d(TAG, "onMapClick: Clicked");
-                curLocation = p0!!
-//                addLocationAlert(p0.latitude, p0.longitude);
-            }
-        })
 
         multipleMarkers()
     }
@@ -253,30 +232,8 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         return v
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        Log.d(TAG, "onRequestPermissionsResult: onRequestPermissionsResult Called")
-        mLocationPermissionsGranted = false
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty()) {
-                    for (i in 0 until grantResults.size) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            mLocationPermissionsGranted = false
-                            Log.d(TAG, "onRequestPermissionsResult: permission failed")
-                            return
-                        }
-                    }
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted")
-                    mLocationPermissionsGranted = true
-                    //initialize our map
-                    initMap()
-                }
-            }
-        }
-    }
 
     private fun moveCamera(latLng: LatLng, zoom: Float, title: String){
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
 
         val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_action_marker)
@@ -285,12 +242,9 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
                     .title(title)
                     .icon(icon)
             googleMap.addMarker(options)
-
-//        hideSoftKeyboard()
     }
 
     fun getDeviceLocation(){
-        Log.d(TAG, "getDeviceLocation: getting the current devices location ")
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity as HomeActivity)
 
         try {

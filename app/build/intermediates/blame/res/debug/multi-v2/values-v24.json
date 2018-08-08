@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/karshsoni/Documents/MyApp/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/home/karsh/Documents/SARestaurant3/SARestaurant/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c7b75c0f435573013fd6c7356b1b490f/res/values-v24/values-v24.xml",
+                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/24055c314c591cc850803f0f7654974e/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/karshsoni/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/dd8ff48af84e3dc89f8ea0d7d2bce1fe/res/values-v24/values-v24.xml",
+                    "source": "/home/karsh/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/fbac9611b2c7c9b9414da6f6315d46c5/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

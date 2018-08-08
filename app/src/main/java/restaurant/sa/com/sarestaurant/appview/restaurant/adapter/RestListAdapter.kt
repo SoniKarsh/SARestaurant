@@ -96,27 +96,6 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             }
         }
 
-//        holder.holderView.setOnClickListener {
-//
-//            if(isClickable){
-//                restaurantDetailModel.rest_name = items[holder.adapterPosition].name
-//                restaurantDetailModel.rest_address = items[holder.adapterPosition].vicinity!!
-//                restaurantDetailModel.imgUrl = holder.restaurantImgUrl
-//                if(items [holder.adapterPosition].rating != null){
-//                    restaurantDetailModel.rating = items[holder.adapterPosition].rating!!
-//                }else{
-//                    restaurantDetailModel.rating = 0.0
-//                }
-////            holder.placeId = items.results!![holder.adapterPosition].placeId
-//                if(items[holder.adapterPosition].openingHours != null){
-//                    restaurantDetailModel.rest_isClosed = items[holder.adapterPosition].openingHours!!.openNow.toString()
-//                }else{
-//                    restaurantDetailModel.rest_isClosed = "No Data Available"
-//                }
-//                Log.d(TAG, "onBindViewHolder: Clicked");
-//                retrofitCall(holder.placeId)
-//            }
-//        }
 
         dialog.setContentView(R.layout.fragment_restaurant_detail)
         holder.holderView.setOnClickListener {

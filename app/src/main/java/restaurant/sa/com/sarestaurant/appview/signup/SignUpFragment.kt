@@ -5,11 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
@@ -18,10 +16,11 @@ import restaurant.sa.com.sarestaurant.appview.signin.SignInFragment
 import restaurant.sa.com.sarestaurant.appview.signup.generictextwatcher.GenericTextWatcher
 import restaurant.sa.com.sarestaurant.appview.signup.view.SignUpView
 import restaurant.sa.com.sarestaurant.model.UserModel
+import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
 class SignUpFragment: Fragment(), SignUpView {
 
-    val TAG = "SignUpFragment"
+    private val TAG = "SignUpFragment"
     lateinit var userModel: UserModel
 
     override fun onAttach(context: Context?) {
@@ -44,7 +43,6 @@ class SignUpFragment: Fragment(), SignUpView {
         btnSignUp.setOnClickListener {
 
             if(txtPassword.text.toString() != txtConfirmPassword.text.toString()){
-                Log.d(TAG, "onActivityCreated: ${txtPassword}${txtConfirmPassword}");
                 confirmPasswordWrapper.error = "Confirm Password and Password Doesn't Match."
             }else{
                 confirmPasswordWrapper.isErrorEnabled = false
@@ -66,8 +64,8 @@ class SignUpFragment: Fragment(), SignUpView {
                 startActivity(intent)
             }
             else{
-                Log.d(TAG, "onActivityCreated: ${txtPassword.text} ${txtConfirmPassword.text}");
-                Toast.makeText(activity, "Please Follow The Guidelines", Toast.LENGTH_LONG).show()
+                ToastUtils.setTag(TAG)
+                ToastUtils.lengthShort(activity!!, getString(R.string.enter_valid_details))
             }
         }
 
@@ -76,8 +74,23 @@ class SignUpFragment: Fragment(), SignUpView {
     override fun displayValidationMessage(view: TextInputLayout?): Boolean {
         if (!view!!.isErrorEnabled && view.editText!!.text.isNotEmpty()){
             return true
+        }else{
+            when(view.id){
+                R.id.userNameWrapper -> {
+                    userNameWrapper.error = "This must contain only letters and length must be between 1 to 25"
+                }
+                R.id.mobileNoWrapper -> {
+                    mobileNoWrapper.error = "This must contain valid number and length must be 10"
+                }
+                R.id.emailIdWrapperUp-> {
+                    emailIdWrapperUp.error = "Please Enter Valid Email"
+                }
+                R.id.passwordWrapperUp -> {
+                    passwordWrapperUp.error = "This must contain 1 lowercase, 1 uppercase, 1 numeric, 1 special character and size must be greater than 8"
+                }
+            }
+            return false
         }
-        return false
     }
 
     override fun setError(view: View) {
