@@ -21,6 +21,11 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPre
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPresenterImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.view.RestaurantView
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
+import restaurant.sa.com.sarestaurant.utils.ToastUtils
+import android.support.design.widget.Snackbar
+import restaurant.sa.com.sarestaurant.R.id.coordinatorLayout
+
+
 
 class FavoriteFragment: Fragment(), RestaurantView {
 
@@ -62,7 +67,8 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        ToastUtils.setTag(TAG)
+        ToastUtils.lengthShort(context!!, SARestaurantApp.instance!!.isClickableForMap.toString())
         restaurantPresenterImp = RestaurantPresenterImp()
         fetchData()
         simpleSwipeRefreshLayout.setOnRefreshListener {
@@ -88,11 +94,20 @@ class FavoriteFragment: Fragment(), RestaurantView {
     fun fetchData(){
         val layout = LinearLayoutManager(activity)
         restaurantPresenterImp.getListOfFavLocations(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.OnCallBack{
-            override fun onResponse(listOfLocations: ArrayList<LatLng>) {
-                // isClickableForMap
-                SARestaurantApp.instance!!.isClickableForMap == true
+            override fun onResponse(listOfLocations: ArrayList<LatLng>?) {
 
+                if(!listOfLocations!!.isEmpty()){
+                    SARestaurantApp.instance!!.isClickableForMap = true
+                }else{
+                    val snackbar = Snackbar
+                            .make(constraintLayoutRest, getString(R.string.no_data_found), Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.ok), View.OnClickListener {
+                                ToastUtils.lengthShort(context!!, getString(R.string.refresh))
+                            })
+                    snackbar.show()
+                }
                 listOfPlacesLocation = listOfLocations
+                locationCommunication.sendLocationFromRestaurant(listOfPlacesLocation)
                 Log.d(TAG, "onResponse: Stop Progress")
                 restaurantView!!.stopProgress()
             }
@@ -102,7 +117,6 @@ class FavoriteFragment: Fragment(), RestaurantView {
                 Toast.makeText(homeActivity, "Error Occurred!!!", Toast.LENGTH_LONG).show()
             }
         })
-        locationCommunication.sendLocationFromRestaurant(listOfPlacesLocation)
         recyclerView.adapter = FavoriteListAdapter(SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
         recyclerView.layoutManager = layout
     }

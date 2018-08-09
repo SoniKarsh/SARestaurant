@@ -75,5 +75,9 @@
     <string name="permission_needed">Permission needed</string>
     <string name="permission_dialog">and fetching weather data.</string>
     <string name="weatherData">Current Temperature</string>
+    <string name="refresh">Pull to Refresh</string>
+    <string name="no_data_found">No Data Found:(</string>
+    <string name="ok">OKAY</string>
+    <string name="empty_list">List is Empty</string>
 
 </resources>

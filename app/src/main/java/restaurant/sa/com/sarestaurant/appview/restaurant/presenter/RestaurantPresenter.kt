@@ -15,7 +15,7 @@ interface RestaurantPresenter {
 
     interface OnCallBack{
 
-        fun onResponse(listOfLocations: ArrayList<LatLng>)
+        fun onResponse(listOfLocations: ArrayList<LatLng>?)
 
         fun onFailed()
 

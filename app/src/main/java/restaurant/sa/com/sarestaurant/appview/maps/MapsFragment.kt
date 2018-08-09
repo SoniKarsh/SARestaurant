@@ -65,9 +65,8 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
 
     override fun onConnected(p0: Bundle?) {
         for(i in listOfLocations){
-            addLocationAlert(i.latitude, i.longitude);
+            addLocationAlert(i.latitude, i.longitude)
         }
-
     }
 
     override fun onAttach(context: Context?) {

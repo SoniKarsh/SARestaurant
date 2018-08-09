@@ -23,6 +23,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragme
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
@@ -33,6 +34,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_home.*
+import kotlinx.android.synthetic.main.fragment_restaurant.*
 import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallReceiver
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
@@ -247,6 +249,13 @@ class HomeActivity : AppCompatActivity(), TempFoundCallback, DetailPresenter, Na
                             .hide(supportFragmentManager.findFragmentById(R.id.fragmentHolder))
                             .addToBackStack(mapsFragment.javaClass.simpleName)
                             .commit()
+                }else if(!SARestaurantApp.instance!!.isClickableForMap){
+                    val snackbar = Snackbar
+                            .make(constraintLayoutRest, getString(R.string.no_data_found), Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.ok), View.OnClickListener {
+                                ToastUtils.lengthShort(this, getString(R.string.refresh))
+                            })
+                    snackbar.show()
                 }
                 return true
             }

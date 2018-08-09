@@ -24,6 +24,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailM
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesPhotoClient
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
+import restaurant.sa.com.sarestaurant.utils.ToastUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,6 +81,15 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
             items = removeItem(adapterPos)
             notifyItemRemoved(holder.adapterPosition)
             notifyItemRangeChanged(holder.adapterPosition, items!!.size)
+            if(items!!.isEmpty()){
+                SARestaurantApp.instance!!.isClickableForMap = false
+                val snackbar = Snackbar
+                        .make((context as HomeActivity).constraintLayoutRest, context.getString(R.string.empty_list), Snackbar.LENGTH_INDEFINITE)
+                        .setAction(context.getString(R.string.ok), View.OnClickListener {
+                            ToastUtils.lengthShort(context, context.getString(R.string.refresh))
+                        })
+                snackbar.show()
+            }
         }
 
         holder.sharePost.setOnClickListener {

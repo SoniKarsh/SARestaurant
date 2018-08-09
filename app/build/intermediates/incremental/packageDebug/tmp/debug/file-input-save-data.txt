@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Aug 09 15:46:04 IST 2018
+#Thu Aug 09 18:42:21 IST 2018
 1.base=/home/karshsoni/SA/SARestaurant5/SARestaurant/app/build/intermediates/transforms/dexMerger/debug/30
 2.path=classes.dex
 0.baseType=DIRECTORY

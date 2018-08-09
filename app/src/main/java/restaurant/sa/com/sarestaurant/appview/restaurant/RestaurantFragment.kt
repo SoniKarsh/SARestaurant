@@ -196,7 +196,8 @@ class RestaurantFragment: Fragment(), RestaurantView {
     // Remove progress bar on onStop of fragment lifecycler to avoid null object reference error
     override fun onStop() {
         super.onStop()
-
+        // isClickableForMap
+        SARestaurantApp.instance!!.isClickableForMap = false
         if(handler!=null) {
             handler!!.removeCallbacks(runnable)
         }

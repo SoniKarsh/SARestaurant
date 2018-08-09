@@ -17,10 +17,10 @@ public abstract interface RestaurantPresenter {
     public abstract java.util.ArrayList<restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel> getListOfTitleImg(@org.jetbrains.annotations.NotNull()
     restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass responseFromParse);
     
-    @kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000 \n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\bf\u0018\u00002\u00020\u0001J\b\u0010\u0002\u001a\u00020\u0003H&J \u0010\u0004\u001a\u00020\u00032\u0016\u0010\u0005\u001a\u0012\u0012\u0004\u0012\u00020\u00070\u0006j\b\u0012\u0004\u0012\u00020\u0007`\bH&\u00a8\u0006\t"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/presenter/RestaurantPresenter$OnCallBack;", "", "onFailed", "", "onResponse", "listOfLocations", "Ljava/util/ArrayList;", "Lcom/google/android/gms/maps/model/LatLng;", "Lkotlin/collections/ArrayList;", "app_debug"})
+    @kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000 \n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\bf\u0018\u00002\u00020\u0001J\b\u0010\u0002\u001a\u00020\u0003H&J$\u0010\u0004\u001a\u00020\u00032\u001a\u0010\u0005\u001a\u0016\u0012\u0004\u0012\u00020\u0007\u0018\u00010\u0006j\n\u0012\u0004\u0012\u00020\u0007\u0018\u0001`\bH&\u00a8\u0006\t"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/restaurant/presenter/RestaurantPresenter$OnCallBack;", "", "onFailed", "", "onResponse", "listOfLocations", "Ljava/util/ArrayList;", "Lcom/google/android/gms/maps/model/LatLng;", "Lkotlin/collections/ArrayList;", "app_debug"})
     public static abstract interface OnCallBack {
         
-        public abstract void onResponse(@org.jetbrains.annotations.NotNull()
+        public abstract void onResponse(@org.jetbrains.annotations.Nullable()
         java.util.ArrayList<com.google.android.gms.maps.model.LatLng> listOfLocations);
         
         public abstract void onFailed();
