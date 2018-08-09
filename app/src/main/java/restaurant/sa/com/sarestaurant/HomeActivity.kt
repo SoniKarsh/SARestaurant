@@ -25,6 +25,7 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragme
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
 import android.location.Location
+import android.os.Build
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
@@ -36,9 +37,11 @@ import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.*
+import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
+import restaurant.sa.com.sarestaurant.utils.LogUtils
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
@@ -59,6 +62,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     var permissionUtils: PermissionUtils? = null
     var homeActivity: HomeActivity? = null
     var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
+    private val jobId = 123
     var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -98,6 +102,9 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             override fun onPermissionGranted() {
                 homeBtn.visibility = View.GONE
                 homeTV.visibility = View.GONE
+                if(SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "") == ""){
+                    scheduleJob()
+                }
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthShort(this@HomeActivity, "GRANTED")
                 if(fragmentHolder.visibility == View.GONE){
@@ -151,6 +158,28 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         }
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    fun scheduleJob(){
+        val componentName = ComponentName(this, ApiCallJobService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val info = JobInfo.Builder(jobId, componentName)
+                    .setPersisted(true)
+                    .setPeriodic((60* 60 *1000).toLong()) //60* 60 *1000
+                    .build()
+            val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+            val resultCode = scheduler.schedule(info)
+            if (resultCode == JobScheduler.RESULT_SUCCESS) {
+                LogUtils.setTag(TAG)
+                LogUtils.i("Job scheduled")
+            } else {
+                LogUtils.setTag(TAG)
+                LogUtils.e("Job scheduling failed")
+            }
+        } else {
+            LogUtils.setTag(TAG)
+            LogUtils.e("VERSION.SDK_INT < LOLLIPOP")
+        }
     }
 
     override fun onContextItemSelected(item: MenuItem?): Boolean {

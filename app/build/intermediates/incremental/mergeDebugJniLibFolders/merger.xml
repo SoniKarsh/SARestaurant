@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/karsh/Documents/SARestaurant3/SARestaurant/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/home/karsh/Documents/SARestaurant3/SARestaurant/app/src/debug/jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/karshsoni/SA/SARestaurant5/SARestaurant/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/home/karshsoni/SA/SARestaurant5/SARestaurant/app/src/debug/jniLibs"/></dataSet></merger>

@@ -12,8 +12,6 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import android.util.Log
-import android.widget.RemoteViews
-import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import restaurant.sa.com.sarestaurant.HomeActivity
@@ -36,7 +34,6 @@ class ApiCallJobService: JobService(), HomeCallback {
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private var weatherFragment: WeatherFragment? = null
     var weatherData: WeatherData? = null
-    var notificationLayout: RemoteViews? = null
     private var mNotificationManager: NotificationManager? = null
     var notification: Notification? = null
     override fun onStartJob(params: JobParameters): Boolean {
@@ -50,7 +47,7 @@ class ApiCallJobService: JobService(), HomeCallback {
     override fun sendWeatherData(weatherData: WeatherData) {
         Log.d(TAG, "sendWeatherData: $weatherData")
 
-        updateNotification()
+        updateNotification(weatherData)
     }
 
     override fun getData() {
@@ -87,9 +84,7 @@ class ApiCallJobService: JobService(), HomeCallback {
 
     fun shownotification(){
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        var notificationIntent = Intent(this, HomeActivity::class.java)
 
-        notificationLayout  = RemoteViews(this.packageName, R.layout.status_bar)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
             var mChannel = mNotificationManager!!.getNotificationChannel(channelId)
@@ -103,7 +98,7 @@ class ApiCallJobService: JobService(), HomeCallback {
             val intent = Intent(this, HomeActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-            builder.setContentTitle("Job Scheduled")  // required
+            builder.setContentTitle(this.getString(R.string.app_name))  // required
                     .setSmallIcon(android.R.drawable.ic_popup_reminder) // required
                     .setContentText(this.getString(R.string.app_name))  // required
                     .setDefaults(Notification.DEFAULT_ALL)
@@ -131,9 +126,11 @@ class ApiCallJobService: JobService(), HomeCallback {
         startForeground(1, notification)
     }
 
-    fun updateNotification(){
-        notificationLayout!!.setTextViewText(R.id.tempTV, weatherData!!.temp)
-        mNotificationManager!!.notify(1, notification)
+    fun updateNotification(weatherData: WeatherData){
+        Log.d(TAG, "updateNotification: ${weatherData.temp}");
+        builder.setContentTitle(this.resources.getString(R.string.weatherData))
+                .setContentText(weatherData.temp+this.resources.getString(R.string.f))
+        mNotificationManager!!.notify(123, builder.build())
 
     }
 

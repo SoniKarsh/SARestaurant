@@ -2335,7 +2335,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>
@@ -5170,51 +5170,49 @@ public final class R {
     public static final int tabMode=0x7f0800fc;
     public static final int tag_transition_group=0x7f0800fd;
     public static final int temp=0x7f0800fe;
-    public static final int tempImg=0x7f0800ff;
-    public static final int tempTV=0x7f080100;
-    public static final int terrain=0x7f080101;
-    public static final int text=0x7f080102;
-    public static final int text2=0x7f080103;
-    public static final int textSpacerNoButtons=0x7f080104;
-    public static final int textSpacerNoTitle=0x7f080105;
-    public static final int text_input_password_toggle=0x7f080106;
-    public static final int textinput_counter=0x7f080107;
-    public static final int textinput_error=0x7f080108;
-    public static final int time=0x7f080109;
-    public static final int title=0x7f08010a;
-    public static final int titleDividerNoCustom=0x7f08010b;
-    public static final int title_template=0x7f08010c;
-    public static final int toggleButton2=0x7f08010d;
-    public static final int toolbar=0x7f08010e;
-    public static final int top=0x7f08010f;
-    public static final int topPanel=0x7f080110;
-    public static final int touch_outside=0x7f080111;
-    public static final int transition_current_scene=0x7f080112;
-    public static final int transition_layout_save=0x7f080113;
-    public static final int transition_position=0x7f080114;
-    public static final int transition_scene_layoutid_cache=0x7f080115;
-    public static final int transition_transform=0x7f080116;
-    public static final int tvAddress=0x7f080117;
-    public static final int tvInfo=0x7f080118;
-    public static final int tvRatingBar2=0x7f080119;
-    public static final int txtConfirmPassword=0x7f08011a;
-    public static final int txtEmailId=0x7f08011b;
-    public static final int txtMobileNo=0x7f08011c;
-    public static final int txtPassword=0x7f08011d;
-    public static final int txtUserName=0x7f08011e;
-    public static final int uniform=0x7f08011f;
-    public static final int unknown=0x7f080120;
-    public static final int up=0x7f080121;
-    public static final int useLogo=0x7f080122;
-    public static final int userNameWrapper=0x7f080123;
-    public static final int viewPager=0x7f080124;
-    public static final int view_offset_helper=0x7f080125;
-    public static final int visible=0x7f080126;
-    public static final int weatherFrag=0x7f080127;
-    public static final int wide=0x7f080128;
-    public static final int withText=0x7f080129;
-    public static final int wrap=0x7f08012a;
-    public static final int wrap_content=0x7f08012b;
+    public static final int terrain=0x7f0800ff;
+    public static final int text=0x7f080100;
+    public static final int text2=0x7f080101;
+    public static final int textSpacerNoButtons=0x7f080102;
+    public static final int textSpacerNoTitle=0x7f080103;
+    public static final int text_input_password_toggle=0x7f080104;
+    public static final int textinput_counter=0x7f080105;
+    public static final int textinput_error=0x7f080106;
+    public static final int time=0x7f080107;
+    public static final int title=0x7f080108;
+    public static final int titleDividerNoCustom=0x7f080109;
+    public static final int title_template=0x7f08010a;
+    public static final int toggleButton2=0x7f08010b;
+    public static final int toolbar=0x7f08010c;
+    public static final int top=0x7f08010d;
+    public static final int topPanel=0x7f08010e;
+    public static final int touch_outside=0x7f08010f;
+    public static final int transition_current_scene=0x7f080110;
+    public static final int transition_layout_save=0x7f080111;
+    public static final int transition_position=0x7f080112;
+    public static final int transition_scene_layoutid_cache=0x7f080113;
+    public static final int transition_transform=0x7f080114;
+    public static final int tvAddress=0x7f080115;
+    public static final int tvInfo=0x7f080116;
+    public static final int tvRatingBar2=0x7f080117;
+    public static final int txtConfirmPassword=0x7f080118;
+    public static final int txtEmailId=0x7f080119;
+    public static final int txtMobileNo=0x7f08011a;
+    public static final int txtPassword=0x7f08011b;
+    public static final int txtUserName=0x7f08011c;
+    public static final int uniform=0x7f08011d;
+    public static final int unknown=0x7f08011e;
+    public static final int up=0x7f08011f;
+    public static final int useLogo=0x7f080120;
+    public static final int userNameWrapper=0x7f080121;
+    public static final int viewPager=0x7f080122;
+    public static final int view_offset_helper=0x7f080123;
+    public static final int visible=0x7f080124;
+    public static final int weatherFrag=0x7f080125;
+    public static final int wide=0x7f080126;
+    public static final int withText=0x7f080127;
+    public static final int wrap=0x7f080128;
+    public static final int wrap_content=0x7f080129;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f090000;
@@ -5321,8 +5319,7 @@ public final class R {
     public static final int slide=0x7f0a0058;
     public static final int sp_example=0x7f0a0059;
     public static final int ssp_example=0x7f0a005a;
-    public static final int status_bar=0x7f0a005b;
-    public static final int support_simple_spinner_dropdown_item=0x7f0a005c;
+    public static final int support_simple_spinner_dropdown_item=0x7f0a005b;
   }
   public static final class menu {
     public static final int activity_home_drawer=0x7f0b0000;
@@ -5449,26 +5446,30 @@ public final class R {
     public static final int path_password_eye_mask_strike_through=0x7f0d0070;
     public static final int path_password_eye_mask_visible=0x7f0d0071;
     public static final int path_password_strike_through=0x7f0d0072;
-    public static final int previous=0x7f0d0073;
-    public static final int request_permission=0x7f0d0074;
-    public static final int restLogo=0x7f0d0075;
-    public static final int restaurant_address=0x7f0d0076;
-    public static final int restaurant_name=0x7f0d0077;
-    public static final int sarestaurant=0x7f0d0078;
-    public static final int search_menu_title=0x7f0d0079;
-    public static final int show_map=0x7f0d007a;
-    public static final int sign_in=0x7f0d007b;
-    public static final int sign_up=0x7f0d007c;
-    public static final int slide_description=0x7f0d007d;
-    public static final int status_bar_notification_info_overflow=0x7f0d007e;
-    public static final int temperature=0x7f0d007f;
-    public static final int text=0x7f0d0080;
-    public static final int title_activity_home=0x7f0d0081;
-    public static final int user_name=0x7f0d0082;
-    public static final int weather=0x7f0d0083;
-    public static final int weather_image=0x7f0d0084;
-    public static final int yes=0x7f0d0085;
-    public static final int your_location=0x7f0d0086;
+    public static final int permission_dialog=0x7f0d0073;
+    public static final int permission_needed=0x7f0d0074;
+    public static final int permission_rationale_dialog=0x7f0d0075;
+    public static final int previous=0x7f0d0076;
+    public static final int request_permission=0x7f0d0077;
+    public static final int restLogo=0x7f0d0078;
+    public static final int restaurant_address=0x7f0d0079;
+    public static final int restaurant_name=0x7f0d007a;
+    public static final int sarestaurant=0x7f0d007b;
+    public static final int search_menu_title=0x7f0d007c;
+    public static final int show_map=0x7f0d007d;
+    public static final int sign_in=0x7f0d007e;
+    public static final int sign_up=0x7f0d007f;
+    public static final int slide_description=0x7f0d0080;
+    public static final int status_bar_notification_info_overflow=0x7f0d0081;
+    public static final int temperature=0x7f0d0082;
+    public static final int text=0x7f0d0083;
+    public static final int title_activity_home=0x7f0d0084;
+    public static final int user_name=0x7f0d0085;
+    public static final int weather=0x7f0d0086;
+    public static final int weatherData=0x7f0d0087;
+    public static final int weather_image=0x7f0d0088;
+    public static final int yes=0x7f0d0089;
+    public static final int your_location=0x7f0d008a;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0e0000;
@@ -10803,7 +10804,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>

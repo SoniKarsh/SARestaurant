@@ -870,30 +870,30 @@ public final class R {
         public static final int submit_area = 0x7f0800fb;
         public static final int tabMode = 0x7f0800fc;
         public static final int tag_transition_group = 0x7f0800fd;
-        public static final int text = 0x7f080102;
-        public static final int text2 = 0x7f080103;
-        public static final int textSpacerNoButtons = 0x7f080104;
-        public static final int textSpacerNoTitle = 0x7f080105;
-        public static final int text_input_password_toggle = 0x7f080106;
-        public static final int textinput_counter = 0x7f080107;
-        public static final int textinput_error = 0x7f080108;
-        public static final int time = 0x7f080109;
-        public static final int title = 0x7f08010a;
-        public static final int titleDividerNoCustom = 0x7f08010b;
-        public static final int title_template = 0x7f08010c;
-        public static final int top = 0x7f08010f;
-        public static final int topPanel = 0x7f080110;
-        public static final int touch_outside = 0x7f080111;
-        public static final int transition_current_scene = 0x7f080112;
-        public static final int transition_layout_save = 0x7f080113;
-        public static final int transition_position = 0x7f080114;
-        public static final int transition_scene_layoutid_cache = 0x7f080115;
-        public static final int transition_transform = 0x7f080116;
-        public static final int uniform = 0x7f08011f;
-        public static final int up = 0x7f080121;
-        public static final int view_offset_helper = 0x7f080125;
-        public static final int visible = 0x7f080126;
-        public static final int wrap_content = 0x7f08012b;
+        public static final int text = 0x7f080100;
+        public static final int text2 = 0x7f080101;
+        public static final int textSpacerNoButtons = 0x7f080102;
+        public static final int textSpacerNoTitle = 0x7f080103;
+        public static final int text_input_password_toggle = 0x7f080104;
+        public static final int textinput_counter = 0x7f080105;
+        public static final int textinput_error = 0x7f080106;
+        public static final int time = 0x7f080107;
+        public static final int title = 0x7f080108;
+        public static final int titleDividerNoCustom = 0x7f080109;
+        public static final int title_template = 0x7f08010a;
+        public static final int top = 0x7f08010d;
+        public static final int topPanel = 0x7f08010e;
+        public static final int touch_outside = 0x7f08010f;
+        public static final int transition_current_scene = 0x7f080110;
+        public static final int transition_layout_save = 0x7f080111;
+        public static final int transition_position = 0x7f080112;
+        public static final int transition_scene_layoutid_cache = 0x7f080113;
+        public static final int transition_transform = 0x7f080114;
+        public static final int uniform = 0x7f08011d;
+        public static final int up = 0x7f08011f;
+        public static final int view_offset_helper = 0x7f080123;
+        public static final int visible = 0x7f080124;
+        public static final int wrap_content = 0x7f080129;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f090000;
@@ -967,7 +967,7 @@ public final class R {
         public static final int select_dialog_item_material = 0x7f0a0054;
         public static final int select_dialog_multichoice_material = 0x7f0a0055;
         public static final int select_dialog_singlechoice_material = 0x7f0a0056;
-        public static final int support_simple_spinner_dropdown_item = 0x7f0a005c;
+        public static final int support_simple_spinner_dropdown_item = 0x7f0a005b;
     }
     public static final class string {
         public static final int abc_action_bar_home_description = 0x7f0d0000;
@@ -1007,8 +1007,8 @@ public final class R {
         public static final int path_password_eye_mask_strike_through = 0x7f0d0070;
         public static final int path_password_eye_mask_visible = 0x7f0d0071;
         public static final int path_password_strike_through = 0x7f0d0072;
-        public static final int search_menu_title = 0x7f0d0079;
-        public static final int status_bar_notification_info_overflow = 0x7f0d007e;
+        public static final int search_menu_title = 0x7f0d007c;
+        public static final int status_bar_notification_info_overflow = 0x7f0d0081;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0e0000;

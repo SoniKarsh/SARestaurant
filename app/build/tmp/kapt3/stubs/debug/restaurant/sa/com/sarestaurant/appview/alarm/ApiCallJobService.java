@@ -3,7 +3,7 @@ package restaurant.sa.com.sarestaurant.appview.alarm;
 import java.lang.System;
 
 @android.support.annotation.RequiresApi(value = android.os.Build.VERSION_CODES.LOLLIPOP)
-@kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000\\\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0010\u000b\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0007\b\u0007\u0018\u00002\u00020\u00012\u00020\u0002B\u0005\u00a2\u0006\u0002\u0010\u0003J\u0010\u0010\'\u001a\u00020(2\u0006\u0010)\u001a\u00020*H\u0002J\b\u0010+\u001a\u00020(H\u0016J\u0010\u0010,\u001a\u00020\u000e2\u0006\u0010)\u001a\u00020*H\u0016J\u0010\u0010-\u001a\u00020\u000e2\u0006\u0010)\u001a\u00020*H\u0016J\u0010\u0010.\u001a\u00020(2\u0006\u0010\u001f\u001a\u00020 H\u0016J\u0006\u0010/\u001a\u00020(J\u0006\u00100\u001a\u00020(R\u000e\u0010\u0004\u001a\u00020\u0005X\u0082D\u00a2\u0006\u0002\n\u0000R\u001a\u0010\u0006\u001a\u00020\u0007X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\b\u0010\t\"\u0004\b\n\u0010\u000bR\u000e\u0010\f\u001a\u00020\u0005X\u0082D\u00a2\u0006\u0002\n\u0000R\u000e\u0010\r\u001a\u00020\u000eX\u0082\u000e\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u000f\u001a\u00020\u0010X\u0082.\u00a2\u0006\u0002\n\u0000R\u0010\u0010\u0011\u001a\u0004\u0018\u00010\u0012X\u0082\u000e\u00a2\u0006\u0002\n\u0000R\u001c\u0010\u0013\u001a\u0004\u0018\u00010\u0014X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0015\u0010\u0016\"\u0004\b\u0017\u0010\u0018R\u001c\u0010\u0019\u001a\u0004\u0018\u00010\u001aX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001b\u0010\u001c\"\u0004\b\u001d\u0010\u001eR\u001c\u0010\u001f\u001a\u0004\u0018\u00010 X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b!\u0010\"\"\u0004\b#\u0010$R\u0010\u0010%\u001a\u0004\u0018\u00010&X\u0082\u000e\u00a2\u0006\u0002\n\u0000\u00a8\u00061"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/alarm/ApiCallJobService;", "Landroid/app/job/JobService;", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/presenter/HomeCallback;", "()V", "TAG", "", "builder", "Landroid/support/v4/app/NotificationCompat$Builder;", "getBuilder", "()Landroid/support/v4/app/NotificationCompat$Builder;", "setBuilder", "(Landroid/support/v4/app/NotificationCompat$Builder;)V", "channelId", "jobCancelled", "", "mFusedLocationProviderClient", "Lcom/google/android/gms/location/FusedLocationProviderClient;", "mNotificationManager", "Landroid/app/NotificationManager;", "notification", "Landroid/app/Notification;", "getNotification", "()Landroid/app/Notification;", "setNotification", "(Landroid/app/Notification;)V", "notificationLayout", "Landroid/widget/RemoteViews;", "getNotificationLayout", "()Landroid/widget/RemoteViews;", "setNotificationLayout", "(Landroid/widget/RemoteViews;)V", "weatherData", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;", "getWeatherData", "()Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;", "setWeatherData", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;)V", "weatherFragment", "Lrestaurant/sa/com/sarestaurant/appview/weather/WeatherFragment;", "doBackgroundWork", "", "params", "Landroid/app/job/JobParameters;", "getData", "onStartJob", "onStopJob", "sendWeatherData", "shownotification", "updateNotification", "app_debug"})
+@kotlin.Metadata(mv = {1, 1, 9}, bv = {1, 0, 2}, k = 1, d1 = {"\u0000T\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0006\n\u0002\u0010\u000b\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0007\b\u0007\u0018\u00002\u00020\u00012\u00020\u0002B\u0005\u00a2\u0006\u0002\u0010\u0003J\u0010\u0010!\u001a\u00020\"2\u0006\u0010#\u001a\u00020$H\u0002J\b\u0010%\u001a\u00020\"H\u0016J\u0010\u0010&\u001a\u00020\u000e2\u0006\u0010#\u001a\u00020$H\u0016J\u0010\u0010\'\u001a\u00020\u000e2\u0006\u0010#\u001a\u00020$H\u0016J\u0010\u0010(\u001a\u00020\"2\u0006\u0010\u0019\u001a\u00020\u001aH\u0016J\u0006\u0010)\u001a\u00020\"J\u000e\u0010*\u001a\u00020\"2\u0006\u0010\u0019\u001a\u00020\u001aR\u000e\u0010\u0004\u001a\u00020\u0005X\u0082D\u00a2\u0006\u0002\n\u0000R\u001a\u0010\u0006\u001a\u00020\u0007X\u0086.\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\b\u0010\t\"\u0004\b\n\u0010\u000bR\u000e\u0010\f\u001a\u00020\u0005X\u0082D\u00a2\u0006\u0002\n\u0000R\u000e\u0010\r\u001a\u00020\u000eX\u0082\u000e\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u000f\u001a\u00020\u0010X\u0082.\u00a2\u0006\u0002\n\u0000R\u0010\u0010\u0011\u001a\u0004\u0018\u00010\u0012X\u0082\u000e\u00a2\u0006\u0002\n\u0000R\u001c\u0010\u0013\u001a\u0004\u0018\u00010\u0014X\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u0015\u0010\u0016\"\u0004\b\u0017\u0010\u0018R\u001c\u0010\u0019\u001a\u0004\u0018\u00010\u001aX\u0086\u000e\u00a2\u0006\u000e\n\u0000\u001a\u0004\b\u001b\u0010\u001c\"\u0004\b\u001d\u0010\u001eR\u0010\u0010\u001f\u001a\u0004\u0018\u00010 X\u0082\u000e\u00a2\u0006\u0002\n\u0000\u00a8\u0006+"}, d2 = {"Lrestaurant/sa/com/sarestaurant/appview/alarm/ApiCallJobService;", "Landroid/app/job/JobService;", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/presenter/HomeCallback;", "()V", "TAG", "", "builder", "Landroid/support/v4/app/NotificationCompat$Builder;", "getBuilder", "()Landroid/support/v4/app/NotificationCompat$Builder;", "setBuilder", "(Landroid/support/v4/app/NotificationCompat$Builder;)V", "channelId", "jobCancelled", "", "mFusedLocationProviderClient", "Lcom/google/android/gms/location/FusedLocationProviderClient;", "mNotificationManager", "Landroid/app/NotificationManager;", "notification", "Landroid/app/Notification;", "getNotification", "()Landroid/app/Notification;", "setNotification", "(Landroid/app/Notification;)V", "weatherData", "Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;", "getWeatherData", "()Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;", "setWeatherData", "(Lrestaurant/sa/com/sarestaurant/appview/restaurant/model/WeatherData;)V", "weatherFragment", "Lrestaurant/sa/com/sarestaurant/appview/weather/WeatherFragment;", "doBackgroundWork", "", "params", "Landroid/app/job/JobParameters;", "getData", "onStartJob", "onStopJob", "sendWeatherData", "shownotification", "updateNotification", "app_debug"})
 public final class ApiCallJobService extends android.app.job.JobService implements restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback {
     private final java.lang.String TAG = "ApiCallJobService";
     private boolean jobCancelled;
@@ -14,8 +14,6 @@ public final class ApiCallJobService extends android.app.job.JobService implemen
     private restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment weatherFragment;
     @org.jetbrains.annotations.Nullable()
     private restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData weatherData;
-    @org.jetbrains.annotations.Nullable()
-    private android.widget.RemoteViews notificationLayout;
     private android.app.NotificationManager mNotificationManager;
     @org.jetbrains.annotations.Nullable()
     private android.app.Notification notification;
@@ -36,15 +34,6 @@ public final class ApiCallJobService extends android.app.job.JobService implemen
     
     public final void setWeatherData(@org.jetbrains.annotations.Nullable()
     restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData p0) {
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final android.widget.RemoteViews getNotificationLayout() {
-        return null;
-    }
-    
-    public final void setNotificationLayout(@org.jetbrains.annotations.Nullable()
-    android.widget.RemoteViews p0) {
     }
     
     @org.jetbrains.annotations.Nullable()
@@ -83,7 +72,8 @@ public final class ApiCallJobService extends android.app.job.JobService implemen
     public final void shownotification() {
     }
     
-    public final void updateNotification() {
+    public final void updateNotification(@org.jetbrains.annotations.NotNull()
+    restaurant.sa.com.sarestaurant.appview.restaurant.model.WeatherData weatherData) {
     }
     
     public ApiCallJobService() {

@@ -71,5 +71,9 @@
     <string name="close_dialog">Closing Activity</string>
     <string name="close_txt">Are you sure you want to close this activity?</string>
     <string name="f">F</string>
+    <string name="permission_rationale_dialog">This permission is needed because of fetching nearby restaurant list</string>
+    <string name="permission_needed">Permission needed</string>
+    <string name="permission_dialog">and fetching weather data.</string>
+    <string name="weatherData">Current Temperature</string>
 
 </resources>

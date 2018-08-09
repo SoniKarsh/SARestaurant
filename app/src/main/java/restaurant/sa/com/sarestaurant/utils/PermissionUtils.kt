@@ -6,6 +6,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import restaurant.sa.com.sarestaurant.HomeActivity
+import restaurant.sa.com.sarestaurant.R
 
 class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -56,7 +57,6 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
                         }
                         LogUtils.setTag(TAG)
                         LogUtils.d(this.permissions.toString())
-                        ToastUtils.lengthShort(context, this.permissions.toString())
                         askForPermissions(this.permissions!!)
                     }
                 }
@@ -98,9 +98,9 @@ class PermissionUtils(private val context: Context): ActivityCompat.OnRequestPer
             if(ActivityCompat.shouldShowRequestPermissionRationale(homeActivity, permissionList[i])){
                 count++
                 AlertDialog.Builder(homeActivity)
-                        .setTitle("Permission needed")
-                        .setMessage("This permission is needed because of fetching nearby restaurant list" +
-                                " and fetching weather data.")
+                        .setTitle(context.getString(R.string.permission_needed))
+                        .setMessage(context.getString(R.string.permission_rationale_dialog) +
+                                context.getString(R.string.permission_dialog))
                         .setPositiveButton("ok") { dialog, which ->
                             ActivityCompat.requestPermissions(homeActivity,
                                     permissionList, LOCATION_PERMISSION_REQUEST_CODE)
