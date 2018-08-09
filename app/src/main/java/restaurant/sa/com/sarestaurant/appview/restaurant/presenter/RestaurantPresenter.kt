@@ -13,12 +13,20 @@ interface RestaurantPresenter {
 
     fun getListOfTitleImg(responseFromParse: ResponseModelClass) :ArrayList<TitleImgModel>
 
+    fun getFavListOfTitleImg(listOfFavoriteRestaurantModel: ArrayList<FavoriteRestaurantModel>, listener: OnTitleImgCallBack) :ArrayList<TitleImgModel>
+
     interface OnCallBack{
 
         fun onResponse(listOfLocations: ArrayList<LatLng>?)
 
         fun onFailed()
 
+    }
+
+    interface OnTitleImgCallBack{
+        fun onResponse(titleImgModel: ArrayList<TitleImgModel>?)
+
+        fun onFailed()
     }
 
 }

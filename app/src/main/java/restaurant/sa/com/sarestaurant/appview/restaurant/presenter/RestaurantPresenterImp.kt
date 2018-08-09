@@ -49,4 +49,11 @@ class RestaurantPresenterImp: RestaurantPresenter {
         return listOfTitleImgModel
     }
 
+    override fun getFavListOfTitleImg(listOfFavoriteRestaurantModel: ArrayList<FavoriteRestaurantModel>, listener: RestaurantPresenter.OnTitleImgCallBack): ArrayList<TitleImgModel> {
+        for(i in listOfFavoriteRestaurantModel){
+            listOfTitleImgModel.add(TitleImgModel(i.restaurantName, i.restaurantImagePath, i.restaurantAddress, i.rating))
+        }
+        return listOfTitleImgModel
+    }
+
 }

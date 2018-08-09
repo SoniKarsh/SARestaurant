@@ -24,7 +24,7 @@ import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 import android.support.design.widget.Snackbar
 import restaurant.sa.com.sarestaurant.R.id.coordinatorLayout
-
+import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 
 
 class FavoriteFragment: Fragment(), RestaurantView {
@@ -108,6 +108,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
                 }
                 listOfPlacesLocation = listOfLocations
                 locationCommunication.sendLocationFromRestaurant(listOfPlacesLocation)
+
                 Log.d(TAG, "onResponse: Stop Progress")
                 restaurantView!!.stopProgress()
             }
@@ -116,6 +117,18 @@ class FavoriteFragment: Fragment(), RestaurantView {
                 restaurantView!!.stopProgress()
                 Toast.makeText(homeActivity, "Error Occurred!!!", Toast.LENGTH_LONG).show()
             }
+        })
+
+        // Title Image code .... need to change . just copied from above.
+        restaurantPresenterImp.getFavListOfTitleImg(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.OnTitleImgCallBack{
+            override fun onResponse(titleImgModel: ArrayList<TitleImgModel>?) {
+                locationCommunication.sendNameImgFromRestaurant(titleImgModel!!)
+            }
+
+            override fun onFailed() {
+
+            }
+
         })
         recyclerView.adapter = FavoriteListAdapter(SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
         recyclerView.layoutManager = layout
