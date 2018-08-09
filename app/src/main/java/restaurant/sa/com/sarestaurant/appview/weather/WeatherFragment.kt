@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.google.android.gms.common.api.Api
 import restaurant.sa.com.sarestaurant.appview.weather.model.ResponseModelClass
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,8 +42,6 @@ class WeatherFragment : Fragment() {
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     lateinit var homeActivity: HomeActivity
     lateinit var contextRestFrag: Context
-    var granted = false
-    var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
     var weatherPresenterImp: WeatherPresenterImp? = null
     var homeCallback: HomeCallback? = null
     var isRunning: Boolean = false
@@ -106,7 +103,6 @@ class WeatherFragment : Fragment() {
         val client: WeatherApiClient = retrofit.create(WeatherApiClient::class.java)
 
         val mHandler = Handler(Looper.getMainLooper());
-        val weatherModel = WeatherModel()
         val call = client.sendRequestForPlaces("select * from weather.forecast where woeid in (SELECT woeid FROM geo.places WHERE text= \"(${location.latitude},${location.longitude})\")", "json")
         call.enqueue(object : Callback<ResponseModelClass> {
             override fun onFailure(call: Call<ResponseModelClass>?, t: Throwable?) {
@@ -114,32 +110,27 @@ class WeatherFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<ResponseModelClass>?, responseModelClass: Response<ResponseModelClass>?) {
+                val weatherModel = WeatherModel()
                 if (isRunning) {
                     if (isVisible && isAdded) {
                         weatherModel.temperature = responseModelClass!!.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp!!
                         mHandler.post(Runnable {
-                            val temperature = resources.getString(R.string.temperature) + responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp
+                            val temperature = resources.getString(R.string.temperature) + weatherModel.temperature
                             val imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
                             val locationOfWeather = responseModelClass.body()!!.query!!.results!!.channel!!.location
-                            val windWeather = responseModelClass.body()!!.query!!.results!!.channel!!.wind
                             val cityName = locationOfWeather!!.city
                             val region = locationOfWeather.region
                             val country = locationOfWeather.country
                             val cityDetail = cityName + region + country
-
                             weatherData.imgUrl = imgUrl
                             weatherData.temp = responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp!!
                             weatherModel.imgUrl = imgUrl
-                            SARestaurantApp.database!!.weatherDao().insertData(weatherModel)
                             if (isRunning) {
-                                Log.d(TAG, "onResponse: isRunning");
                                 weatherFrag.text = cityDetail // must be inside run()
                                 temp.text = temperature
                                 val imgUrlRun = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
                                 Picasso.get().load(imgUrlRun)
                                         .into(imageView)
-                            } else {
-
                             }
                             SARestaurantApp.instance!!.sharedPreference!!.edit()
                                     .putString("temp", responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp)
@@ -152,15 +143,18 @@ class WeatherFragment : Fragment() {
                     val imgUrl = "http://l.yimg.com/a/i/us/we/52/${responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.code}.gif"
                     weatherData.imgUrl = imgUrl
                     weatherData.temp = temperature!!
+                    weatherModel.temperature = responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp
+                    weatherModel.imgUrl = imgUrl
                     val service = context as ApiCallJobService
                     homeCallback = service
                     homeCallback!!.sendWeatherData(weatherData)
                     SARestaurantApp.instance!!.sharedPreference!!.edit()
-                            .putString("temp", responseModelClass.body()!!.query!!.results!!.channel!!.item!!.condition!!.temp)
+                            .putString("temp", weatherModel.temperature)
                             .putString("imgurl", imgUrl)
                             .apply()
 
                 }
+                SARestaurantApp.database!!.weatherDao().insertData(weatherModel)
             }
         })
     }

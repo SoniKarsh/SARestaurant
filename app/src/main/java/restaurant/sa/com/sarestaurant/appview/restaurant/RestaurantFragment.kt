@@ -138,17 +138,18 @@ class RestaurantFragment: Fragment(), RestaurantView {
             handler!!.postDelayed({
 
                 // To avoid infinite progress bar
-                if(simpleSwipeRefreshLayout!=null){
+                if (simpleSwipeRefreshLayout != null) {
                     simpleSwipeRefreshLayout.isRefreshing = false
                 }
 
                 // On refresh clear current adapter
-                if(adapter!=null){
+                if (adapter != null) {
                     adapter!!.items.clear()
                 }
-                // API call
-                retrofitCall(currentLocation!!)
 
+                if (isAdded && isVisible){// API call
+                    retrofitCall(currentLocation!!)
+                }
                 // Enabled scroll on result retrieval
                 layout.setScrollEnabled(true)
 

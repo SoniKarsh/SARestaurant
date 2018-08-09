@@ -42,7 +42,6 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
     lateinit var restaurantDetailModel: RestaurantDetailModel
     private lateinit var homeActivity: HomeActivity
     val BASE_URL = "https://maps.googleapis.com"
-    val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteListAdapter.CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
@@ -56,7 +55,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
         favoriteRestaurantModel = FavoriteRestaurantModel()
         restaurantDetailModel = RestaurantDetailModel()
 
-        if(items != null){
+        if(items != null && items!!.isNotEmpty()){
             Log.d(TAG, "onBindViewHolder: called/n");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.restaurantImage.clipToOutline = true
@@ -72,7 +71,6 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
             holder.restaurantImgUrl = imgUrl
             if (items!![holder.adapterPosition].isFavorite!!) {
                 holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
-//            addItem(favoriteRestaurantModel)
             }
         }else{
             Snackbar.make(homeActivity.constraintLayoutRest, "Data not Found :(", Snackbar.LENGTH_LONG)
@@ -80,7 +78,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
         }
 
         holder.favoriteButton.setOnClickListener {
-            var adapterPos = items!![holder.adapterPosition].adapterPosition
+            val adapterPos = items!![holder.adapterPosition].adapterPosition
             items = removeItem(adapterPos)
             notifyItemRemoved(holder.adapterPosition)
             notifyItemRangeChanged(holder.adapterPosition, items!!.size)
@@ -168,7 +166,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
                     dialog.restDetailName.text = restaurantDetailModel.rest_name
                     dialog.show()
                 }else{
-                    Snackbar.make(homeActivity.constraintLayoutRest, "Data not Found :(", Snackbar.LENGTH_LONG)
+                    Snackbar.make((context as HomeActivity).constraintLayoutRest, "Data not Found :(", Snackbar.LENGTH_LONG)
                             .setAction("OK", null).show()
                 }
             }

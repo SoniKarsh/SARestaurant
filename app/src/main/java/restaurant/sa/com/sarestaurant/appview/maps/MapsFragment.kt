@@ -57,7 +57,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         return null
     }
 
-
     override fun onConnectionSuspended(p0: Int) {
     }
 
@@ -110,7 +109,6 @@ class MapsFragment: Fragment(), OnMapReadyCallback, GoogleApiClient.ConnectionCa
         listOfLocations = locationCommunication.getLocationFromRestaurant()
         listOfTitleImgModel = locationCommunication.getNameImgFromRestaurant()
         LogUtils.setTag(TAG)
-        LogUtils.d(listOfTitleImgModel.size.toString()+""+listOfLocations.size.toString())
 
         getDeviceLocation()
         fun rand(start: Int, end: Int) = Random().nextInt(end + 1 - start) + start

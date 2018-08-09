@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.model.LatLng
@@ -24,19 +23,16 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragment
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
-import android.location.Location
 import android.os.Build
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_home.*
-import kotlinx.android.synthetic.main.nav_header_home.*
 import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
@@ -47,13 +43,10 @@ import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
 class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication {
 
-    val FRAGMENT_TAG = "SignInFragment"
     val RESTAURANT_FRAGMENT_TAG = "RestaurantFragment"
     val FAVORITE_RESTAURANT_FRAGMENT_TAG = "FavoriteFragment"
     val WEATHER_FRAGMENT_TAG = "WeatherFragment"
-    val MAP_FRAGMENT_TAG = "MapsFragment"
     var mapsFragment = MapsFragment()
-    var weatherFragment = WeatherFragment()
     lateinit var mapsPresenterImp: MapsPresenterImp
     var detailPresenter: DetailPresenter? = null
     private val TAG = "HomeActivity"
@@ -71,7 +64,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     }
 
     override fun sendLocationFromRestaurant(listOfLocations: ArrayList<LatLng>) {
-        Log.d(TAG, ": ${listOfLocations}");
         this.listOfLocations = listOfLocations
     }
 
@@ -160,6 +152,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         nav_view.setNavigationItemSelectedListener(this)
     }
 
+    // Schedule Job
     fun scheduleJob(){
         val componentName = ComponentName(this, ApiCallJobService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -205,9 +198,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                         .show()
             }
         }
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -222,7 +212,6 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_map -> {
-                ToastUtils.lengthShort(this, SARestaurantApp.instance!!.isClickableForMap.toString())
                 if(mapsPresenterImp.isServicesOK(this) && SARestaurantApp.instance!!.isClickableForMap){
                     supportFragmentManager.beginTransaction()
                             .add(R.id.fragmentHolder, mapsFragment, mapsFragment.javaClass.simpleName)

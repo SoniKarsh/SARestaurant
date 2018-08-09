@@ -31,6 +31,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
     lateinit var restaurantPresenterImp: RestaurantPresenterImp
     lateinit var locationCommunication: LocationCommunication
     var restaurantView: RestaurantView? = null
+    private val handler: Handler? = Handler()
 
     override fun stopProgress() {
         progressBar.visibility = View.GONE
@@ -61,22 +62,27 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        progressBar.progress =
 
         restaurantPresenterImp = RestaurantPresenterImp()
-        Log.d(TAG, "onActivityCreated: ${SARestaurantApp.database!!.favoriteRestaurantDao().getAll().toString()}");
         fetchData()
         simpleSwipeRefreshLayout.setOnRefreshListener {
-            Handler().postDelayed({
-                simpleSwipeRefreshLayout.setRefreshing(false)
-                // Generate a random integer number
-                fetchData()
-                // set the number value in TextView
-            }, 2000)
+            handler!!.postDelayed(runnable, 2000)
         }
 
-//        Toast.makeText(activity, "${userDataBase.favoriteRestaurantDao().getAll()}", Toast.LENGTH_LONG).show()
+    }
 
+    override fun onStop() {
+        super.onStop()
+        if(handler!=null) {
+            handler.removeCallbacks(runnable)
+        }
+    }
+
+    private val runnable = Runnable {
+        simpleSwipeRefreshLayout.setRefreshing(false)
+        // Generate a random integer number
+        fetchData()
+        // set the number value in TextView
     }
 
     fun fetchData(){
@@ -95,7 +101,6 @@ class FavoriteFragment: Fragment(), RestaurantView {
                 restaurantView!!.stopProgress()
                 Toast.makeText(homeActivity, "Error Occurred!!!", Toast.LENGTH_LONG).show()
             }
-
         })
         locationCommunication.sendLocationFromRestaurant(listOfPlacesLocation)
         recyclerView.adapter = FavoriteListAdapter(SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)

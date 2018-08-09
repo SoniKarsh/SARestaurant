@@ -76,29 +76,27 @@ class SignInFragment : Fragment(), SignInView {
 
                     Log.d(TAG, "onSuccess: ${loginResult.accessToken}");
 
-                    var graphRequest = GraphRequest.newMeRequest(loginResult.accessToken
+                    val graphRequest = GraphRequest.newMeRequest(loginResult.accessToken
                     ) { `object`, response ->
                         displayUserInfo(`object`)
                         userModel.emailId = `object`.getString("email")
                         userModel.mobileNo = ""
                         userModel.password = ""
                         userModel.userName = `object`.getString("first_name") + `object`.getString("last_name")
+                        // App code
+                        signInPresenterImp.storeInSharedPreferences(userModel.userName
+                                , userModel.emailId
+                                , userModel.mobileNo)
                         SARestaurantApp.database!!.userDao().insertData(userModel)
+                        val intent = Intent(activity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
                     }
 
-                    var bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("fields", "first_name, last_name, email, id")
                     graphRequest.parameters = bundle
                     graphRequest.executeAsync()
-
-                    // App code
-                    signInPresenterImp.storeInSharedPreferences(userModel.userName
-                            , userModel.emailId
-                            , userModel.mobileNo)
-
-                    val intent = Intent(activity, HomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)
 
                 }
 
