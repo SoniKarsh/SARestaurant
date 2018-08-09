@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_restaurant.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
-import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.location.interactor.LocationCommunication
 import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.adapter.FavoriteListAdapter
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.RestaurantPresenterImp

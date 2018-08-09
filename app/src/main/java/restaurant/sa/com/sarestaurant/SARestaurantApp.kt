@@ -15,6 +15,7 @@ class SARestaurantApp: Application() {
     var isRestVisible: Boolean = false
     var isWeatherVisible: Boolean = false
     var isClickableForMap: Boolean = false
+    var isActivityVisible: Boolean = false
 
     companion object {
         var instance: SARestaurantApp? = null

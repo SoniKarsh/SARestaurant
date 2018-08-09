@@ -1,9 +1,8 @@
 package restaurant.sa.com.sarestaurant
 
+import android.app.AlarmManager
 import android.app.FragmentManager
-import android.app.job.JobInfo
-import android.app.job.JobScheduler
-import android.content.ComponentName
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,15 +15,16 @@ import android.view.MenuItem
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
-import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.location.interactor.LocationCommunication
 import restaurant.sa.com.sarestaurant.appview.maps.MapsFragment
 import restaurant.sa.com.sarestaurant.appview.maps.presenter.MapsPresenterImp
 import restaurant.sa.com.sarestaurant.appview.restaurant.RestaurantFragment
 import restaurant.sa.com.sarestaurant.appview.restaurant.favorite.FavoriteFragment
 import restaurant.sa.com.sarestaurant.appview.weather.WeatherFragment
 import android.content.DialogInterface
-import android.os.Build
+import android.location.Location
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,15 +33,18 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_home.*
-import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallJobService
+import restaurant.sa.com.sarestaurant.appview.alarm.ApiCallReceiver
+import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
+import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
+import restaurant.sa.com.sarestaurant.appview.restaurant.interactor.TempFoundCallback
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
-import restaurant.sa.com.sarestaurant.utils.LogUtils
+import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.HomeCallback
 import restaurant.sa.com.sarestaurant.utils.PermissionUtils
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 
-class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication {
+class HomeActivity : AppCompatActivity(), TempFoundCallback, DetailPresenter, NavigationView.OnNavigationItemSelectedListener, LocationCommunication {
 
     val RESTAURANT_FRAGMENT_TAG = "RestaurantFragment"
     val FAVORITE_RESTAURANT_FRAGMENT_TAG = "FavoriteFragment"
@@ -55,7 +58,7 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
     var permissionUtils: PermissionUtils? = null
     var homeActivity: HomeActivity? = null
     var listOfTitleImgModel: ArrayList<TitleImgModel> = ArrayList()
-    private val jobId = 123
+    private var tempFoundCallback: TempFoundCallback? = null
     var permissionList = arrayOf<String>(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -83,11 +86,20 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
 
     }
 
+    override fun onSuccess() {
+        setToNavigationHeader()
+    }
+
+    override fun onError() {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         homeActivity = this
+        tempFoundCallback = this
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         permissionUtils = PermissionUtils(this)
         permissionUtils!!.setPermissionGranted(object : PermissionUtils.PermissionGranted {
@@ -95,7 +107,9 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
                 homeBtn.visibility = View.GONE
                 homeTV.visibility = View.GONE
                 if(SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "") == ""){
+                    SARestaurantApp.instance!!.isActivityVisible = true
                     scheduleJob()
+                    firstCallToWeather()
                 }
                 ToastUtils.setTag(TAG)
                 ToastUtils.lengthShort(this@HomeActivity, "GRANTED")
@@ -137,6 +151,30 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
         val navEmailId = headerView.findViewById<TextView>(R.id.navEmailId)
         navUserName.text = SARestaurantApp.instance!!.sharedPreference!!.getString("username", "")
         navEmailId.text = SARestaurantApp.instance!!.sharedPreference!!.getString("emailid", "")
+        if(SARestaurantApp.instance!!.sharedPreference!!.getString("temp", "") != ""){
+            setToNavigationHeader()
+        }
+        nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    private fun firstCallToWeather() {
+        val weatherFragment = WeatherFragment()
+        val getLocation = GetLocationImp(true, mFusedLocationProviderClient, this)
+        getLocation.sendLocation(object: GetLocation.OnReceiveLocation{
+            override fun getDeviceLastLocation(location: Location) {
+                weatherFragment.retrofitCall(location, this@HomeActivity, true)
+            }
+
+            override fun onError(error: String) {
+                Log.d(TAG, "error: $error")
+            }
+
+        })
+    }
+
+    fun setToNavigationHeader(){
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0)
         val navTv = headerView.findViewById<TextView>(R.id.nav_tv)
         val navImgUrl = headerView.findViewById<ImageView>(R.id.nav_img)
         val f = getString(R.string.f)
@@ -148,35 +186,26 @@ class HomeActivity : AppCompatActivity(), DetailPresenter, NavigationView.OnNavi
             Picasso.get().load(imgUrl)
                     .into(navImgUrl)
         }
-
-        nav_view.setNavigationItemSelectedListener(this)
     }
 
     // Schedule Job
     fun scheduleJob(){
-        val componentName = ComponentName(this, ApiCallJobService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val info = JobInfo.Builder(jobId, componentName)
-                    .setPersisted(true)
-                    .setPeriodic((60* 60 *1000).toLong()) //60* 60 *1000
-                    .build()
-            val scheduler = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-            val resultCode = scheduler.schedule(info)
-            if (resultCode == JobScheduler.RESULT_SUCCESS) {
-                LogUtils.setTag(TAG)
-                LogUtils.i("Job scheduled")
-            } else {
-                LogUtils.setTag(TAG)
-                LogUtils.e("Job scheduling failed")
-            }
-        } else {
-            LogUtils.setTag(TAG)
-            LogUtils.e("VERSION.SDK_INT < LOLLIPOP")
-        }
+        Log.d(TAG, "scheduleJob:ALARM ")
+        val intent = Intent(this, ApiCallReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+                this, 123, intent, 0)
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.set(AlarmManager.RTC_WAKEUP, 5000, pendingIntent)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 5000, 60000 * 60, pendingIntent)
     }
 
     override fun onContextItemSelected(item: MenuItem?): Boolean {
         return super.onContextItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        SARestaurantApp.instance!!.isActivityVisible = false
+        super.onDestroy()
     }
 
     override fun onBackPressed() {

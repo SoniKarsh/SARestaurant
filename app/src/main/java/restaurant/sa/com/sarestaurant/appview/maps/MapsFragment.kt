@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.custom_info_window.view.*
 import kotlinx.android.synthetic.main.fragment_maps.*
 import restaurant.sa.com.sarestaurant.HomeActivity
 import restaurant.sa.com.sarestaurant.SARestaurantApp
-import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.location.interactor.LocationCommunication
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.MarkerCallback
 import restaurant.sa.com.sarestaurant.utils.LogUtils

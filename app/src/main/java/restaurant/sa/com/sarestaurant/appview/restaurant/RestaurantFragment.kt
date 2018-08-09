@@ -21,7 +21,7 @@ import restaurant.sa.com.sarestaurant.R
 import restaurant.sa.com.sarestaurant.SARestaurantApp
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocation
 import restaurant.sa.com.sarestaurant.appview.location.presenter.GetLocationImp
-import restaurant.sa.com.sarestaurant.appview.location.presenter.LocationCommunication
+import restaurant.sa.com.sarestaurant.appview.location.interactor.LocationCommunication
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.LinearLayoutManageScroll
 import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.RestListAdapter
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ResponseModelClass

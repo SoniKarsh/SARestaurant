@@ -22,7 +22,6 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.adapter.RecyclerAdapter
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.PhotosModel.ResponsePhotoModelClass
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.RestaurantDetailModel
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.ShareModel
-import restaurant.sa.com.sarestaurant.appview.restaurant.presenter.DetailPresenter
 import restaurant.sa.com.sarestaurant.appview.restaurant.retrofitclient.GooglePlacesPhotoClient
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import retrofit2.Call
@@ -35,7 +34,6 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
 
     val TAG = "FavoriteListAdapter"
     lateinit var favoriteRestaurantModel: FavoriteRestaurantModel
-    lateinit var photoReference: String
     lateinit var imgUrl: String
     lateinit var shareModel: ShareModel
     val dialog = Dialog(this.context)
