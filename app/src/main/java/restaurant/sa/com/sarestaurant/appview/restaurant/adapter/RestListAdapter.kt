@@ -40,13 +40,12 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 
-class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteRestaurantModel>, var context: Context) : RecyclerView.Adapter<RestListAdapter.CustomViewHolder>(){
+class RestListAdapter(var items: ArrayList<Result>, var context: Context) : RecyclerView.Adapter<RestListAdapter.CustomViewHolder>(){
 
     val TAG = "RestaurantListAdapter"
     lateinit var favoriteRestaurantModel: FavoriteRestaurantModel
     lateinit var shareModel: ShareModel
     var homeActivity: HomeActivity? = null
-    var FRAGMENT_DETAIL_REST = "RestaurantDetailFragment"
     var detailPresenter: DetailPresenter? = null
     lateinit var restaurantDetailModel: RestaurantDetailModel
     var isClickable: Boolean = true
@@ -54,6 +53,8 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     val BASE_URL = "https://maps.googleapis.com"
     val noImage = "https://www.aubreydaniels.com/sites/default/files/default_images/x2017-05-15_18.png.pagespeed.ic.tLD9q0ZZph.png"
     val dialog = Dialog(this.context)
+    var favItems: ArrayList<FavoriteRestaurantModel> = ArrayList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list_view, parent, false))
     }
@@ -65,6 +66,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         favoriteRestaurantModel = FavoriteRestaurantModel()
         restaurantDetailModel = RestaurantDetailModel()
+        favItems = SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>
         shareModel = ShareModel()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder.restaurantImage.clipToOutline = true
@@ -87,10 +89,12 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
                     && items[holder.adapterPosition].vicinity == i.restaurantAddress){
                 if(i.isFavorite!=null){
                     if(i.isFavorite!!) {
+                        holder.favoriteButton.isChecked = true
                         holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
                     }
 //            addItem(favoriteRestaurantModel)
                 }else{
+                    holder.favoriteButton.isChecked = false
                     Log.d("TAG", "${i.isFavorite}")
                 }
             }
@@ -142,7 +146,7 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
         }
 
         holder.favoriteButton.setOnClickListener {
-            var isFavorite = holder.favoriteButton.isChecked
+            val isFavorite = holder.favoriteButton.isChecked
             favoriteRestaurantModel.adapterPosition = holder.adapterPosition
             favoriteRestaurantModel.restaurantName = items[holder.adapterPosition].name
             favoriteRestaurantModel.restaurantAddress = items[holder.adapterPosition].vicinity!!
@@ -165,12 +169,15 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
             favoriteRestaurantModel.isFavorite = isFavorite
 
             if(isFavorite){
+                Log.d(TAG, "onBindViewHolder: $isFavorite On")
                 holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_black_24dp)
                 addItem(favoriteRestaurantModel)
             }else{
+                Log.d(TAG, "onBindViewHolder: $isFavorite Off")
                 holder.favoriteButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp)
                 removeItem(holder.adapterPosition)
             }
+//            favItems =
         }
     }
 
@@ -253,13 +260,13 @@ class RestListAdapter(var items: ArrayList<Result>, var favItems: List<FavoriteR
     }
 
     inner class CustomViewHolder(view : View): RecyclerView.ViewHolder(view) {
-        var holderView = view.cardView
+        var holderView = view.cardView!!
         var restaurantImgUrl:String = ""
-        var restaurantName = view.restTextViewName
-        var restaurantAddress = view.restTextViewAddress
-        var favoriteButton = view.toggleButton2
-        var restaurantImage = view.restImageView
-        var sharePost = view.restShareImgView
+        var restaurantName = view.restTextViewName!!
+        var restaurantAddress = view.restTextViewAddress!!
+        var favoriteButton = view.toggleButton2!!
+        var restaurantImage = view.restImageView!!
+        var sharePost = view.restShareImgView!!
         var placeId: String = ""
     }
 

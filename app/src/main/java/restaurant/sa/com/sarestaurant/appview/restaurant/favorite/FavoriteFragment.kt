@@ -23,13 +23,12 @@ import restaurant.sa.com.sarestaurant.appview.restaurant.view.RestaurantView
 import restaurant.sa.com.sarestaurant.model.FavoriteRestaurantModel
 import restaurant.sa.com.sarestaurant.utils.ToastUtils
 import android.support.design.widget.Snackbar
-import restaurant.sa.com.sarestaurant.R.id.coordinatorLayout
 import restaurant.sa.com.sarestaurant.appview.restaurant.model.TitleImgModel
+import restaurant.sa.com.sarestaurant.utils.LogUtils
 
 
 class FavoriteFragment: Fragment(), RestaurantView {
 
-    val BASE_URL = "https://maps.googleapis.com"
     val TAG = "FavoriteFragment"
     lateinit var homeActivity: HomeActivity
     var listOfPlacesLocation: ArrayList<LatLng> = ArrayList()
@@ -37,7 +36,7 @@ class FavoriteFragment: Fragment(), RestaurantView {
     lateinit var locationCommunication: LocationCommunication
     var restaurantView: RestaurantView? = null
     private val handler: Handler? = Handler()
-
+    private var snackbar: Snackbar? = null
     override fun stopProgress() {
         progressBar.visibility = View.GONE
     }
@@ -79,6 +78,9 @@ class FavoriteFragment: Fragment(), RestaurantView {
 
     override fun onStop() {
         super.onStop()
+        if(snackbar!=null){
+            snackbar!!.dismiss()
+        }
         if(handler!=null) {
             handler.removeCallbacks(runnable)
         }
@@ -97,14 +99,16 @@ class FavoriteFragment: Fragment(), RestaurantView {
             override fun onResponse(listOfLocations: ArrayList<LatLng>?) {
 
                 if(!listOfLocations!!.isEmpty()){
+                    LogUtils.setTag(TAG)
+                    LogUtils.d(listOfLocations.toString())
                     SARestaurantApp.instance!!.isClickableForMap = true
                 }else{
-                    val snackbar = Snackbar
+                    snackbar = Snackbar
                             .make(constraintLayoutRest, getString(R.string.no_data_found), Snackbar.LENGTH_INDEFINITE)
                             .setAction(getString(R.string.ok), View.OnClickListener {
                                 ToastUtils.lengthShort(context!!, getString(R.string.refresh))
                             })
-                    snackbar.show()
+                    snackbar!!.show()
                 }
                 listOfPlacesLocation = listOfLocations
                 locationCommunication.sendLocationFromRestaurant(listOfPlacesLocation)
@@ -122,6 +126,8 @@ class FavoriteFragment: Fragment(), RestaurantView {
         // Title Image code .... need to change . just copied from above.
         restaurantPresenterImp.getFavListOfTitleImg(SARestaurantApp.database!!.favoriteRestaurantDao().getAll() as ArrayList<FavoriteRestaurantModel>, object : RestaurantPresenter.OnTitleImgCallBack{
             override fun onResponse(titleImgModel: ArrayList<TitleImgModel>?) {
+                LogUtils.setTag(TAG)
+                LogUtils.d(titleImgModel.toString())
                 locationCommunication.sendNameImgFromRestaurant(titleImgModel!!)
             }
 

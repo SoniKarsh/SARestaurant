@@ -76,7 +76,7 @@ class FavoriteListAdapter(var items: List<FavoriteRestaurantModel>?, var context
                     .setAction("OK", null).show()
         }
 
-        holder.favoriteButton.setOnClickListener {
+        holder.favoriteButton.setOnClickListener { it ->
             val adapterPos = items!![holder.adapterPosition].adapterPosition
             items = removeItem(adapterPos)
             notifyItemRemoved(holder.adapterPosition)

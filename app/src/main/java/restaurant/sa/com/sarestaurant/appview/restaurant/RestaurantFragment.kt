@@ -287,7 +287,7 @@ class RestaurantFragment: Fragment(), RestaurantView {
                             Log.d(TAG, "onResponseAfter Refresh: $i")
                         }
 
-                        adapter = RestListAdapter(resultList, SARestaurantApp.database!!.favoriteRestaurantDao().getAll(), homeActivity)
+                        adapter = RestListAdapter(resultList, homeActivity)
 
                         if (recyclerView != null) {
                             recyclerView.layoutManager = layout

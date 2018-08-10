@@ -69,7 +69,7 @@ class ApiCallService: Service(), HomeCallback {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if(backgroundThread!=null){
+        if(!backgroundThread!!.isAlive){
             backgroundThread!!.start()
         }
         return START_STICKY
